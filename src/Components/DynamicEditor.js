@@ -102,6 +102,7 @@ const DynamicEditor = () => {
                                         value={x.title}
                                         onChange={e => handleInputChange(e, i)}
                                         />
+                                        
                                     <AceEditor 
                                         className="editor" 
                                         name="code"
