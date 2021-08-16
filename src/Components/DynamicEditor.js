@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-kuroir";
@@ -37,70 +37,106 @@ import { Button } from "@material-ui/core";
  }}
  />
  
+ 
+ 
+ 
  */
 
-class DynamicEditor extends React.Component {
+const DynamicEditor = () => {
 
-  render() {
-    const onChange = (newCode) => {
-      console.log(newCode);
-    };
-    
-      const compile = async (val) => {
- 
-   // console.log(val);
+
+  const compile = async (val) => {
+
+    // console.log(val);
     // local host : http://localhost:8001/
     // replace it on line 48, 53 and 182
-   // await axios
+    // await axios
     //        .post("http://localhost:8001/", val, {})
-   //         .then((res) => console.log(res.statusText))
+    //         .then((res) => console.log(res.statusText))
     //        .catch((err) => console.log("Error", err));
 
-  //  setRand(rand + 1);
-  //  await axios.get("http://localhost:8001/", {});
+    //  setRand(rand + 1);
+    //  await axios.get("http://localhost:8001/", {});
   };
 
-    
-    
-    let items = ['Item 1'];
+
+  const [inputList, setInputList] = useState([{title: "", code: ""}]);
+
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const {name, value} = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
+  const handleCodeInputChange = (code, index) => {
+    const list = [...inputList];
+    list[index]['code'] = code;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const handleRemoveClick = index => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, {title: "", code: ""}]);
+  };
 
 
-    return (
-            <div>
-                {items.map((item, index) => {
-                            return (
-                                    <div key={index}>
-                                        <label >{item}</label>
-                                        <input type="text" placeholder="SCSS File Title"/>
-                                        <AceEditor 
-                                            className="editor" 
-                                            mode="css" placeholder={"CSS or SCSS"}
-                                            onChange={onChange}
-                                            setOptions={{
-                                                            enableBasicAutocompletion: true,
-                                                            enableLiveAutocompletion: true,
-                                                            enableSnippets: true,
-                                                          }}
-                                            />
-                                    </div>
-                                    )
-                          })
-                }
-                            
-    
-            
-                <div>
+  return (
+          <div>
+              <div>
                   <Button onClick={compile}> Build</Button>
-                </div>
-               <div>
-                  <Button onClick={compile}> New</Button>
-                </div>
-             
-            </div>
-           
-            );
-  }
-}
-;
+              </div>
+              {inputList.map((x, i) => {
+                          return (
+                                <div key={i}>
+                            
+                                    <input 
+                                        type="text" 
+                                        name="title"
+                                        placeholder="SCSS File Title"
+                                        value={x.title}
+                                        onChange={e => handleInputChange(e, i)}
+                                        />
+                                    <AceEditor 
+                                        className="editor" 
+                                        name="code"
+                                        mode="css" placeholder={"CSS or SCSS"}
+                                        onChange={value => handleCodeInputChange(value, i)}
+                                        value={x.code}
+                                        setOptions={{
+                                                enableBasicAutocompletion: true,
+                                                enableLiveAutocompletion: true,
+                                                enableSnippets: true,
+                                                minLines: 6,
+                                                maxLines: 30,
+                                                wrap: true,
+                                                autoScrollEditorIntoView: true
+                                              }}
+                                        />
+                            
+                            
+                            
+                                    <div className="btn-box">
+                                        {inputList.length !== 1 && <button
+                                            className="mr10"
+                                            onClick={() => handleRemoveClick(i)}>Remove</button>}
+                                        {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
+                                    </div>           
+                                </div>
+                                  )
+                        })
+              }
+              <div>{JSON.stringify(inputList)}</div>
+          </div>
+          );
+};
 
 export default DynamicEditor;
