@@ -1,3 +1,80 @@
-body{
-    background:grey;
+.pnc-editor-container{
+  display:block;  
+  width:100%;
+  height:100%;
+}
+
+.pnc-editor-container button,
+.pnc-editor-container a{
+  font-size:13px;
+}
+
+.pnc-editor-container button{
+  border:none;
+  margin:5px 5px 0 5px;
+}
+
+
+.pnc-editor-container a{
+  text-decoration: none;
+  color:black;
+}
+
+.pnc-editor-panel{
+  display:block;  
+  float:left;
+  width:40%;
+  height: 100vh;
+  background:lightgray;
+}
+
+.pnc-editor-component{
+  padding: 10px 0 
+}
+
+.pnc-title,
+.pnc-editor-panel div.ace_editor {
+  width: 98% !important;
+} 
+
+.pnc-title{
+  border:1px solid white;
+}
+
+.pnc-editor-website-frame{
+  display:block;  
+  float:left;
+  width:60%;
+  height: 100vh;
+}
+
+.pnc-editor-website-frame iframe{
+  display:block;  
+  float:left;
+  width:100%;
+  height: 100vh;
+  background: grey;
+}
+
+.pnc-pop-up-wrapper{
+  position: absolute;
+  background: gray;
+  top: 0;
+  left: 40%;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.pnc-pop-up-box{
+  background: lightgray;
+  width: 80%;
+  margin: 10% 0 0 20%;
+  word-wrap: break-word;
+}
+
+.pnc-close{
+  float: right;
+  padding: 10px;
+  background: darkgray;
 }

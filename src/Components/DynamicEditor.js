@@ -92,47 +92,51 @@ const DynamicEditor = () => {
                   <button onClick={incrementCount}>Click</button>
               </div>
               {inputList.map(
-                      (x, i) => {
-                          return (
-                                <div key={i}>
-                                    <input 
-                                        type="text" 
-                                        name="title"
-                                        placeholder="SCSS File Title"
-                                        value={x.title}
-                                        onChange={e => handleInputChange(e, i)}
-                                        />
+                (x, i) => {
+                  return (
+                    <div key={i} className="pnc-editor-component">
+                      <input 
+                        type="text" 
+                        name="title"
+                        className="pnc-title"
+                        placeholder="SCSS Title"
+                        value={x.title}
+                        onChange={e => handleInputChange(e, i)}
+                      />
                                         
-                                    <AceEditor 
-                                        className="editor" 
-                                        name="code"
-                                        mode="css" placeholder={"CSS or SCSS"}
-                                        onChange={value => handleCodeInputChange(value, i)}
-                                        value={x.code}
-                                        setOptions={{
-                                                // enableBasicAutocompletion: true,
-                                                // enableLiveAutocompletion: true,
-                                                // enableSnippets: true,
-                                                minLines: 6,
-                                                maxLines: 30,
-                                                wrap: true,
-                                                autoScrollEditorIntoView: true
-                                              }}
-                                        />
-                                    <div className="btn-box">
-                                        {inputList.length !== 1 && <button
-                                            className="mr10"
-                                            onClick={() => handleRemoveClick(i)}>
-                                            Remove
-                                            </button>
-                                            }
-                                        {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
-                                    </div>           
-                                </div>
-                           )
-                        })
+                      <AceEditor 
+                        className="editor" 
+                        name="code"
+                        mode="css" placeholder={"CSS or SCSS"}
+                        onChange={value => handleCodeInputChange(value, i)}
+                        value={x.code}
+                        setOptions={{
+                          enableBasicAutocompletion: true,
+                          enableLiveAutocompletion: true,
+                          enableSnippets: true,
+                          minLines: 6,
+                          maxLines: 30,
+                          wrap: true,
+                          autoScrollEditorIntoView: true
+                        }}
+                      />
+                      <div>
+                        {inputList.length !== 1 && <button onClick={() => handleRemoveClick(i)}>Remove</button>}
+                        {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
+                      </div>           
+                    </div>
+                  );
+                 })
               }
-              <div>{JSON.stringify(inputList)}</div>
+              <div className="pnc-pop-up-wrapper">
+                 <a href="#" className="pnc-close">Close</a> 
+                 <div className="pnc-pop-up-box">
+                     {JSON.stringify(inputList)}
+                 </div>
+              </div>
+              <div>
+                 <a href="#" className="pnc-open">Data</a> 
+              </div>
           </div>
           );
 };
