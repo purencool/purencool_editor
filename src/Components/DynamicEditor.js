@@ -1,48 +1,18 @@
 import React, {useState} from "react";
 import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-html";
-import "ace-builds/src-noconflict/theme-kuroir";
-import "ace-builds/src-noconflict/theme-monokai";
-import "ace-builds/src-noconflict/theme-github";
-import "ace-builds/src-noconflict/theme-tomorrow";
-import "ace-builds/src-noconflict/theme-twilight";
-import "ace-builds/src-noconflict/theme-xcode";
-import "ace-builds/src-noconflict/theme-textmate";
-import "ace-builds/src-noconflict/theme-solarized_dark";
-import "ace-builds/src-noconflict/theme-solarized_light";
-import "ace-builds/src-noconflict/theme-terminal";
-import "ace-builds/src-noconflict/ext-language_tools";
-
-
-import axios from "axios";
+//import axios from "axios";
 import { Button } from "@material-ui/core";
 
-/*
- 
- * @type type            <AceEditor
- className="editor"
- fontSize={fontSize}
- style={{ width: `${ratio}%`, height: "85vh" }}
- mode="html"
- theme={theme}
- onChange={onChange}
- width="auto"
- placeholder={"Start coding"}
- value={code}
- editorProps={{ $blockScrolling: true }}
- setOptions={{
- enableBasicAutocompletion: true,
- enableLiveAutocompletion: true,
- enableSnippets: true,
- }}
- />
- 
- 
- 
- 
- */
+import {useGlobalState} from 'state-pool';
 
 const DynamicEditor = () => {
+
+  const [count, setCount] = useGlobalState("count");
+
+  let incrementCount = (e) => {
+    setCount(count + 1)
+  }
+
 
 
   const compile = async (val) => {
@@ -60,9 +30,18 @@ const DynamicEditor = () => {
   };
 
 
+  /**
+   * 
+   * @type type
+   */
   const [inputList, setInputList] = useState([{title: "", code: ""}]);
 
-  // handle input change
+  /**
+   * 
+   * @param {type} e
+   * @param {type} index
+   * @returns {undefined}
+   */
   const handleInputChange = (e, index) => {
     const {name, value} = e.target;
     const list = [...inputList];
@@ -70,20 +49,33 @@ const DynamicEditor = () => {
     setInputList(list);
   };
 
+/**
+ * 
+ * @param {type} code
+ * @param {type} index
+ * @returns {undefined}
+ */
   const handleCodeInputChange = (code, index) => {
     const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
   };
 
-  // handle click event of the Remove button
+  /**
+   * 
+   * @param {type} index
+   * @returns {undefined}
+   */
   const handleRemoveClick = index => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
   };
 
-  // handle click event of the Add button
+  /**
+   * 
+   * @returns {undefined}
+   */
   const handleAddClick = () => {
     setInputList([...inputList, {title: "", code: ""}]);
   };
@@ -94,10 +86,15 @@ const DynamicEditor = () => {
               <div>
                   <Button onClick={compile}> Build</Button>
               </div>
-              {inputList.map((x, i) => {
+              <div>
+                  Count: {count}
+                  <br/>
+                  <button onClick={incrementCount}>Click</button>
+              </div>
+              {inputList.map(
+                      (x, i) => {
                           return (
                                 <div key={i}>
-                            
                                     <input 
                                         type="text" 
                                         name="title"
@@ -112,26 +109,26 @@ const DynamicEditor = () => {
                                         onChange={value => handleCodeInputChange(value, i)}
                                         value={x.code}
                                         setOptions={{
-                                                enableBasicAutocompletion: true,
-                                                enableLiveAutocompletion: true,
-                                                enableSnippets: true,
+                                                // enableBasicAutocompletion: true,
+                                                // enableLiveAutocompletion: true,
+                                                // enableSnippets: true,
                                                 minLines: 6,
                                                 maxLines: 30,
                                                 wrap: true,
                                                 autoScrollEditorIntoView: true
                                               }}
                                         />
-                            
-                            
-                            
                                     <div className="btn-box">
                                         {inputList.length !== 1 && <button
                                             className="mr10"
-                                            onClick={() => handleRemoveClick(i)}>Remove</button>}
+                                            onClick={() => handleRemoveClick(i)}>
+                                            Remove
+                                            </button>
+                                            }
                                         {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
                                     </div>           
                                 </div>
-                                  )
+                           )
                         })
               }
               <div>{JSON.stringify(inputList)}</div>
