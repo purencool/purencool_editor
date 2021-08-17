@@ -4,6 +4,7 @@
   height:100%;
 }
 
+.pnc-editor-container input,
 .pnc-editor-container button,
 .pnc-editor-container a{
   font-size:13px;
@@ -41,6 +42,10 @@
   border:1px solid white;
 }
 
+.pnc-url{
+   width:100%;
+}
+
 .pnc-editor-website-frame{
   display:block;  
   float:left;
@@ -69,12 +74,5 @@
 .pnc-pop-up-box{
   background: lightgray;
   width: 80%;
-  margin: 10% 0 0 20%;
-  word-wrap: break-word;
-}
-
-.pnc-close{
-  float: right;
-  padding: 10px;
-  background: darkgray;
-}
+  margin: 10% 0 0 20   
+}     

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import AceEditor from "react-ace";
-//import axios from "axios";
+import axios from "axios";
 import { Button } from "@material-ui/core";
 
 import {useGlobalState} from 'state-pool';
@@ -14,19 +14,14 @@ const DynamicEditor = () => {
   }
 
 
+  const compile = async () => {
+    console.log(inputList);
 
-  const compile = async (val) => {
 
-    // console.log(val);
-    // local host : http://localhost:8001/
-    // replace it on line 48, 53 and 182
-    // await axios
-    //        .post("http://localhost:8001/", val, {})
-    //         .then((res) => console.log(res.statusText))
-    //        .catch((err) => console.log("Error", err));
-
-    //  setRand(rand + 1);
-    //  await axios.get("http://localhost:8001/", {});
+   await axios
+           .post("http://localhost:8000", inputList, {})
+           .then((res) => console.log(res.statusText))
+           .catch((err) => console.log("Error", err));
   };
 
 
@@ -85,6 +80,9 @@ const DynamicEditor = () => {
           <div>
               <div>
                   <Button onClick={compile}> Build</Button>
+                   <div>
+                     <a href="#" className="pnc-open">Data</a> 
+                   </div>
               </div>
               <div>
                   Count: {count}
@@ -128,14 +126,11 @@ const DynamicEditor = () => {
                   );
                  })
               }
-              <div className="pnc-pop-up-wrapper">
+              <div className="pnc-pop-up-wrapper display-none">
                  <a href="#" className="pnc-close">Close</a> 
                  <div className="pnc-pop-up-box">
                      {JSON.stringify(inputList)}
                  </div>
-              </div>
-              <div>
-                 <a href="#" className="pnc-open">Data</a> 
               </div>
           </div>
           );

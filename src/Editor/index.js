@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DynamicEditor from "../Components/DynamicEditor.js"
 import 'bootstrap/dist/css/bootstrap.css';
 import '../Editor/index.css';
@@ -13,7 +13,20 @@ function Editor() {
          <DynamicEditor/>
       </div>  
       <div className="pnc-editor-website-frame">
-         <iframe className="frame"title="website view" src="" />
+         <input 
+           type="text" 
+           name="url"
+
+           className="pnc-url"
+           placeholder="Url"     
+         />
+       <button type="button" > Submit </button>
+       <iframe id="pnc-iframe" 
+         className="pnc-iframe"
+         title="website view" 
+          src=""
+
+        />
       </div>
     </div>
   );
