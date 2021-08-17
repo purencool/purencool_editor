@@ -43,22 +43,36 @@
 }
 
 .pnc-url{
-   width:100%;
+  width:100%;
+  background: gray;
+  color: white;
+  border-top: 0;
+  border-right:0;
+  border-left: 0;
 }
+
+.pnc-url::placeholder{
+  color: white;
+}
+
+.pnc-url::focus{
+  border:0;
+}
+
 
 .pnc-editor-website-frame{
   display:block;  
   float:left;
   width:60%;
   height: 100vh;
+  background: grey;
 }
 
 .pnc-editor-website-frame iframe{
   display:block;  
   float:left;
   width:100%;
-  height: 100vh;
-  background: grey;
+  height: 80vh;
 }
 
 .pnc-pop-up-wrapper{
@@ -74,5 +88,9 @@
 .pnc-pop-up-box{
   background: lightgray;
   width: 80%;
-  margin: 10% 0 0 20   
+  margin: 10% 0 0 20px;   
 }     
+
+.display-none{
+  display: none;
+}

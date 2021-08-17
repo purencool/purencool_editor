@@ -4,10 +4,7 @@ import ReactDOM from 'react-dom';
 
 ReactDOM.render(
   <React.StrictMode>
- 
-
       <Editor />
-
   </React.StrictMode>,
   document.getElementById("root")
 );
