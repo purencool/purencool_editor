@@ -13,9 +13,8 @@ store.setState("count", 0);
    * @returns {undefined}
    */
  const handleInputChangeUrl = (e) => {
-  console.log(e.target.value);
+
   let pattern = /^((http|https):\/\/)/; 
-  
   if(e.target.value.startsWith("/")) {
     document.getElementById("pnc-iframe").src=e.target.value;
   } 
