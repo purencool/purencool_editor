@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import DynamicEditor from "../Components/DynamicEditor.js"
+import DynamicEditor from "./Parts/DynamicEditor.js"
+import jQuery from "jquery";
 import 'bootstrap/dist/css/bootstrap.css';
-import '../Editor/index.css';
+import './index.css';
 import {store} from 'state-pool';
 
 store.setState("count", 0);
+store.setState("live_css_update", {css: "body{background: pink !important;}"});
+
+
 
 
   /**
@@ -25,6 +29,12 @@ store.setState("count", 0);
     document.getElementById("pnc-iframe").src=e.target.value;
   }
   
+  jQuery('#pnc-iframe').on('load', function(){
+      //const doc = document.getElementById('pnc-iframe').contentWindow.document.head;
+      //doc.append('<style id="live-purencool-editor"></style>');
+    const head = jQuery("#pnc-iframe").contents().find("head");
+    jQuery(head).append('<style id="live-purencool-editor"></style>');
+   });
  };
 
 function Editor() {
@@ -48,10 +58,7 @@ function Editor() {
            key="lllll"
            className="pnc-iframe"
            title="website view" 
-           src="about:blank"
-           >
-           
-           </iframe>
+           />
         </div>
       </div>
     </div>

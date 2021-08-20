@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import AceEditor from "react-ace";
 import axios from "axios";
-import { Button } from "@material-ui/core";
-
 import {useGlobalState} from 'state-pool';
 
 const DynamicEditor = () => {
@@ -79,9 +77,9 @@ const DynamicEditor = () => {
   return (
           <div>
               <div>
-                  <Button onClick={compile}> Build</Button>
+                  <button onClick={compile}> Build</button>
                    <div>
-                     <a href="#" className="pnc-open">Data</a> 
+                     <button className="pnc-open">Data</button> 
                    </div>
               </div>
               <div>
@@ -127,7 +125,7 @@ const DynamicEditor = () => {
                  })
               }
               <div className="pnc-pop-up-wrapper display-none">
-                 <a href="#" className="pnc-close">Close</a> 
+                 <button className="pnc-close">Close</button> 
                  <div className="pnc-pop-up-box">
                      {JSON.stringify(inputList)}
                  </div>
