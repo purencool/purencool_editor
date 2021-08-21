@@ -2,7 +2,6 @@
   --default_background: gray;
 }
 
-
 html{
    background: var(--default_background);
 }
