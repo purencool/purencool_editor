@@ -1,3 +1,12 @@
+:root {
+  --default_background: gray;
+}
+
+
+html{
+   background: var(--default_background);
+}
+
 .pnc-editor-container{
   display:block;  
   width:100%;
@@ -22,11 +31,28 @@
 }
 
 .pnc-editor-panel{
-  display:block;  
+  display:block; 
+  overflow: auto;
   float:left;
   width:40%;
   height: 100vh;
   background:lightgray;
+}
+
+.pnc-panel-navigation-wrapper{
+  position: relative;
+}
+
+.pnc-panel-navigation{
+  position: absolute;
+  background: gray;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.pnc-panel-spacing{
+  display:block;
+  height:30px;
 }
 
 .pnc-editor-component{
@@ -44,11 +70,12 @@
 
 .pnc-url{
   width:100%;
-  background: gray;
+  background: var(--default_background);
   color: white;
   border-top: 0;
   border-right:0;
   border-left: 0;
+  padding: 5px;
 }
 
 .pnc-url::placeholder{
@@ -65,7 +92,7 @@
   float:left;
   width:60%;
   height: 100vh;
-  background: grey;
+  background: var(--default_background);
 }
 
 .pnc-editor-website-frame iframe{
@@ -77,7 +104,7 @@
 
 .pnc-pop-up-wrapper{
   position: absolute;
-  background: gray;
+  background: var(--default_background);
   top: 0;
   left: 40%;
   right: 0;

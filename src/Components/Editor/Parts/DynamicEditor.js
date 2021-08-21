@@ -3,26 +3,13 @@ import AceEditor from "react-ace";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
+import jQuery from "jquery";
+
 /**
  * 
  * @returns {String}
  */
 const DynamicEditor = () => {
-
-  /**
-   * 
-   * @type type
-   */
-  const [count, setCount] = useGlobalState("count");
-
-  /**
-   * 
-   * @param {type} e
-   * @returns {undefined}
-   */
-  let incrementCount = (e) => {
-    setCount(count + 1)
-  }
 
   /**
    * 
@@ -67,6 +54,16 @@ const DynamicEditor = () => {
     const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
+    
+    let cssUpdate = '';
+    for (let i = 0; i < inputList.length; i++) {
+     cssUpdate =  cssUpdate + inputList[i].code;
+    }
+   
+    jQuery(document).ready(function(){
+	  let iFrame = jQuery("iframe#pnc-iframe").contents();
+	  iFrame.find("#live-purencool-editor").empty().append(cssUpdate);
+    });
   };
 
   /**
@@ -104,14 +101,14 @@ const DynamicEditor = () => {
 
   return (
           <div>
-              <div>
-                  <button onClick={compile}> Build</button>
-                  <button onClick={showData}>Data</button> 
-              </div>
-              <div>
-                  Count: {count}
-                  <br/>
-                  <button onClick={incrementCount}>Click</button>
+              <div className="pnc-panel-navigation-wrapper">
+                 <div className="pnc-panel-navigation">
+                    <button onClick={compile}> Build</button>
+                    <button onClick={showData}>Data</button> 
+                 </div>
+                 <div className="pnc-panel-spacing">
+  
+                 </div>
               </div>
               {inputList.map((x, i) => {
                           return (
