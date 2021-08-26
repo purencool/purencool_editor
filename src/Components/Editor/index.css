@@ -5,6 +5,12 @@
 html{
    background: var(--default_background);
 }
+body .ace_gutter-cell.ace_warning,
+body .ace_gutter-cell.ace_error {
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    background-position: 0;
+}
 
 .pnc-editor-container{
   display:block;  

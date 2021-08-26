@@ -1,6 +1,11 @@
 import React, {useState} from "react";
 import AceEditor from "react-ace";
+import 'ace-builds/webpack-resolver';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import "ace-builds/src-min-noconflict/mode-html";
+
 import axios from "axios";
+
 import {useGlobalState} from 'state-pool';
 
 import jQuery from "jquery";
@@ -10,19 +15,22 @@ import jQuery from "jquery";
  * @returns {String}
  */
 const DynamicEditor = () => {
-
+  
+   const [globalVars] = useGlobalState("global_vars");
+   
   /**
    * 
    * @returns {undefined}
    */
   const compile = async () => {
     console.log(inputList);
-
-
-    await axios
-            .post("http://localhost:8000", inputList, {})
-            .then((res) => console.log(res.statusText))
-            .catch((err) => console.log("Error", err));
+    console.log(globalVars.api_url);
+    if(globalVars.api_url !== "undefined"){
+       await axios
+          .post(globalVars.api_url, inputList, {})
+          .then((res) => console.log(res.statusText))
+          .catch((err) => console.log("Error", err));
+    } 
   };
 
   /**
@@ -50,20 +58,45 @@ const DynamicEditor = () => {
    * @param {type} index
    * @returns {undefined}
    */
-  const handleCodeInputChange = (code, index) => {
+  const handleCodeInputChange = async (code, index) => {  
     const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
     
-    let cssUpdate = '';
+    let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
-     cssUpdate =  cssUpdate + inputList[i].code;
+     scssUpdate =  scssUpdate + inputList[i].code;
     }
    
-    jQuery(document).ready(function(){
-	  let iFrame = jQuery("iframe#pnc-iframe").contents();
-	  iFrame.find("#live-purencool-editor").empty().append(cssUpdate);
-    });
+
+    
+      if(globalVars.api_url !== "undefined"){
+        try {
+          const res =  await axios
+           .post(globalVars.api_url, {"live":scssUpdate}, {})
+           //.then(response => {
+             //console.log(response.data.live_response);
+           // }) 
+           .catch((err) => console.log("Error", err));
+   
+           
+           console.log("JSON data from API ==>", res.data.live_response);
+           if(res.data.live_response !== undefined){
+             jQuery(document).ready(function(){
+	           let iFrame = jQuery("iframe#pnc-iframe").contents();
+	           iFrame.find("#live-purencool-editor")
+                     .empty()
+                     .append(res.data.live_response);
+             });
+           }
+         } catch (error) {
+           console.log(error);
+         }
+      } 
+  
+    
+   
+   
   };
 
   /**
@@ -104,7 +137,7 @@ const DynamicEditor = () => {
               <div className="pnc-panel-navigation-wrapper">
                  <div className="pnc-panel-navigation">
                     <button onClick={compile}> Build</button>
-                    <button onClick={showData}>Data</button> 
+                    <button onClick={showData}>Settings</button> 
                  </div>
                  <div className="pnc-panel-spacing">
   
@@ -148,7 +181,10 @@ const DynamicEditor = () => {
               }
               <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
                   <div className="pnc-pop-up-box">
+                    <div>
+                      <h3>Data</h3>
                       {JSON.stringify(inputList)}
+                    </div>
                   </div>
               </div>
           </div>

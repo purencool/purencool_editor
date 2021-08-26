@@ -1,25 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-
 import Editor from "./Components/Editor";
-import About from "./Components/Settings";
+import {store} from 'state-pool';
+
+
+/**
+ * Sets up global object
+ */
+if (typeof window.purencool_editor_config !== "undefined") {
+   store.setState("global_vars", window.purencool_editor_config);
+} else {
+   store.setState(
+     "global_vars",
+     {
+            "api_url": "undefined"
+     }  
+  );
+}
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-           <Redirect to="/purencool-editor" />
-        </Route>
-        <Route path="/purencool-editor">
-          <Editor />
-        </Route>
-        <Route path="/purencool-settings">
-          <About />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Editor />
   </React.StrictMode>,
   document.getElementById("root")
 );
+

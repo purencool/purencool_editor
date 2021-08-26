@@ -3,12 +3,6 @@ import DynamicEditor from "./Parts/DynamicEditor.js"
 import jQuery from "jquery";
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import {store} from 'state-pool';
-
-store.setState("count", 0);
-store.setState("live_css_update", {css: "body{background: pink !important;}"});
-
-
 
 
   /**
