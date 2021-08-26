@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import DynamicEditor from "./Parts/DynamicEditor.js"
 import jQuery from "jquery";
-import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
+//import './index.css';
 
 
   /**
