@@ -4,9 +4,6 @@ import Editor from "./Components/Editor";
 import {store} from 'state-pool';
 
 
-/**
- * Sets up global object
- */
 if (typeof window.purencool_editor_config !== "undefined") {
    store.setState("global_vars", window.purencool_editor_config);
 } else {
