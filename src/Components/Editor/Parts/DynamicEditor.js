@@ -21,7 +21,7 @@ const DynamicEditor = () => {
    * @type type
    */
   const [globalVars] = useGlobalState("global_vars");
-  
+
   /**
    * 
    * @type type
@@ -41,66 +41,43 @@ const DynamicEditor = () => {
     setInputList(list);
   };
 
-  
-  
-  function complileLiveAccess(scssUpdate) {
-      let results = false;
 
-      if (globalVars.scss_api_url !== "undefined") {
-        let braces = (scssUpdate.split("{").length - 1) + (scssUpdate.split("}").length - 1);
-        let colons = (scssUpdate.split(":").length - 1) + (scssUpdate.split(";").length - 1);
-        
-        if (braces%2 === 0 & colons%2 === 0 & (braces+colons) !== 0){
-         if(window.purencool_editor_config.globalKeyPress === "1") {
-            window.purencool_editor_config["globalKeyPress"] = "0";
-	        results = true;
-          }
-        } 
+
+  /**
+   * 
+   * @param {type} scssUpdate
+   * @returns {Boolean}
+   */
+  function compileLiveAccess(scssUpdate) {
+    let results = false;
+
+    if (globalVars.scss_api_url !== "undefined") {
+      let braces = (scssUpdate.split("{").length - 1) + (scssUpdate.split("}").length - 1);
+      let colons = (scssUpdate.split(":").length - 1) + (scssUpdate.split(";").length - 1);
+
+      if (braces % 2 === 0 & colons % 2 === 0 & (braces + colons) !== 0) {
+        if (window.purencool_editor_config.globalKeyPress === "1") {
+          window.purencool_editor_config["globalKeyPress"] = "0";
+          results = true;
+        }
       }
+    }
 
-      return results;
-   }
-  
-  
-  
+    return results;
+  }
+
   /**
    * 
-   * @returns {undefined}
    */
-  const live = async () => {
-
-  };
+  const buildScss = async () => {
   
-  
-  /**
-   * 
-   * @param {type} code
-   * @param {type} index
-   * @returns {undefined}
-   */
-  const handleCodeInputChange = async (code, index) => {
-    
-    document.addEventListener("keydown", function(e){
-       if(e.keyCode === 186){  
-         window.purencool_editor_config["globalKeyPress"] = "1";
-       }
-    });
-     
-    const list = [...inputList];
-    list[index]['code'] = code;
-    setInputList(list);
-
     let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
       scssUpdate = scssUpdate + inputList[i].code;
     }
 
-
-
-    
-    if (complileLiveAccess(scssUpdate) === true) {
+    if (compileLiveAccess(scssUpdate) === true) {
       try {
-   
         const res = await axios
                 .post(globalVars.scss_api_url, {"live": scssUpdate}, {})
                 //.then(response => {
@@ -124,27 +101,58 @@ const DynamicEditor = () => {
     }
   };
 
-  
-  
+
+  /**
+   * 
+   * @returns {undefined}
+   */
+  const live = async () => {
+    window.purencool_editor_config["globalKeyPress"] = "1";
+    buildScss();
+  };
+
+
+  /**
+   * 
+   * @param {type} code
+   * @param {type} index
+   * @returns {undefined}
+   */
+  const handleCodeInputChange = async (code, index) => {
+
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode === 186) {
+        window.purencool_editor_config["globalKeyPress"] = "1";
+      }
+    });
+    
+     const list = [...inputList];
+    list[index]['code'] = code;
+    setInputList(list);
+
+    buildScss();
+  };
+
+
+
   /**
    * 
    * @returns {undefined}
    */
   const compile = async () => {
     console.log(inputList);
-    console.log(globalVars.compile_api_url);
     if (globalVars.compile_api_url !== "undefined") {
-       const res = await axios
-          .post(globalVars.compile_api_url, {"compile": inputList}, {})
-          //.then(response => {
-          //console.log(response.data.live_response);
-          // }) 
-          .catch((err) => console.log("Error", err));
+      const res = await axios
+              .post(globalVars.compile_api_url, {"compile": inputList}, {})
+              //.then(response => {
+              //console.log(response.data.live_response);
+              // }) 
+              .catch((err) => console.log("Error", err));
     }
   };
 
 
-  
+
   /**
    * 
    * @param {type} index
