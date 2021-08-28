@@ -10,7 +10,8 @@ if (typeof window.purencool_editor_config !== "undefined") {
    store.setState(
      "global_vars",
      {
-            "api_url": "undefined"
+            "scss_api_url": "undefined",
+            "compile_api_url": "undefined"
      }  
   );
 }

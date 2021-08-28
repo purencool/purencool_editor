@@ -5,7 +5,7 @@
  * 
  * 
  * Starting SASS API server
- *    php -S localhost:8000 iscssrestapi.php  2>&1 | grep -v '\[200\]'
+ *    php -S localhost:8000 scssrestapi.php  2>&1 | grep -v '\[200\]'
  * 
  * URL 
  *    http://localhost:8000/scssrestapi.php
