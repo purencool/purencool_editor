@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import AceEditor from "react-ace";
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -26,7 +26,7 @@ const DynamicEditor = () => {
    * 
    * @type type
    */
-  const [inputList, setInputList] = useState([{title: "", code: ""}]);
+  const [inputList, setInputList] = useState([]);
 
   /**
    * 
@@ -41,6 +41,34 @@ const DynamicEditor = () => {
     setInputList(list);
   };
 
+
+  /**
+   * 
+   * @param {type} file
+   */
+  const openFile = (file) => {
+    axios
+      .post(globalVars.open_api_url, {"open": file}, {})
+            .then(response => {
+              console.log("JSON data from API ==>", response.data.compiled);
+              if (response.data.compiled === undefined) {
+                setInputList([{title: "", code: ""}]);
+              } else {
+                setInputList(response.data.compiled);
+              }
+            })
+     .catch((err) => console.log("Error", err));
+
+  };
+
+  /**
+   * 
+   */
+  useEffect(() => {
+    (async () => {
+       openFile('default');
+    })();
+  }, []);
 
 
   /**
@@ -70,7 +98,7 @@ const DynamicEditor = () => {
    * 
    */
   const buildScss = async () => {
-  
+
     let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
       scssUpdate = scssUpdate + inputList[i].code;
@@ -125,8 +153,8 @@ const DynamicEditor = () => {
         window.purencool_editor_config["globalKeyPress"] = "1";
       }
     });
-    
-     const list = [...inputList];
+
+    const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
 
@@ -143,7 +171,7 @@ const DynamicEditor = () => {
     console.log(inputList);
     if (globalVars.compile_api_url !== "undefined") {
       const res = await axios
-              .post(globalVars.compile_api_url, {"compile": inputList}, {})
+              .post(globalVars.compile_api_url, {"compiled": inputList}, {})
               //.then(response => {
               //console.log(response.data.live_response);
               // }) 

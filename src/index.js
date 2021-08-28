@@ -5,17 +5,31 @@ import {store} from 'state-pool';
 
 
 if (typeof window.purencool_editor_config !== "undefined") {
-   store.setState("global_vars", window.purencool_editor_config);
-} else {
-   store.setState(
-     "global_vars",
-     {
-            "scss_api_url": "undefined",
-            "compile_api_url": "undefined"
-     }  
+     
+     if (typeof window.purencool_editor_config.global_api_url !== "undefined" ){   
+        store.setState(
+         "global_vars",
+          {
+            "scss_api_url": window.purencool_editor_config.global_api_url,
+            "compile_api_url": window.purencool_editor_config.global_api_url,
+            "open_api_url": window.purencool_editor_config.global_api_url
+          }  
+        );
+     } else {
+       store.setState("global_vars", window.purencool_editor_config);
+     }
+   } else {
+     store.setState(
+       "global_vars",
+       {
+          "scss_api_url": "undefined",
+          "compile_api_url": "undefined",
+          "open_api_url": "undefined"
+       }  
   );
 }
 
+console.log(window.purencool_editor_config);
 
 ReactDOM.render(
   <React.StrictMode>
