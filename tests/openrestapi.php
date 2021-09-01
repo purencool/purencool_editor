@@ -11,7 +11,7 @@
  *    http://localhost:8000/openrestapi.php
  * 
  * Post example
- *   {"open":"text.txt"}
+ *   {"open":"default"}
  * 
  */
 header('Access-Control-Allow-Origin: *');

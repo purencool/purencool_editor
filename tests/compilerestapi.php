@@ -11,7 +11,7 @@
  *    http://localhost:8000/compilerestapi.php
  * 
  * Post example
- *   {"compile":"p{ a{background:red; } }"}
+ *   {"compiled":[{"title":"Test title","code":"div{\n    a{\n     background: red;\n   }\n}\n\n"},{"title":"akah. aksdhtalll","code":"div{\n    a{\n     background: green;\n   }\n}"}]}
  * 
  */
 header('Access-Control-Allow-Origin: *');
@@ -51,7 +51,7 @@ $body = file_get_contents('php://input');
 if ($body !== '') {
     writeFileContent('text.txt', $body);
     try {
-        echo '{"compile_response":"'. $body .'"}';
+        echo '{"compiled_response":"'. $body .'"}';
         error_log("\n" . $header . "\n" . $body . "\n");
     } catch (\Exception $e) {
         echo "";

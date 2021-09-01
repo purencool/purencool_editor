@@ -26,7 +26,7 @@ const DynamicEditor = () => {
    * 
    * @type type
    */
-  const [inputList, setInputList] = useState([]);
+  const [inputList, setInputList] = useState([{title: "", code: ""}]);
 
   /**
    * 
@@ -64,7 +64,7 @@ const DynamicEditor = () => {
   /**
    * 
    */
-  useEffect(() => {
+   useEffect(() => {
     (async () => {
        openFile('default');
     })();
@@ -212,8 +212,6 @@ const DynamicEditor = () => {
   const handleAddClick = () => {
     setInputList([...inputList, {title: "", code: ""}]);
   };
-
-
   return (
           <div>
               <div className="pnc-panel-navigation-wrapper">

@@ -29,6 +29,9 @@ if (typeof window.purencool_editor_config !== "undefined") {
   );
 }
 
+window.purencool_editor_config["globalKeyPress"] = "1";
+window.purencool_editor_config["editors_container_width"] = 40;
+
 console.log(window.purencool_editor_config);
 
 ReactDOM.render(
