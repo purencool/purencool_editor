@@ -45,7 +45,7 @@ const Editor = () => {
                 <Slider className="slider" onChange={updateSlider} defaultValue={50} />
             <div className="pnc-editor-container" >
               <div className="pnc-editor-panel pnc-box" 
-                   style={{ width: `${ratio}%`, height: "85vh" }}>
+                   style={{ width: `${ratio}%`}}>
                 <DynamicEditor/>
               </div>
               <div className="pnc-editor-website-frame pnc-box"           
