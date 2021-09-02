@@ -3,16 +3,16 @@ import AceEditor from "react-ace";
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import "ace-builds/src-min-noconflict/mode-html";
-
+import $ from "jquery";
 import axios from "axios";
-
 import {useGlobalState} from 'state-pool';
 
-import jQuery from "jquery";
 
 /**
+ * Returns compiled DynamicEditor and all Objects attached to it.
  * 
- * @returns {String}
+ * @returns object DynamicEditor
+ *    Response object before rendering.
  */
 const DynamicEditor = () => {
 
@@ -116,8 +116,8 @@ const DynamicEditor = () => {
 
         console.log("JSON data from API ==>", res.data.live_response);
         if (res.data.live_response !== undefined) {
-          jQuery(document).ready(function () {
-            let iFrame = jQuery("iframe#pnc-iframe").contents();
+            $(document).ready(function () {
+            let iFrame = $("iframe#pnc-iframe").contents();
             iFrame.find("#live-purencool-editor")
                     .empty()
                     .append(res.data.live_response);
@@ -216,9 +216,9 @@ const DynamicEditor = () => {
           <div>
               <div className="pnc-panel-navigation-wrapper">
                   <div className="pnc-panel-navigation">
-                      <button onClick={compile}>Compile</button>
-                      <button onClick={live}>Live view</button>
-                      <button onClick={showData}>Help</button> 
+                      <button onClick={compile} className="compile-btn">Compile</button>
+                      <button onClick={live} className="live-btn">Live view</button>
+                      <button onClick={showData} className="help-btn">Help</button> 
                   </div>
                   <div className="pnc-panel-spacing"></div>
               </div>

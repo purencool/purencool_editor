@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from "react";
-import DynamicEditor from "./Parts/DynamicEditor.js";
+import DynamicEditor from "./DynamicEditor.js";
 import Slider from "rc-slider";
 import $ from "jquery";
 
 /**
+ * Returns compiled Editor and all Objects attached to it.
  * 
- * @returns {Function|String}
+ * @returns object Editor 
+ *    Response object before rendering.
  */
 const Editor = () => {
-    const [ratio, setRatio] = useState(50);
-  
+
   /**
+   * Ratio function that updates useState.
    * 
-   * @param {type} e
-   * @returns {undefined}
+   * The ratio funtion updates an int value that is changed by 
+   * setRatio and updates useSate.
+   * 
+   * @type int
+   *   Returns from useState.
+   */
+  const [ratio, setRatio] = useState(50);
+
+  /**
+   * Adds style live style element to iframe.
+   * 
+   * @param object e
+   *   Gets object from the className="pnc-url" text input.
+   * @returns Null
+   *   Arrow function does not return any value.
+   *   
    */
   const handleInputChangeUrl = (e) => {
 
+    // Addeds URL to src in iframe so that it can fetch site to be styled.
     let pattern = /^((http|https):\/\/)/;
     if (e.target.value.startsWith("/")) {
       document.getElementById("pnc-iframe").src = e.target.value;
@@ -27,25 +44,39 @@ const Editor = () => {
       document.getElementById("pnc-iframe").src = e.target.value;
     }
 
+    // Adds inline style tag to iframed header when URL is initalised.
     $('#pnc-iframe').on('load', function () {
-      //const doc = document.getElementById('pnc-iframe').contentWindow.document.head;
-      //doc.append('<style id="live-purencool-editor"></style>');
       const head = $("#pnc-iframe").contents().find("head");
       $(head).append('<style id="live-purencool-editor"></style>');
     });
   };
 
 
+  /**
+   * Updates slider value so it can set the ratio in the editor.
+   * 
+   * The editor has two main divs that need to be resize from left to right as
+   * this sets setRatio function that then intern changes the inlite styles of 
+   * className="pnc-editor-panel and className="pnc-editor-website-frame".
+   * 
+   * @param int val
+   *   Gets int value from the className="slider" Slider module.
+   * @returns Null
+   *   Arrow function does not return any value.
+   */
   const updateSlider = (val) => {
     setRatio(val);
+    if(val === 20){
+       console.log(val);
+    }
   };
 
   return (
           <div className="pnc-editor-wrapper">
-                <Slider className="slider" onChange={updateSlider} defaultValue={50} />
+            <Slider className="slider" onChange={updateSlider} defaultValue={50} />
             <div className="pnc-editor-container" >
               <div className="pnc-editor-panel pnc-box" 
-                   style={{ width: `${ratio}%`}}>
+                   style={{width: `${ratio}%`}}>
                 <DynamicEditor/>
               </div>
               <div className="pnc-editor-website-frame pnc-box"           
