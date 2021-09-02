@@ -14,7 +14,7 @@ const Editor = () => {
   /**
    * Ratio function that updates useState.
    * 
-   * The ratio funtion updates an int value that is changed by 
+   * The ratio function updates an int value that is changed by 
    * setRatio and updates useSate.
    * 
    * @type int
@@ -27,8 +27,8 @@ const Editor = () => {
    * 
    * @param object e
    *   Gets object from the className="pnc-url" text input.
-   * @returns Null
-   *   Arrow function does not return any value.
+   * @returns void
+   *   Has no return value.
    *   
    */
   const handleInputChangeUrl = (e) => {

@@ -7,7 +7,6 @@ import $ from "jquery";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
-
 /**
  * Returns compiled DynamicEditor and all Objects attached to it.
  * 
@@ -17,22 +16,36 @@ import {useGlobalState} from 'state-pool';
 const DynamicEditor = () => {
 
   /**
+   * Global Vars.
    * 
-   * @type type
+   * @type object global_vars.
+   *   Returns global_vars set at the start of the application.
    */
   const [globalVars] = useGlobalState("global_vars");
 
   /**
+   * InputList saves all the data collected in the Editors.
+   *  
+   * The inputList function contains an array of objects that is changed by 
+   * setRatio and updates useState. 
    * 
-   * @type type
+   * @type array 
+   *   Returns array of Json objects.
    */
   const [inputList, setInputList] = useState([{title: "", code: ""}]);
 
   /**
+   * Receives data from the className="pnc-title" text input.
    * 
-   * @param {type} e
-   * @param {type} index
-   * @returns {undefined}
+   * This function collates the data from the className="pnc-title" text input
+   * and adds it to the inputList to be used later on in different contexts.
+   *  
+   * @param object e
+   *   Data object from text input.
+   * @param int index
+   *   Contains editors text input index number.
+   * @returns void
+   *   Has no return value.
    */
   const handleInputChange = (e, index) => {
     const {name, value} = e.target;
@@ -41,14 +54,21 @@ const DynamicEditor = () => {
     setInputList(list);
   };
 
-
   /**
+   * Request the system opens storage and gets compiled Json object.
    * 
-   * @param {type} file
+   * Asks API to open storage object with a certian name and receives a 
+   * compiled object that contains data that can populate the list of text
+   * editors in the left hand panel.
+   * 
+   * @param string file
+   *   Storages name be opened. 
+   * @returns void
+   *   Has no return value.
    */
-  const openFile = (file) => {
+  const openStorage = (file) => {
     axios
-      .post(globalVars.open_api_url, {"open": file}, {})
+            .post(globalVars.open_api_url, {"open": file}, {})
             .then(response => {
               console.log("JSON data from API ==>", response.data.compiled);
               if (response.data.compiled === undefined) {
@@ -57,24 +77,29 @@ const DynamicEditor = () => {
                 setInputList(response.data.compiled);
               }
             })
-     .catch((err) => console.log("Error", err));
+            .catch((err) => console.log("Error", err));
 
   };
 
   /**
-   * 
+   * React hook used for when the UI is initalising
    */
-   useEffect(() => {
+  useEffect(() => {
     (async () => {
-       openFile('default');
+      openStorage('default');
     })();
   }, []);
 
-
   /**
+   * Tests to see if the string syntactically correct.
    * 
-   * @param {type} scssUpdate
-   * @returns {Boolean}
+   * Function tests to see if the string syntactically correct and will be 
+   * effectively able to be compiled.
+   * 
+   * @param String scssUpdate.
+   *   String for syntactically correct.
+   * @returns Boolean
+   *   Returns boolean.
    */
   function compileLiveAccess(scssUpdate) {
     let results = false;
@@ -94,9 +119,13 @@ const DynamicEditor = () => {
     return results;
   }
 
-  /**
-   * 
-   */
+ /**
+  * Builds SCSS by sending a request to the server.
+  * 
+  * 
+  * @returns void
+  *   Has no return value.
+  */
   const buildScss = async () => {
 
     let scssUpdate = '';
@@ -116,7 +145,7 @@ const DynamicEditor = () => {
 
         console.log("JSON data from API ==>", res.data.live_response);
         if (res.data.live_response !== undefined) {
-            $(document).ready(function () {
+          $(document).ready(function () {
             let iFrame = $("iframe#pnc-iframe").contents();
             iFrame.find("#live-purencool-editor")
                     .empty()
@@ -129,22 +158,29 @@ const DynamicEditor = () => {
     }
   };
 
-
   /**
+   *  SCSS to button called className="live-btn" to compile CSS.
    * 
-   * @returns {undefined}
+   * @returns void
+   *   Has no return value.
    */
   const live = async () => {
     window.purencool_editor_config["globalKeyPress"] = "1";
     buildScss();
   };
 
-
   /**
+   * Allows developer to use the keypress ";" to compile SCSS.
    * 
-   * @param {type} code
-   * @param {type} index
-   * @returns {undefined}
+   * This function collates the data from the className="editor"  textarea
+   * to compile SCSS.
+   * 
+   * @param string code
+   *   Data string from text input.
+   * @param int index
+   *   Contains editors text input index number.
+   * @returns void
+   *   Has no return value.
    */
   const handleCodeInputChange = async (code, index) => {
 
@@ -161,11 +197,11 @@ const DynamicEditor = () => {
     buildScss();
   };
 
-
-
   /**
+   * Sends requests to API for SCSS to be compiled and saved.
    * 
-   * @returns {undefined}
+   * @returns void
+   *   Has no return value.
    */
   const compile = async () => {
     console.log(inputList);
@@ -179,24 +215,13 @@ const DynamicEditor = () => {
     }
   };
 
-
-
   /**
+   * Button to show help called className="live-btn".
    * 
-   * @param {type} index
-   * @returns {undefined}
+   * @returns void
+   *   Has no return value.
    */
-  const handleRemoveClick = index => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
-
-  /**
-   * 
-   * @returns {undefined}
-   */
-  const showData = () => {
+  const showHelp = () => {
     const div = document.querySelector('#pnc-pop-up-wrapper-id');
     if (div.classList.contains('display-none')) {
       div.classList.remove('display-none');
@@ -206,74 +231,94 @@ const DynamicEditor = () => {
   };
 
   /**
+   * Removes editor with a certian index className="remove-editor".
    * 
-   * @returns {undefined}
+   * @param int index
+   *   Contains editors text input index number.
+   * @returns void
+   *   Has no return value.
+   */
+  const handleRemoveClick = index => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+
+  /**
+   * Adds editor with a certian index className="add-editor".
+   * 
+   * @param int index
+   *   Contains editors text input index number.
+   * @returns void
+   *   Has no return value.
    */
   const handleAddClick = () => {
     setInputList([...inputList, {title: "", code: ""}]);
   };
+  
   return (
           <div>
-              <div className="pnc-panel-navigation-wrapper">
-                  <div className="pnc-panel-navigation">
-                      <button onClick={compile} className="compile-btn">Compile</button>
-                      <button onClick={live} className="live-btn">Live view</button>
-                      <button onClick={showData} className="help-btn">Help</button> 
-                  </div>
-                  <div className="pnc-panel-spacing"></div>
+            <div className="pnc-panel-navigation-wrapper">
+              <div className="pnc-panel-navigation">
+                <button onClick={compile} className="compile-btn">Compile</button>
+                <button onClick={live} className="live-btn">Live view</button>
+                <button onClick={showHelp} className="help-btn">Help</button> 
               </div>
-              {inputList.map((x, i) => {
-                          return (
+              <div className="pnc-panel-spacing"></div>
+            </div>
+            {inputList.map((x, i) => {
+                        return (
                                 <div key={i} className="pnc-editor-component">
-                                    <input 
-                                        type="text" 
-                                        name="title"
-                                        className="pnc-title"
-                                        placeholder="SCSS Title"
-                                        value={x.title}
-                                        onChange={e => handleInputChange(e, i)}
-                                        />
-                            
-                                    <AceEditor 
-                                        className="editor" 
-                                        name="code"
-                                        mode="css" placeholder={"CSS or SCSS"}
-                                        onChange={value => handleCodeInputChange(value, i)}
-                                        value={x.code}
-                                        setOptions={{
-                                                enableBasicAutocompletion: true,
-                                                enableLiveAutocompletion: true,
-                                                enableSnippets: true,
-                                                minLines: 6,
-                                                maxLines: 30,
-                                                wrap: true,
-                                                autoScrollEditorIntoView: true
-                                              }}
-                                        />
-                                    <div>
-                                        {inputList.length !== 1 && <button onClick={() => handleRemoveClick(i)}>Remove</button>}
-                                        {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
-                                    </div>           
+                                  <input 
+                                    type="text" 
+                                    name="title"
+                                    className="pnc-title"
+                                    placeholder="SCSS Title"
+                                    value={x.title}
+                                    onChange={e => handleInputChange(e, i)}
+                                    />
+                              
+                                  <AceEditor 
+                                    className="editor" 
+                                    name="code"
+                                    mode="css" placeholder={"CSS or SCSS"}
+                                    onChange={value => handleCodeInputChange(value, i)}
+                                    value={x.code}
+                                    setOptions={{
+                                          enableBasicAutocompletion: true,
+                                          enableLiveAutocompletion: true,
+                                          enableSnippets: true,
+                                          minLines: 6,
+                                          maxLines: 30,
+                                          wrap: true,
+                                          autoScrollEditorIntoView: true
+                                        }}
+                                    />
+                                  <div>
+                                    {inputList.length !== 1 && <button onClick={() => handleRemoveClick(i)} className="remove-editor">Remove</button>}
+                                    {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}
+                                  </div>           
                                 </div>
-                                  );
-                        })
-              }
-              <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
-                  <div className="pnc-pop-up-box">
-                      <div>
-                          <h2>Help</h2>
-                          <p></p>
-                          <h3>Compile</h3>
-                          <p></p>
-                          <h3>Live View</h3>
-                          <p></p>
-                      </div>
-                      <div>
-                          <h3>Live Data</h3>
-                          {JSON.stringify(inputList)}
-                      </div>
-                  </div>
+                                );
+                      })
+            }
+            <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
+              <div className="pnc-pop-up-box">
+                <div>
+                  <h2>Help</h2>
+                  <p></p>
+                  <h3>Compile</h3>
+                  <p></p>
+                  <h3>Live View</h3>
+                  <p></p>
+                </div>
+                <div>
+                  <h3>Live Data</h3>
+                  {JSON.stringify(inputList)}
+                </div>
               </div>
+            </div>
           </div>
           );
 };
