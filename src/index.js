@@ -5,9 +5,10 @@ import {store} from 'state-pool';
 
 
 /**
- * 
+ * Sets up global variables being used by the application.
  */
 if (typeof window.purencool_editor_config !== "undefined") {
+     // If the application 
      if (typeof window.purencool_editor_config.global_api_url !== "undefined" ){   
         store.setState(
          "global_vars",
@@ -36,7 +37,7 @@ window.purencool_editor_config["editors_container_width"] = 40;
 console.log(window.purencool_editor_config);
 
 /**
- * 
+ * Initializing application.
  */
 ReactDOM.render(
   <React.StrictMode>

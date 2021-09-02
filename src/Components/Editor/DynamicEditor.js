@@ -7,6 +7,8 @@ import $ from "jquery";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
+import Help from './Parts/DynamicEditor/help';
+
 /**
  * Returns compiled DynamicEditor and all Objects attached to it.
  * 
@@ -231,14 +233,14 @@ const DynamicEditor = () => {
   };
 
   /**
-   * Removes editor with a certian index className="remove-editor".
+   * Removes editor with a certian index className="delete-editor".
    * 
    * @param int index
    *   Contains editors text input index number.
    * @returns void
    *   Has no return value.
    */
-  const handleRemoveClick = index => {
+  const handleDeleteClick = (index) => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
@@ -257,13 +259,41 @@ const DynamicEditor = () => {
     setInputList([...inputList, {title: "", code: ""}]);
   };
   
+
+  /**
+   * Closes editor with a certian index className="display-editor-btn".
+   * 
+   * @param int index
+   *   Contains editors text input index number.
+   * @returns void
+   *   Has no return value.
+   */
+  const handleEditorDisplay = (i) => {
+    $(".editor-"+i).slideToggle( "fast" );
+  };
+  
+ 
+  /**
+   * Closes all editors with className="hide-all-editors-btn".
+   * 
+   * @returns void
+   *   Has no return value.
+   */
+  const handlEditorsDisplays = () => {
+    $(".editor").slideToggle( "fast" );
+  };
+  
+  
   return (
           <div>
             <div className="pnc-panel-navigation-wrapper">
               <div className="pnc-panel-navigation">
-                <button onClick={compile} className="compile-btn">Compile</button>
-                <button onClick={live} className="live-btn">Live view</button>
-                <button onClick={showHelp} className="help-btn">Help</button> 
+                <div className="pnc-panel-container">
+                  <button onClick={compile} className="compile-btn">Compile</button>
+                  <button onClick={live} className="live-btn">Live view</button>
+                  <button onClick={showHelp} className="help-btn">Help</button> 
+                  <button onClick={handlEditorsDisplays} className="editors-displays-btn">Close/Open Editors</button> 
+                </div>
               </div>
               <div className="pnc-panel-spacing"></div>
             </div>
@@ -278,9 +308,8 @@ const DynamicEditor = () => {
                                     value={x.title}
                                     onChange={e => handleInputChange(e, i)}
                                     />
-                              
+                                    <div className={"editor editor-"+i}>
                                   <AceEditor 
-                                    className="editor" 
                                     name="code"
                                     mode="css" placeholder={"CSS or SCSS"}
                                     onChange={value => handleCodeInputChange(value, i)}
@@ -295,14 +324,17 @@ const DynamicEditor = () => {
                                           autoScrollEditorIntoView: true
                                         }}
                                     />
+                                    </div>
                                   <div>
-                                    {inputList.length !== 1 && <button onClick={() => handleRemoveClick(i)} className="remove-editor">Remove</button>}
+                                    {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
                                     {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}
+                                    <button onClick={e => handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
                                   </div>           
                                 </div>
                                 );
                       })
             }
+            
             <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
               <div className="pnc-pop-up-box">
                 <div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DynamicEditor from "./DynamicEditor.js";
 import Slider from "rc-slider";
 import $ from "jquery";
