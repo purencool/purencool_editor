@@ -8,6 +8,7 @@ import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
 import Help from './Parts/DynamicEditor/help';
+import Feedback from './Parts/DynamicEditor/feedback';
 
 /**
  * Returns compiled DynamicEditor and all Objects attached to it.
@@ -334,7 +335,7 @@ const DynamicEditor = () => {
                                 );
                       })
             }
-            
+            <Feedback title="" message=""/>
             <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
               <div className="pnc-pop-up-box">
                 <div>

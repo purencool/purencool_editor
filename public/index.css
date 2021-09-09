@@ -3,7 +3,30 @@
   --default_second_background: lightgray;
   --slider_first_color: #57c5f7;
 }
-/* var(--slider_first_color); */
+/* var( --default_second_background); */
+
+iframe body *,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: lightgray lightgray;
+}
+
+iframe body *,
+*::-webkit-scrollbar {
+  width: 2px;
+}
+
+iframe body *,
+*::-webkit-scrollbar-track {
+  background: lightgray;
+}
+
+iframe body *,
+*::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 0;
+  border: 1px solid lightgray;
+}
 
 
 html{
@@ -45,6 +68,7 @@ body .ace_gutter-cell.ace_error {
   height: 99.5vh;
   background: var(--default_second_background);
   overflow: auto;
+  border-right: 1px solid var(--default_background);
 }
 
 .pnc-handler{
@@ -99,7 +123,9 @@ body .ace_gutter-cell.ace_error {
 } 
 
 .pnc-title{
-  border:1px solid white;
+  background: darkgray;
+  border: 1px solid darkgray;
+  font-weight: 700;
 }
 
 .pnc-url{
@@ -144,6 +170,8 @@ body .ace_gutter-cell.ace_error {
   padding: 10px;  
 }     
 
+
+
 /**
  * Buttons
  */
@@ -158,13 +186,36 @@ body .ace_gutter-cell.ace_error {
 }
 
 
+/**
+ * Feedback box
+ */
+#pnc-feedback-id {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100px;
+    padding: 0 20px;
+    background: var(--default_second_background);
+}
+
+#pnc-feedback-id button{
+position: absolute;
+    top: 0px;
+    right: 0px;
+}
 
 
-
+/**
+ * Generic css
+ */
 .display-none{
   display: none;
 }
 
+
+/**
+ * Top slider
+ */
 .rc-slider {
   height: 4px;
   width: 100%;
