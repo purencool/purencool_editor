@@ -27,6 +27,13 @@ const DynamicEditor = () => {
   const [globalVars] = useGlobalState("global_vars");
 
   /**
+   * Change messages function
+   * 
+   * @type type
+   */
+  const [global_vars, setMessage, messageUpdateF] = useGlobalState("global_vars");
+
+  /**
    * InputList saves all the data collected in the Editors.
    *  
    * The inputList function contains an array of objects that is changed by 
@@ -122,13 +129,13 @@ const DynamicEditor = () => {
     return results;
   }
 
- /**
-  * Builds SCSS by sending a request to the server.
-  * 
-  * 
-  * @returns void
-  *   Has no return value.
-  */
+  /**
+   * Builds SCSS by sending a request to the server.
+   * 
+   * 
+   * @returns void
+   *   Has no return value.
+   */
   const buildScss = async () => {
 
     let scssUpdate = '';
@@ -215,7 +222,15 @@ const DynamicEditor = () => {
               //console.log(response.data.live_response);
               // }) 
               .catch((err) => console.log("Error", err));
-    }
+      
+      // Changes message box values to update user of progress  
+      messageUpdateF(global_vars => {
+        global_vars.message.title = 'Compiled';
+        let message = 'SCSS has been compiled and deployed.';
+        global_vars.message.message = message;
+        global_vars.message.hash = Math.floor(1000 + Math.random() * 9000);
+      });
+    }  
   };
 
   /**
@@ -259,7 +274,7 @@ const DynamicEditor = () => {
   const handleAddClick = () => {
     setInputList([...inputList, {title: "", code: ""}]);
   };
-  
+
 
   /**
    * Closes editor with a certian index className="display-editor-btn".
@@ -270,10 +285,10 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const handleEditorDisplay = (i) => {
-    $(".editor-"+i).slideToggle( "fast" );
+    $(".editor-" + i).slideToggle("fast");
   };
-  
- 
+
+
   /**
    * Closes all editors with className="hide-all-editors-btn".
    * 
@@ -281,10 +296,10 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const handlEditorsDisplays = () => {
-    $(".editor").slideToggle( "fast" );
+    $(".editor").slideToggle("fast");
   };
-  
-  
+
+
   return (
           <div>
             <div className="pnc-panel-navigation-wrapper">
@@ -309,23 +324,23 @@ const DynamicEditor = () => {
                                     value={x.title}
                                     onChange={e => handleInputChange(e, i)}
                                     />
-                                    <div className={"editor editor-"+i}>
-                                  <AceEditor 
-                                    name="code"
-                                    mode="css" placeholder={"CSS or SCSS"}
-                                    onChange={value => handleCodeInputChange(value, i)}
-                                    value={x.code}
-                                    setOptions={{
-                                          enableBasicAutocompletion: true,
-                                          enableLiveAutocompletion: true,
-                                          enableSnippets: true,
-                                          minLines: 6,
-                                          maxLines: 30,
-                                          wrap: true,
-                                          autoScrollEditorIntoView: true
-                                        }}
-                                    />
-                                    </div>
+                                  <div className={"editor editor-" + i}>
+                                    <AceEditor 
+                                      name="code"
+                                      mode="css" placeholder={"CSS or SCSS"}
+                                      onChange={value => handleCodeInputChange(value, i)}
+                                      value={x.code}
+                                      setOptions={{
+                                            enableBasicAutocompletion: true,
+                                            enableLiveAutocompletion: true,
+                                            enableSnippets: true,
+                                            minLines: 6,
+                                            maxLines: 30,
+                                            wrap: true,
+                                            autoScrollEditorIntoView: true
+                                          }}
+                                      />
+                                  </div>
                                   <div>
                                     {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
                                     {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}
@@ -335,7 +350,7 @@ const DynamicEditor = () => {
                                 );
                       })
             }
-            <Feedback title="" message=""/>
+            <Feedback message={globalVars.message} />
             <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
               <div className="pnc-pop-up-box">
                 <div>

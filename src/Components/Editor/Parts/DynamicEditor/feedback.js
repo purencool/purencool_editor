@@ -4,6 +4,14 @@ import $ from "jquery";
 /**
  * Returns compiled Feedback action information.
  * 
+ * Example message object.
+ * 
+ * {
+ *   "title": "Purencool Editor", // Displaying the title string 
+ *   "message": "Version 1.0",    // Message string informing user of action
+ *   "hash": ""                   // Hashs is used for forcing prop change
+ * }
+ * 
  * @param object props 
  *   Props object with parameters "title" and "message" 
  * @returns object Feedback 
@@ -21,13 +29,24 @@ const Feedback = (props) => {
     $(".pnc-feedback-wrapper").slideToggle( "slow" );
   };
   
-
+  
+  /**
+   * Opens feeback when the prop changes. 
+   * 
+   * @returns void
+   *   Has no return value.
+   */
+  useEffect(() => {
+    $(".pnc-feedback-wrapper").slideDown( "slow" );
+  });
+  
+  
   return (
        <div id="pnc-feedback-id"  className="pnc-feedback-wrapper display1-none">
           <div>
-            <button onClick={handleClose} className="close-btn">Close</button>
-            <h4>{props.title}</h4>
-            <p>{props.message}</p>
+            <button onClick={handleClose} className="close-btn">X</button>
+            <h4>{props.message.title}</h4>
+            <p>{props.message.message}</p>
           </div>
        </div>
     );
