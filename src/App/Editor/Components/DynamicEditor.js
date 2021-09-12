@@ -15,6 +15,9 @@ import EditorsDisplays from './DynamicEditor/Buttons/editorsDisplays';
 
 
 
+import ScriptedElements from '../ScriptedElements/ScriptedElements';
+
+
 import {buildScssObject} from './Util/buildScssObject';
 
 /**
@@ -219,6 +222,9 @@ const DynamicEditor = () => {
                 </div>
               </div>
               <div className="pnc-panel-spacing"></div>
+            </div>
+            <div>
+               <ScriptedElements />
             </div>
             {inputList.map((x, i) => {
                         return (

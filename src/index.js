@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Editor from "./Components/Editor";
+import Editor from "./App/Editor";
 import {store} from 'state-pool';
 
 let defaultMessage = {
