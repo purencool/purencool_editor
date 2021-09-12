@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
+import {useGlobalState} from 'state-pool';
 
 /**
  * Returns compiled Feedback action information.
@@ -20,6 +21,15 @@ import $ from "jquery";
 const Feedback = (props) => {
   
   /**
+   * Global Vars.
+   * 
+   * @type object global_vars.
+   *   Returns global_vars set at the start of the application.
+   */
+  const [globalVars] = useGlobalState("global_vars");
+  
+  
+  /**
    * Close feedback box with className="close-btn".
    * 
    * @returns void
@@ -37,7 +47,9 @@ const Feedback = (props) => {
    *   Has no return value.
    */
   useEffect(() => {
-    $(".pnc-feedback-wrapper").slideDown( "slow" );
+    if(globalVars.message.hash !== props.message.hash) {
+      $(".pnc-feedback-wrapper").slideDown( "slow" );
+    }
   });
   
   return (

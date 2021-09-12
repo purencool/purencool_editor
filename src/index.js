@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import Editor from "./Components/Editor";
 import {store} from 'state-pool';
 
+let defaultMessage = {
+  "title": "Welcome", 
+  "message": "Version 1.0", 
+  "hash": 1111
+};
+        
 
 /**
  * Sets up global variables being used by the application.
@@ -12,14 +18,10 @@ if (typeof window.purencool_editor_config === "undefined") {
     "scss_api_url": "undefined",
     "compile_api_url": "undefined",
     "open_api_url": "undefined",
-    "message": {"title": "Welcome", "message": "Version 1.0", "hash": ""}
+    "message": defaultMessage
   };
 } else {
-  window.purencool_editor_config['message'] = {
-    "title": "Purencool Editor", 
-    "message": "Version 1.0",
-    "hash": ""
-  };
+  window.purencool_editor_config['message'] = defaultMessage;
 }
 
 /**
@@ -32,7 +34,7 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
             "scss_api_url": window.purencool_editor_config.global_api_url,
             "compile_api_url": window.purencool_editor_config.global_api_url,
             "open_api_url": window.purencool_editor_config.global_api_url,
-            "message": {"title": "Welcome", "message": "Version 1.0", "hash": ""}
+            "message": defaultMessage
           }
   );
 } else {
