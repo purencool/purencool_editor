@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DynamicEditor from "./DynamicEditor.js";
+import DynamicEditor from "./Parts/DynamicEditor.js";
 import Slider from "rc-slider";
 import $ from "jquery";
 

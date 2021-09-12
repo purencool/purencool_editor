@@ -7,15 +7,15 @@ import $ from "jquery";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
-import Help from './Parts/DynamicEditor/help';
-import Feedback from './Parts/DynamicEditor/feedback';
+import Help from './DynamicEditor/help';
+import Feedback from './DynamicEditor/feedback';
 
-import ShowHelp from './Parts/Buttons/showHelp';
-import EditorsDisplays from './Parts/Buttons/editorsDisplays';
+import ShowHelp from './DynamicEditor/Buttons/showHelp';
+import EditorsDisplays from './DynamicEditor/Buttons/editorsDisplays';
 
 
 
-import {buildScssObject} from './Parts/Util/buildScssObject';
+import {buildScssObject} from './Util/buildScssObject';
 
 /**
  * Returns compiled DynamicEditor and all Objects attached to it.
