@@ -10,6 +10,11 @@ import {useGlobalState} from 'state-pool';
 import Help from './Parts/DynamicEditor/help';
 import Feedback from './Parts/DynamicEditor/feedback';
 
+import ShowHelp from './Parts/Buttons/showHelp';
+import EditorsDisplays from './Parts/Buttons/editorsDisplays';
+
+
+
 import {buildScssObject} from './Parts/Util/buildScssObject';
 
 /**
@@ -25,13 +30,6 @@ const DynamicEditor = () => {
    * 
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
-   */
-  const [globalVars] = useGlobalState("global_vars");
-
-  /**
-   * Change messages function
-   * 
-   * @type type
    */
   const [global_vars, setMessage, messageUpdateF] = useGlobalState("global_vars");
 
@@ -80,7 +78,7 @@ const DynamicEditor = () => {
    */
   const openStorage = (file) => {
     axios
-            .post(globalVars.open_api_url, {"open": file}, {})
+            .post(global_vars.open_api_url, {"open": file}, {})
             .then(response => {
               console.log("JSON data from API ==>", response.data.compiled);
               if (response.data.compiled === undefined) {
@@ -110,7 +108,7 @@ const DynamicEditor = () => {
    */
   const live = async () => {
     window.purencool_editor_config["globalKeyPress"] = "1";
-    buildScssObject(inputList,globalVars);
+    buildScssObject(inputList,global_vars);
   };
 
   /**
@@ -137,7 +135,7 @@ const DynamicEditor = () => {
     const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
-    buildScssObject(inputList,globalVars);
+    buildScssObject(inputList,global_vars);
   };
 
   /**
@@ -148,9 +146,9 @@ const DynamicEditor = () => {
    */
   const compile = async () => {
     console.log(inputList);
-    if (globalVars.compile_api_url !== "undefined") {
+    if (global_vars.compile_api_url !== "undefined") {
       const res = await axios
-              .post(globalVars.compile_api_url, {"compiled": inputList}, {})
+              .post(global_vars.compile_api_url, {"compiled": inputList}, {})
               //.then(response => {
               //console.log(response.data.live_response);
               // }) 
@@ -166,20 +164,7 @@ const DynamicEditor = () => {
     }  
   };
 
-  /**
-   * Button to show help called className="live-btn".
-   * 
-   * @returns void
-   *   Has no return value.
-   */
-  const showHelp = () => {
-    const div = document.querySelector('#pnc-pop-up-wrapper-id');
-    if (div.classList.contains('display-none')) {
-      div.classList.remove('display-none');
-    } else {
-      div.classList.add('display-none');
-    }
-  };
+
 
   /**
    * Removes editor with a certian index className="delete-editor".
@@ -222,17 +207,6 @@ const DynamicEditor = () => {
   };
 
 
-  /**
-   * Closes all editors with className="hide-all-editors-btn".
-   * 
-   * @returns void
-   *   Has no return value.
-   */
-  const handlEditorsDisplays = () => {
-    $(".editor").slideToggle("fast");
-  };
-
-
   return (
           <div>
             <div className="pnc-panel-navigation-wrapper">
@@ -240,8 +214,8 @@ const DynamicEditor = () => {
                 <div className="pnc-panel-container">
                   <button onClick={compile} className="compile-btn">Compile</button>
                   <button onClick={live} className="live-btn">Live view</button>
-                  <button onClick={showHelp} className="help-btn">Help</button> 
-                  <button onClick={handlEditorsDisplays} className="editors-displays-btn">Close/Open Editors</button> 
+                   <ShowHelp />
+                   <EditorsDisplays />
                 </div>
               </div>
               <div className="pnc-panel-spacing"></div>
@@ -283,7 +257,7 @@ const DynamicEditor = () => {
                                 );
                       })
             }
-            <Feedback message={globalVars.message} />
+            <Feedback message={global_vars.message} />
             <Help inputList={inputList} />
           </div>
           );
