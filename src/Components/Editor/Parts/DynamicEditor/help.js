@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 /**
  * Returns compiled Help information.
  * 
+ * @param props
+ *   Object props.
  * @returns object Help 
- *    Response object before rendering.
+ *   Response object before rendering.
  */
-const Help = () => {
+const Help = (props) => {
 
   return (
       <div>
@@ -22,7 +24,7 @@ const Help = () => {
                 </div>
                 <div>
                   <h3>Live Data</h3>
-                   this.props.inputLists
+                   {JSON.stringify(props.inputLists)}
                 </div>
               </div>
             </div>

@@ -40,7 +40,6 @@ const Feedback = (props) => {
     $(".pnc-feedback-wrapper").slideDown( "slow" );
   });
   
-  
   return (
        <div id="pnc-feedback-id"  className="pnc-feedback-wrapper display1-none">
           <div>
