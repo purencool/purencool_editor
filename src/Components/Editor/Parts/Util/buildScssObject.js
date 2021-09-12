@@ -1,25 +1,15 @@
-import $ from "jquery";
 import axios from "axios";
-import {useGlobalState} from 'state-pool';
-
+import $ from "jquery";
 
 /**
- * Returns compiled Help information.
- * 
- * @param props
- *   Object props.
- * @returns object Help 
- *   Response object before rendering.
+ * Updates live css in style html tag in iframe.
+ *
+ * @param object global_vars.
+ *   Returns global_vars set at the start of the application.
+ * @param inputList
+ *   The inputList function contains an array of objects that is changed
  */
-export const buildScssObject = (inputList) => {
-  /**
-   * Global Vars.
-   * 
-   * @type object global_vars.
-   *   Returns global_vars set at the start of the application.
-   */
-  const [globalVars] = useGlobalState("global_vars");
-  
+export const buildScssObject = (inputList,globalVars) => {
   
   /**
    * Tests to see if the string syntactically correct.
@@ -32,7 +22,7 @@ export const buildScssObject = (inputList) => {
    * @returns Boolean
    *   Returns boolean.
    */
-  function compileLiveAccess(scssUpdate) {
+  const compileLiveAccessFunc = (scssUpdate) => {
     let results = false;
 
     if (globalVars.scss_api_url !== "undefined") {
@@ -49,8 +39,9 @@ export const buildScssObject = (inputList) => {
 
     return results;
   }
-  
-  
+
+
+
 
   /**
    * Builds SCSS by sending a request to the server.
@@ -59,15 +50,14 @@ export const buildScssObject = (inputList) => {
    * @returns void
    *   Has no return value.
    */
-  const buildScss = async () => {
-    
+  const buildScssFunc = async () => {
 
     let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
       scssUpdate = scssUpdate + inputList[i].code;
     }
 
-    if (compileLiveAccess(scssUpdate) === true) {
+    if (compileLiveAccessFunc(scssUpdate) === true) {
       try {
         const res = await axios
                 .post(globalVars.scss_api_url, {"live": scssUpdate}, {})
@@ -91,12 +81,12 @@ export const buildScssObject = (inputList) => {
       }
     }
   };
-  
-  /**
-   * 
-   */
-  buildScss(inputList);
 
+ 
+
+
+  buildScssFunc();
+  //console.log(globalVars);
+  //console.log(inputList);
 };
-
 

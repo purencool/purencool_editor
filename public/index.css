@@ -217,7 +217,7 @@ position: absolute;
  * Top slider
  */
 .rc-slider {
-  height: 4px;
+  height: 5px;
   width: 100%;
   box-sizing: border-box;
 }
