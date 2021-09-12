@@ -9,7 +9,6 @@ import React from "react";
  *   Response object before rendering.
  */
 const Help = (props) => {
-
   return (
       <div>
           <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
@@ -24,7 +23,7 @@ const Help = (props) => {
                 </div>
                 <div>
                   <h3>Live Data</h3>
-                   {JSON.stringify(props.inputLists)}
+                   {JSON.stringify(props.inputList)}
                 </div>
               </div>
             </div>

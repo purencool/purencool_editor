@@ -41,6 +41,13 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
   store.setState("global_vars", window.purencool_editor_config);
 }
 
+  /**
+   * GlobalEditorArray saves all the data collected in the Editors.
+   * 
+   */
+  store.setState( "global_editor_array",[{title: "", code: ""}]);
+
+
 
 window.purencool_editor_config["globalKeyPress"] = "1";
 window.purencool_editor_config["editors_container_width"] = 40;

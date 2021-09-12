@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import AceEditor from "react-ace";
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -12,6 +12,7 @@ import Feedback from './DynamicEditor/feedback';
 
 import ShowHelp from './DynamicEditor/Buttons/showHelp';
 import EditorsDisplays from './DynamicEditor/Buttons/editorsDisplays';
+import CompileScss from './DynamicEditor/Buttons/compileScss';
 
 
 
@@ -34,7 +35,7 @@ const DynamicEditor = () => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars, setMessage, messageUpdateF] = useGlobalState("global_vars");
+  const [global_vars] = useGlobalState("global_vars");
 
   /**
    * InputList saves all the data collected in the Editors.
@@ -45,7 +46,7 @@ const DynamicEditor = () => {
    * @type array 
    *   Returns array of Json objects.
    */
-  const [inputList, setInputList] = useState([{title: "", code: ""}]);
+  const [inputList, setInputList] = useGlobalState("global_editor_array");
 
   /**
    * Receives data from the className="pnc-title" text input.
@@ -141,31 +142,6 @@ const DynamicEditor = () => {
     buildScssObject(inputList,global_vars);
   };
 
-  /**
-   * Sends requests to API for SCSS to be compiled and saved.
-   * 
-   * @returns void
-   *   Has no return value.
-   */
-  const compile = async () => {
-    console.log(inputList);
-    if (global_vars.compile_api_url !== "undefined") {
-      const res = await axios
-              .post(global_vars.compile_api_url, {"compiled": inputList}, {})
-              //.then(response => {
-              //console.log(response.data.live_response);
-              // }) 
-              .catch((err) => console.log("Error", err));
-      
-      // Changes message box values to update user of progress  
-      messageUpdateF(global_vars => {
-        global_vars.message.title = 'Compiled';
-        let message = 'SCSS has been compiled and deployed.';
-        global_vars.message.message = message;
-        global_vars.message.hash = Math.floor(1000 + Math.random() * 9000);
-      });
-    }  
-  };
 
 
 
@@ -215,8 +191,8 @@ const DynamicEditor = () => {
             <div className="pnc-panel-navigation-wrapper">
               <div className="pnc-panel-navigation">
                 <div className="pnc-panel-container">
-                  <button onClick={compile} className="compile-btn">Compile</button>
-                  <button onClick={live} className="live-btn">Live view</button>
+                   <CompileScss/>
+                    <button onClick={live} className="live-btn">Live view</button>
                    <ShowHelp />
                    <EditorsDisplays />
                 </div>
