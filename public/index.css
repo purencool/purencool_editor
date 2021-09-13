@@ -105,7 +105,7 @@ body .ace_gutter-cell.ace_error {
 }
 
 .pnc-panel-container{
-   padding-left: 5px;
+  padding-left: 5px;
 }
 
 .pnc-panel-spacing{
@@ -122,12 +122,34 @@ body .ace_gutter-cell.ace_error {
   width: 98% !important;
 } 
 
+.pnc-pop-up-wrapper{
+  position: absolute;
+  background: var(--default_background);
+  top: 0;
+  left: 40%;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.pnc-pop-up-box{
+  background: var(--default_second_background);
+  width: 90.5%;
+  margin: 10% 0 0 20px;
+  padding: 10px;  
+}  
+
+
+
 .pnc-title{
   background: darkgray;
   border: 1px solid darkgray;
   font-weight: 700;
 }
 
+/**
+ * Iframe editor
+ */
 .pnc-url{
   width:100%;
   background: var(--default_background);
@@ -153,24 +175,53 @@ body .ace_gutter-cell.ace_error {
   border: none;
 }
 
-.pnc-pop-up-wrapper{
+
+
+/**
+ * Second Iframe
+ */
+.pnc-second-frame{
   position: absolute;
-  background: var(--default_background);
   top: 0;
-  left: 40%;
-  right: 0;
+  left: 0;
+  background: lightgray;
   bottom: 0;
-  z-index: 9999;
+  right: 0;
+  z-index: 888;
+}   
+
+.pnc-second-frame iframe{
+  display: block;
+  width: 100%;
+  height: 95vh;
+  border: none;
 }
 
-.pnc-pop-up-box{
-  background: var(--default_second_background);
-  width: 90.5%;
-  margin: 10% 0 0 20px;
-  padding: 10px;  
-}     
+.pnc-second-url {
+  width: calc(100% - 60px);
+  background: var(--default_background);
+  color: white;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  padding: 5px;
+}
+
+div div .close-second-iframe-btn{
+    float: right;
+    margin: 0;
+    height: 26px;
+    width:60px;
+}
 
 
+.pnc-second-url::placeholder{
+  color: white;
+}
+
+.pnc-second-url::focus{
+  border:0;
+}
 
 /**
  * Buttons
@@ -190,18 +241,18 @@ body .ace_gutter-cell.ace_error {
  * Feedback box
  */
 #pnc-feedback-id {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100px;
-    padding: 0 20px;
-    background: var(--default_second_background);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100px;
+  padding: 0 20px;
+  background: var(--default_second_background);
 }
 
 #pnc-feedback-id button{
-position: absolute;
-    top: 0px;
-    right: 0px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 
@@ -212,6 +263,9 @@ position: absolute;
   display: none;
 }
 
+.position-relative{
+  position:relative;
+}
 
 /**
  * Top slider

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Slider from "rc-slider";
 import $ from "jquery";
+import {useGlobalState} from 'state-pool';
 
-import DynamicEditor from "./Components/DynamicEditor/DynamicEditor.js";
-import ShowHelp from './Components/DynamicEditor/Buttons/showHelp';
-import EditorsDisplays from './Components/DynamicEditor/Buttons/editorsDisplays';
-import CompileScss from './Components/DynamicEditor/Buttons/compileScss';
-import LiveScss from './Components/DynamicEditor/Buttons/liveScss';
-
+import Help from './Parts/help';
+import Feedback from './Parts/feedback';
+import MainNavigation from './Parts/mainNavigation';
+import SecondIframe from "./Parts/secondIframe";
+import DynamicEditor from "./Components/DynamicEditor/DynamicEditor";
 import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
 
 /**
@@ -17,6 +17,25 @@ import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
  *    Response object before rendering.
  */
 const Editor = () => {
+  
+  /**
+   * Global Vars.
+   * 
+   * @type object global_vars.
+   *   Returns global_vars set at the start of the application.
+   */
+  const [global_vars] = useGlobalState("global_vars");
+  
+  /**
+   * InputList saves all the data collected in the Editors.
+   *  
+   * The inputList function contains an array of objects that is changed by 
+   * setRatio and updates useState. 
+   * 
+   * @type array 
+   *   Returns array of Json objects.
+   */
+  const [inputList] = useGlobalState("global_editor_array");
 
   /**
    * Ratio function that updates useState.
@@ -84,21 +103,12 @@ const Editor = () => {
             <div className="pnc-editor-container" >
               <div className="pnc-editor-panel pnc-box" 
                    style={{width: `${ratio}%`}}>
-                <div className="pnc-panel-navigation-wrapper">
-                  <div className="pnc-panel-navigation">
-                    <div className="pnc-panel-container">
-                      <CompileScss/>
-                      <LiveScss/>
-                      <ShowHelp />
-                      <EditorsDisplays />
-                    </div>
-                  </div>
-                  <div className="pnc-panel-spacing"></div>
-                </div>
-                <div>
+                <div className="position-relative">  
+                  <MainNavigation />
                   <ScriptedElements />
-                </div>   
-                <DynamicEditor/>
+                  <DynamicEditor/>
+                  <SecondIframe />
+                </div> 
               </div>
               <div className="pnc-editor-website-frame pnc-box"           
                    style={{width: `${100 - ratio}%`}}>
@@ -122,7 +132,8 @@ const Editor = () => {
                 </div>
               </div>
             </div>
-          
+            <Feedback message={global_vars.message} />
+            <Help inputList={inputList} />
           </div>
           );
 }

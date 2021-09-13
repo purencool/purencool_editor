@@ -7,8 +7,6 @@ import $ from "jquery";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
-import Help from '../DynamicEditor/Parts/help';
-import Feedback from '../DynamicEditor/Parts/feedback';
 
 import {buildScssObject} from '../Util/buildScssObject';
 
@@ -199,8 +197,6 @@ const DynamicEditor = () => {
                                 );
                       })
             }
-            <Feedback message={global_vars.message} />
-            <Help inputList={inputList} />
           </div>
           );
 };
