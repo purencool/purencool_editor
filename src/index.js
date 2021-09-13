@@ -3,14 +3,6 @@ import ReactDOM from 'react-dom';
 import Editor from "./App/Editor";
 import {store} from 'state-pool';
 
-/**
- * @type object default global message
- */
-let defaultMessage = {
-  "title": "Welcome",
-  "message": "Version 1.0",
-  "hash": 1111
-};
 
 /**
  * Sets up global variables being used by the application.
@@ -19,29 +11,43 @@ if (typeof window.purencool_editor_config === "undefined") {
   window.purencool_editor_config = {
     "scss_api_url": "undefined",
     "compile_api_url": "undefined",
-    "open_api_url": "undefined",
-    "message": defaultMessage
+    "open_api_url": "undefined"
   };
-} else {
-  window.purencool_editor_config['message'] = defaultMessage;
-}
+} 
+
 
 /**
  * Sets global state store
  */
 if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
-  store.setState(
-          "global_vars",
-          {
-            "scss_api_url": window.purencool_editor_config.global_api_url,
-            "compile_api_url": window.purencool_editor_config.global_api_url,
-            "open_api_url": window.purencool_editor_config.global_api_url,
-            "message": defaultMessage
-          }
-  );
-} else {
-  store.setState("global_vars", window.purencool_editor_config);
+  window.purencool_editor_config = {
+    "scss_api_url": window.purencool_editor_config.global_api_url,
+    "compile_api_url": window.purencool_editor_config.global_api_url,
+    "open_api_url": window.purencool_editor_config.global_api_url
+  };
 }
+
+
+/**
+ * @type object global scripted elements
+ */
+let scriptedElements = ['span'];
+if (typeof window.purencool_editor_config.scripted_array !== "undefined") {
+  scriptedElements = window.purencool_editor_config.scripted_array;
+}
+window.purencool_editor_config['scripted_elements'] = scriptedElements;
+
+/**
+ * @type object default global message
+ */
+let defaultMessage = {"title": "Welcome","message": "Version 1.0","hash": 1111};
+window.purencool_editor_config['message'] = defaultMessage;
+
+
+
+store.setState("global_vars", window.purencool_editor_config);
+
+
 
 /**
  * GlobalEditorArray saves all the data collected in the Editors.
@@ -59,9 +65,9 @@ console.log(window.purencool_editor_config);
  * Initializing application.
  */
 ReactDOM.render(
-  <React.StrictMode>
-    <Editor />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+        <React.StrictMode>
+          <Editor />
+        </React.StrictMode>,
+        document.getElementById("root")
+        );
 

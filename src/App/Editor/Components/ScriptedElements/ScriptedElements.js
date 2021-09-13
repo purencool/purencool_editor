@@ -1,19 +1,32 @@
 import React from "react";
+import {useGlobalState} from 'state-pool';
 
 /**
  * Returns compiled Help information.
  * 
- * @param props
- *   Object props.
  * @returns object Help 
  *   Response object before rendering.
  */
-const ScriptedElements = (props) => {
+const ScriptedElements = () => {
+  
+  /**
+   * Global Vars.
+   * 
+   * @type object global_vars.
+   *   Returns global_vars set at the start of the application.
+   */
+  const [globalVars] = useGlobalState("global_vars");
+  
+  console.log(globalVars);
 
-  return (
-      <div>
-          hello
-      </div>
+   let elements = ["div", "span", "button"];
+   return (
+        <div>
+            {
+                elements.map((el, index) => 
+                    React.createElement(el, { key: index }, "hello"))
+            }
+        </div>
     );
 };
 

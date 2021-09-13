@@ -7,9 +7,8 @@ import $ from "jquery";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
-import Help from '../DynamicEditor/help';
-import Feedback from '../DynamicEditor/feedback';
-
+import Help from '../DynamicEditor/Parts/help';
+import Feedback from '../DynamicEditor/Parts/feedback';
 
 import {buildScssObject} from '../Util/buildScssObject';
 
