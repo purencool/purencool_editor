@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import DynamicEditor from "./Components/DynamicEditor.js";
 import Slider from "rc-slider";
 import $ from "jquery";
+
+import DynamicEditor from "./Components/DynamicEditor/DynamicEditor.js";
+import ShowHelp from './Components/DynamicEditor/Buttons/showHelp';
+import EditorsDisplays from './Components/DynamicEditor/Buttons/editorsDisplays';
+import CompileScss from './Components/DynamicEditor/Buttons/compileScss';
+import LiveScss from './Components/DynamicEditor/Buttons/liveScss';
+
+import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
 
 /**
  * Returns compiled Editor and all Objects attached to it.
@@ -66,8 +73,8 @@ const Editor = () => {
    */
   const updateSlider = (val) => {
     setRatio(val);
-    if(val === 20){
-       console.log(val);
+    if (val === 20) {
+      console.log(val);
     }
   };
 
@@ -77,6 +84,20 @@ const Editor = () => {
             <div className="pnc-editor-container" >
               <div className="pnc-editor-panel pnc-box" 
                    style={{width: `${ratio}%`}}>
+                <div className="pnc-panel-navigation-wrapper">
+                  <div className="pnc-panel-navigation">
+                    <div className="pnc-panel-container">
+                      <CompileScss/>
+                      <LiveScss/>
+                      <ShowHelp />
+                      <EditorsDisplays />
+                    </div>
+                  </div>
+                  <div className="pnc-panel-spacing"></div>
+                </div>
+                <div>
+                  <ScriptedElements />
+                </div>   
                 <DynamicEditor/>
               </div>
               <div className="pnc-editor-website-frame pnc-box"           

@@ -7,19 +7,11 @@ import $ from "jquery";
 import axios from "axios";
 import {useGlobalState} from 'state-pool';
 
-import Help from './DynamicEditor/help';
-import Feedback from './DynamicEditor/feedback';
-
-import ShowHelp from './DynamicEditor/Buttons/showHelp';
-import EditorsDisplays from './DynamicEditor/Buttons/editorsDisplays';
-import CompileScss from './DynamicEditor/Buttons/compileScss';
+import Help from '../DynamicEditor/help';
+import Feedback from '../DynamicEditor/feedback';
 
 
-
-import ScriptedElements from '../ScriptedElements/ScriptedElements';
-
-
-import {buildScssObject} from './Util/buildScssObject';
+import {buildScssObject} from '../Util/buildScssObject';
 
 /**
  * Returns compiled DynamicEditor and all Objects attached to it.
@@ -105,17 +97,6 @@ const DynamicEditor = () => {
   }, []);
 
   /**
-   *  SCSS to button called className="live-btn" to compile CSS.
-   * 
-   * @returns void
-   *   Has no return value.
-   */
-  const live = async () => {
-    window.purencool_editor_config["globalKeyPress"] = "1";
-    buildScssObject(inputList,global_vars);
-  };
-
-  /**
    * Allows developer to use the keypress ";" to compile SCSS.
    * 
    * This function collates the data from the className="editor"  textarea
@@ -139,11 +120,8 @@ const DynamicEditor = () => {
     const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
-    buildScssObject(inputList,global_vars);
+    buildScssObject(inputList, global_vars);
   };
-
-
-
 
   /**
    * Removes editor with a certian index className="delete-editor".
@@ -159,7 +137,6 @@ const DynamicEditor = () => {
     setInputList(list);
   };
 
-
   /**
    * Adds editor with a certian index className="add-editor".
    * 
@@ -171,7 +148,6 @@ const DynamicEditor = () => {
   const handleAddClick = () => {
     setInputList([...inputList, {title: "", code: ""}]);
   };
-
 
   /**
    * Closes editor with a certian index className="display-editor-btn".
@@ -188,20 +164,6 @@ const DynamicEditor = () => {
 
   return (
           <div>
-            <div className="pnc-panel-navigation-wrapper">
-              <div className="pnc-panel-navigation">
-                <div className="pnc-panel-container">
-                   <CompileScss/>
-                    <button onClick={live} className="live-btn">Live view</button>
-                   <ShowHelp />
-                   <EditorsDisplays />
-                </div>
-              </div>
-              <div className="pnc-panel-spacing"></div>
-            </div>
-            <div>
-               <ScriptedElements />
-            </div>
             {inputList.map((x, i) => {
                         return (
                                 <div key={i} className="pnc-editor-component">
