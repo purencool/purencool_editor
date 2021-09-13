@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import Editor from "./App/Editor";
 import {store} from 'state-pool';
 
+/**
+ * @type object default global message
+ */
 let defaultMessage = {
-  "title": "Welcome", 
-  "message": "Version 1.0", 
+  "title": "Welcome",
+  "message": "Version 1.0",
   "hash": 1111
 };
-        
 
 /**
  * Sets up global variables being used by the application.
@@ -41,14 +43,14 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
   store.setState("global_vars", window.purencool_editor_config);
 }
 
-  /**
-   * GlobalEditorArray saves all the data collected in the Editors.
-   * 
-   */
-  store.setState( "global_editor_array",[{title: "", code: ""}]);
+/**
+ * GlobalEditorArray saves all the data collected in the Editors.
+ */
+store.setState("global_editor_array", [{title: "", code: ""}]);
 
-
-
+/**
+ * 
+ */
 window.purencool_editor_config["globalKeyPress"] = "1";
 window.purencool_editor_config["editors_container_width"] = 40;
 console.log(window.purencool_editor_config);
@@ -57,9 +59,9 @@ console.log(window.purencool_editor_config);
  * Initializing application.
  */
 ReactDOM.render(
-        <React.StrictMode>
-          <Editor />
-        </React.StrictMode>,
-        document.getElementById("root")
-        );
+  <React.StrictMode>
+    <Editor />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 

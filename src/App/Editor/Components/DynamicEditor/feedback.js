@@ -28,7 +28,6 @@ const Feedback = (props) => {
    */
   const [globalVars] = useGlobalState("global_vars");
   
-  
   /**
    * Close feedback box with className="close-btn".
    * 
@@ -38,7 +37,6 @@ const Feedback = (props) => {
   const handleClose = () => {
     $(".pnc-feedback-wrapper").slideToggle( "slow" );
   };
-  
   
   /**
    * Opens feeback when the prop changes. 

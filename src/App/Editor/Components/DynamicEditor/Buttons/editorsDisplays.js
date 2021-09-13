@@ -19,7 +19,6 @@ const editorsDisplays = () => {
     $(".editor").slideToggle("fast");
   };
 
-
   return (
       <button onClick={handlEditorsDisplays} className="editors-displays-btn">Close/Open Editors</button> 
     );

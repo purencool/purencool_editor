@@ -10,7 +10,6 @@ import {useGlobalState} from 'state-pool';
  */
 const compileScss = () => {
   
-  
   /**
    * Global Vars.
    * 
@@ -18,7 +17,6 @@ const compileScss = () => {
    *   Returns global_vars set at the start of the application.
    */
   const [global_vars, setMessage, messageUpdateF] = useGlobalState("global_vars");
-  
   
   /**
    * InputList saves all the data collected in the Editors.
@@ -31,7 +29,6 @@ const compileScss = () => {
    */
   const [inputList] = useGlobalState("global_editor_array");
 
-  
   /**
    * Sends requests to API for SCSS to be compiled and saved.
    * 
@@ -57,8 +54,6 @@ const compileScss = () => {
       });
     }  
   };
-
-  
 
   return (
       <button onClick={handleCompile} className="compile-btn">Compile</button>

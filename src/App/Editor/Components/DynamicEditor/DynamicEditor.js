@@ -161,7 +161,6 @@ const DynamicEditor = () => {
     $(".editor-" + i).slideToggle("fast");
   };
 
-
   return (
           <div>
             {inputList.map((x, i) => {
