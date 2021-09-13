@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "rc-slider";
 import $ from "jquery";
 import {useGlobalState} from 'state-pool';
@@ -17,7 +17,7 @@ import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
  *    Response object before rendering.
  */
 const Editor = () => {
-  
+
   /**
    * Global Vars.
    * 
@@ -25,7 +25,7 @@ const Editor = () => {
    *   Returns global_vars set at the start of the application.
    */
   const [global_vars] = useGlobalState("global_vars");
-  
+
   /**
    * InputList saves all the data collected in the Editors.
    *  
@@ -97,6 +97,21 @@ const Editor = () => {
     }
   };
 
+
+  /**
+   * React hook used for when the UI is initalising
+   */
+  useEffect(() => {
+   $('#pnc-iframe').on('load', function(){
+    $(this).contents().find('body').on('click', 'a', function(e){
+        console.log(this.href);
+        $('.pnc-url').val(this.href);
+        
+      });
+   });
+
+  }, []);
+
   return (
           <div className="pnc-editor-wrapper">
             <Slider className="slider" onChange={updateSlider} defaultValue={50} />
@@ -126,7 +141,7 @@ const Editor = () => {
                     <iframe id="pnc-iframe" 
                             key="lllll"
                             className="pnc-iframe"
-                            title="website view" 
+                            title="website view"
                             />
                   </div>
                 </div>

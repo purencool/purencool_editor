@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import $ from "jquery";
 
 /**
  * Returns SecondIframe Help information.
@@ -47,7 +48,22 @@ const SecondIframe = () => {
       div.classList.add('display-none');
     }
   };
+  
+  /**
+   * React hook used for when the UI is initalising
+   */
+  useEffect(() => {
+   $('#pnc-second-iframe').on('load', function(){
+    $(this).contents().find('body').on('click', 'a', function(e){
+        console.log(this.href);
+        $('.pnc-second-url').val(this.href);
+        
+      });
+   });
 
+  }, []);
+  
+  
   return (
           <div id="pnc-second-frame-id" className="pnc-second-frame display-none">
             <div className="pnc-editor-iframe-container">
