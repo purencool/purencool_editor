@@ -31,7 +31,9 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
 /**
  * @type object global scripted elements
  */
-let scriptedElements = ['span'];
+let scriptedElements = [
+  {'element_type':'span', 'label':''}
+];
 if (typeof window.purencool_editor_config.scripted_array !== "undefined") {
   scriptedElements = window.purencool_editor_config.scripted_array;
 }

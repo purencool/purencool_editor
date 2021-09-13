@@ -9,6 +9,7 @@ import {useGlobalState} from 'state-pool';
  */
 const ScriptedElements = () => {
   
+  
   /**
    * Global Vars.
    * 
@@ -16,15 +17,15 @@ const ScriptedElements = () => {
    *   Returns global_vars set at the start of the application.
    */
   const [globalVars] = useGlobalState("global_vars");
-  
-  console.log(globalVars);
-
-   let elements = ["div", "span", "button"];
+  // {'element':[
+  //   {'element_type':'iframe','create':'no', 'id':'', 'class':'', 'src':'' }
+  //   {'element_type':'button', 'id':'', 'class':'', 'src':'' }
+  // ]},
    return (
         <div>
             {
-                elements.map((el, index) => 
-                    React.createElement(el, { key: index }, "hello"))
+                globalVars.scripted_elements.map((el, index) => 
+                    React.createElement(el.element_type, { key: index }, el.label))
             }
         </div>
     );
