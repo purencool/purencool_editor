@@ -49,7 +49,7 @@ foreach ($_SERVER as $key => $value) {
 
 $body = file_get_contents('php://input');
 if ($body !== '') {
-    writeFileContent('text.txt', $body);
+    writeFileContent('./data/text.txt', $body);
     try {
         echo '{"compiled_response":"'. $body .'"}';
         error_log("\n" . $header . "\n" . $body . "\n");
