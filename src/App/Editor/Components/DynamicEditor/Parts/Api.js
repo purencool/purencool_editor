@@ -40,6 +40,9 @@ const api = (props) => {
   }, []);
   
  
+ 
+ 
+ 
   return (
           <div className="pnc-api-container">
             <select className={props.elementKey}>
@@ -51,7 +54,7 @@ const api = (props) => {
                : 
                  inputList[0].map((x, i) => {
                    return (
-                    <option key={i} value={x.id} > 
+                    <option key={i} value={x.id} className={x.id} > 
                      {x.label}
                     </option> 
                   );
