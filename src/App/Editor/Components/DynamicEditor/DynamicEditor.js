@@ -10,6 +10,8 @@ import {useGlobalState} from 'state-pool';
 
 import {buildScssObject} from '../Util/buildScssObject';
 
+import ApiCall from './Parts/api';
+
 /**
  * Returns compiled DynamicEditor and all Objects attached to it.
  * 
@@ -171,6 +173,10 @@ const DynamicEditor = () => {
                                     value={x.title}
                                     onChange={e => handleInputChange(e, i)}
                                     />
+                                  { global_vars.api_url !== 'undefined'
+                                      ? <ApiCall elementKey={i} />
+                                      : ""
+                                  }  
                                   <div className={"editor editor-" + i}>
                                     <AceEditor 
                                       name="code"

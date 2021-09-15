@@ -17,7 +17,7 @@ if (typeof window.purencool_editor_config === "undefined") {
 
 
 /**
- * Sets global state store
+ * Sets global state for injected variables.
  */
 if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
   window.purencool_editor_config = {
@@ -29,7 +29,17 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
 
 
 /**
- * @type object global scripted elements
+ * Sets global state for api.
+ */
+if (typeof window.purencool_editor_config.api_url !== "undefined") {
+  window.purencool_editor_config["api_url"] = window.purencool_editor_config.api_url;
+} else {
+  window.purencool_editor_config["api_url"] = 'undefined';
+}
+
+
+/**
+ * @type object global scripted elements.
  */
 let scriptedElements = [
   {'element_type':'span', 'label':''}
@@ -41,7 +51,7 @@ window.purencool_editor_config['scripted_elements'] = scriptedElements;
 
 
 /**
- * @type object default global message
+ * @type object default global message.
  */
 let defaultMessage = {"title": "Welcome","message": "Version 1.0","hash": 1111};
 window.purencool_editor_config['message'] = defaultMessage;
@@ -49,14 +59,15 @@ window.purencool_editor_config['message'] = defaultMessage;
 
 /**
  *  @todo These varibles need to used by global_vars and not directly in the
- *  app
+ *  app.
  */
 window.purencool_editor_config["globalKeyPress"] = "1";
 window.purencool_editor_config["editors_container_width"] = 40;
 
 
+
 /**
- * Add Window Variables to Global Variable Store
+ * Add Window Variables to Global Variable Store.
  */
 store.setState("global_vars", window.purencool_editor_config);
 
@@ -69,6 +80,7 @@ store.setState("global_editor_array", [{title: "", code: ""}]);
 
 
 console.log(window.purencool_editor_config);
+
 
 /**
  * Initializing application.

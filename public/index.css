@@ -175,7 +175,14 @@ body .ace_gutter-cell.ace_error {
   border: none;
 }
 
-
+/**
+ * Api
+ */
+.pnc-api-container select {
+ width: 98%;
+ border:none;
+ border-bottom: 1px solid var(--default_second_background);
+}
 
 /**
  * Second Iframe
