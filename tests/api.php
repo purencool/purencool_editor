@@ -13,6 +13,7 @@
  * Post example
  *   {"data":"service_collection"}
  *   {"data":"editor"}
+ *   {"code":""}
  * 
  */
 header('Access-Control-Allow-Origin: *');
@@ -81,6 +82,59 @@ function configurationApi($var = 'default') {
   return $returnObject;
 }
 
+function codeApi($var) {
+  $path = getcwd() . "/data/temp";
+  $filegz = $path . "/code.tar.gz";
+  $filetar = $path . "/code.tar";
+
+  
+  if (is_dir($path)) {
+    function recurseRmdir($dir) {
+      $files = array_diff(scandir($dir), array('.', '..'));
+      foreach ($files as $file) {
+        (is_dir("$dir/$file")) ? recurseRmdir("$dir/$file") : unlink("$dir/$file");
+      }
+      return rmdir($dir);
+    }
+
+    recurseRmdir($path);
+    mkdir($path);
+  }
+
+  $configurationApi = configurationApi();
+
+  $storeCorrectArray = [];
+  foreach ($configurationApi as $value) {
+    if ($value['id'] == $var) {
+      $storeCorrectArray = $value;
+      function wget($address, $filename) {
+        file_put_contents($filename, file_get_contents($address));
+      }
+
+      wget($value['url'] . "/code.tar.gz", $filegz);
+      break;
+    }
+  }
+  $p = new PharData($filegz);
+  $p->decompress();
+  $phar = new PharData($filetar);
+  $phar->extractTo($path);
+
+  chmod($path, 0777);
+  chmod($filegz, 0777);
+  chmod($filetar, 0777);
+  
+        $myfiles = array_diff(scandir($path."/".$storeCorrectArray['path']."/code"), array('.', '..')); 
+     // print_r($myfiles); 
+      
+     $createConfigObject = json_decode($storeCorrectArray['configuration']);
+     $open = $path."/".$storeCorrectArray['path']."code/". $createConfigObject->scss->scss_default;
+     
+     $return = file_get_contents($open);
+    
+  return "{\"response\":\"$return\"}";
+}
+
 $body = file_get_contents('php://input');
 if ($body !== '') {
   $bodyArray = json_decode(html_entity_decode($body), true);
@@ -96,6 +150,10 @@ if ($body !== '') {
 
     if ($bodyArray['data'] == 'editor') {
       $bodyResult = configurationApi('editor');
+    }
+
+    if (isset($bodyArray['code'])) {
+      $bodyResult = codeApi($bodyArray['code']);
     }
 
     echo json_encode(($bodyResult));
