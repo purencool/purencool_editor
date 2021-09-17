@@ -179,8 +179,11 @@ const DynamicEditor = () => {
                                   }  
                                   <div className={"editor editor-" + i}>
                                     <AceEditor 
-                                      name="code"
-                                      mode="css" placeholder={"CSS or SCSS"}
+                                      ref={instance => { this.aceEditor = instance; }}
+                                      name={"code-editor-"+i}
+                                      mode="css" 
+                                      placeholder={"CSS or SCSS"}
+                                      setValue="testing to see"
                                       onChange={value => handleCodeInputChange(value, i)}
                                       value={x.code}
                                       setOptions={{

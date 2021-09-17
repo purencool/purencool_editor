@@ -5,7 +5,8 @@ import {store} from 'state-pool';
 
 
 /**
- * Sets up global variables being used by the application.
+ * Sets up global variables being used by the application so that editor doesn't
+ * throw an error on load if object doesn't exist.
  */
 if (typeof window.purencool_editor_config === "undefined") {
   window.purencool_editor_config = {
@@ -17,23 +18,19 @@ if (typeof window.purencool_editor_config === "undefined") {
 
 
 /**
- * Sets global state for injected variables.
+ * Sets global api url for single connection variables.
  */
 if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
-  window.purencool_editor_config = {
-    "scss_api_url": window.purencool_editor_config.global_api_url,
-    "compile_api_url": window.purencool_editor_config.global_api_url,
-    "open_api_url": window.purencool_editor_config.global_api_url
-  };
+  window.purencool_editor_config["scss_api_url"] = window.purencool_editor_config.global_api_url;
+  window.purencool_editor_config["compile_api_url"] = window.purencool_editor_config.global_api_url;
+  window.purencool_editor_config["open_api_url"] =window.purencool_editor_config.global_api_url;
 }
 
 
 /**
  * Sets global state for api.
  */
-if (typeof window.purencool_editor_config.api_url !== "undefined") {
-  window.purencool_editor_config["api_url"] = window.purencool_editor_config.api_url;
-} else {
+if (typeof window.purencool_editor_config.api_url === "undefined") {
   window.purencool_editor_config["api_url"] = 'undefined';
 }
 

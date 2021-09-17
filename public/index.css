@@ -1,6 +1,6 @@
 :root {
   --default_background: gray;
-  --default_second_background: lightgray;
+  --default_second_background: #f5f7fb;
   --slider_first_color: #57c5f7;
 }
 /* var( --default_second_background); */

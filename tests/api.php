@@ -87,8 +87,8 @@ function codeApi($var) {
   $filegz = $path . "/code.tar.gz";
   $filetar = $path . "/code.tar";
 
-  
   if (is_dir($path)) {
+
     function recurseRmdir($dir) {
       $files = array_diff(scandir($dir), array('.', '..'));
       foreach ($files as $file) {
@@ -107,6 +107,7 @@ function codeApi($var) {
   foreach ($configurationApi as $value) {
     if ($value['id'] == $var) {
       $storeCorrectArray = $value;
+
       function wget($address, $filename) {
         file_put_contents($filename, file_get_contents($address));
       }
@@ -123,16 +124,12 @@ function codeApi($var) {
   chmod($path, 0777);
   chmod($filegz, 0777);
   chmod($filetar, 0777);
-  
-        $myfiles = array_diff(scandir($path."/".$storeCorrectArray['path']."/code"), array('.', '..')); 
-     // print_r($myfiles); 
-      
-     $createConfigObject = json_decode($storeCorrectArray['configuration']);
-     $open = $path."/".$storeCorrectArray['path']."code/". $createConfigObject->scss->scss_default;
-     
-     $return = file_get_contents($open);
-    
-  return "{\"response\":\"$return\"}";
+
+  $myfiles = array_diff(scandir($path . "/" . $storeCorrectArray['path'] . "/code"), array('.', '..'));
+  $createConfigObject = json_decode($storeCorrectArray['configuration']);
+  $open = $path . "/" . $storeCorrectArray['path'] . "code/" . $createConfigObject->scss->scss_default;
+
+  return file_get_contents($open);
 }
 
 $body = file_get_contents('php://input');
@@ -156,7 +153,7 @@ if ($body !== '') {
       $bodyResult = codeApi($bodyArray['code']);
     }
 
-    echo json_encode(($bodyResult));
+    echo json_encode($bodyResult);
     error_log("\n" . $header . "\n" . $bodyResult . "\n");
   } catch (\Exception $e) {
     echo "";
