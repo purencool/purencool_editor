@@ -1,7 +1,9 @@
 :root {
-  --default_background: gray;
+  --default_background: white;
   --default_second_background: #f5f7fb;
   --slider_first_color: #57c5f7;
+  --color_light_green: #32cea4;
+  --color_green_background: #145242;
 }
 /* var( --default_second_background); */
 
@@ -99,7 +101,6 @@ body .ace_gutter-cell.ace_error {
 
 .pnc-panel-navigation{
   position: absolute;
-  background: var(--default_background);
   width: 100%;
   padding-bottom: 5px;
 }
@@ -142,8 +143,8 @@ body .ace_gutter-cell.ace_error {
 
 
 .pnc-title{
-  background: darkgray;
-  border: 1px solid darkgray;
+  border:none;
+  border-bottom: 1px solid darkgray;
   font-weight: 700;
 }
 
@@ -153,7 +154,6 @@ body .ace_gutter-cell.ace_error {
 .pnc-url{
   width:100%;
   background: var(--default_background);
-  color: white;
   border-top: 0;
   border-right:0;
   border-left: 0;
@@ -161,7 +161,6 @@ body .ace_gutter-cell.ace_error {
 }
 
 .pnc-url::placeholder{
-  color: white;
 }
 
 .pnc-url::focus{
@@ -207,7 +206,6 @@ body .ace_gutter-cell.ace_error {
 .pnc-second-url {
   width: calc(100% - 60px);
   background: var(--default_background);
-  color: white;
   border-top: 0;
   border-right: 0;
   border-left: 0;
@@ -223,7 +221,6 @@ div div .close-second-iframe-btn{
 
 
 .pnc-second-url::placeholder{
-  color: white;
 }
 
 .pnc-second-url::focus{
@@ -233,7 +230,8 @@ div div .close-second-iframe-btn{
 /**
  * Buttons
  */
-.pnc-editor-container button{
+button{
+  background: none; 
   border:none;
   margin: 5px 5px 0 0;
 }
@@ -249,11 +247,17 @@ div div .close-second-iframe-btn{
  */
 #pnc-feedback-id {
   position: absolute;
-  right: 0;
+  z-index: 777;
+  left: 5px;
   bottom: 0;
   min-width: 100px;
   padding: 0 20px;
-  background: var(--default_second_background);
+  color: var(--color_light_green);
+  background: var(--color_green_background);
+}
+
+#pnc-feedback-id button{
+  color: var(--color_light_green);
 }
 
 #pnc-feedback-id button{

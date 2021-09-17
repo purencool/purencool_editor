@@ -60,8 +60,6 @@ const api = (props) => {
 
 
   const handleCopy = (i) => {
-    console.log(codeList);
-    console.log(i);
     navigator.clipboard.writeText(codeList[codeList.length - 1]);
     $("#wrapper-code-pre-"+i).slideUp('fast');
     $("#code-pre-"+i).empty();
