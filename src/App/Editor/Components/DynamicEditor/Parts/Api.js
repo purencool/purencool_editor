@@ -42,6 +42,7 @@ const api = (props) => {
    * React hook used for when the UI is initalising
    */
   useEffect(() => {
+
     axios.post(global_vars.api_url, {"data": 'editor'}, {})
             .then(response => {
               setInputList([...inputList, response.data]);
@@ -73,15 +74,14 @@ const api = (props) => {
               <option value="none" > 
                 Select required SCSS
               </option> 
-              {inputList[0] === undefined ?
-                        "loading...."
-                        :
-                        inputList[0].map((x, i) => {
-                  return (
-                        <option key={i} value={x.id} className={x.id} > 
-                          {x.label}
-                        </option>
-                          );
+              {inputList.length === 0 ?
+                ""
+                :
+                inputList[0].map((x, i) => {
+                  return  <option key={i} value={x.id} className={x.id} > 
+                      {x.label}
+                    </option>;
+                  
                 })
               }
             </select> 

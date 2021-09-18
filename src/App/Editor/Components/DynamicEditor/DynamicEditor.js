@@ -72,17 +72,18 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const openStorage = (file) => {
-    axios
-            .post(global_vars.open_api_url, {"open": file}, {})
-            .then(response => {
-              console.log("JSON data from API ==>", response.data.compiled);
-              if (response.data.compiled === undefined) {
-                setInputList([{title: "", code: ""}]);
-              } else {
-                setInputList(response.data.compiled);
-              }
-            })
-            .catch((err) => console.log("Error", err));
+    if (global_vars.open_api_url !== "undefined") {
+      axios.post(global_vars.open_api_url, {"open": file}, {})
+              .then(response => {
+                console.log("openStorage ==>", response.data.compiled);
+                if (response.data.compiled === undefined) {
+                  setInputList([{title: "", code: ""}]);
+                } else {
+                  setInputList(response.data.compiled);
+                }
+              })
+              .catch((err) => console.log("Error", err));
+    }
 
   };
 
@@ -174,13 +175,15 @@ const DynamicEditor = () => {
                                     onChange={e => handleInputChange(e, i)}
                                     />
                                   { global_vars.api_url !== 'undefined'
-                                      ? <ApiCall elementKey={i} />
-                                      : ""
+                                              ? <ApiCall elementKey={i} />
+                                              : ""
                                   }  
                                   <div className={"editor editor-" + i}>
                                     <AceEditor 
-                                      ref={instance => { this.aceEditor = instance; }}
-                                      name={"code-editor-"+i}
+                                      ref={instance => {
+                                    this.aceEditor = instance;
+                                  }}
+                                      name={"code-editor-" + i}
                                       mode="css" 
                                       placeholder={"CSS or SCSS"}
                                       setValue="testing to see"
@@ -193,18 +196,18 @@ const DynamicEditor = () => {
                                             minLines: 6,
                                             maxLines: 30,
                                             wrap: true,
-                                            autoScrollEditorIntoView: true
-                                          }}
+                                    autoScrollEditorIntoView: true
+                                  }}
                                       />
                                   </div>
                                   <div>
                                     {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
                                     {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}
-                                    <button onClick={e => handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
+                                    <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
                                   </div>           
                                 </div>
-                                );
-                      })
+                              );
+                    })
             }
           </div>
           );

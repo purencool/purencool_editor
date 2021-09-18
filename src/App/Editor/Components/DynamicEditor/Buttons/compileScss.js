@@ -37,14 +37,14 @@ const compileScss = () => {
    */
   const handleCompile = async () => {
     if (global_vars.compile_api_url !== "undefined") {
-      console.log(inputList);
       const res = await axios
               .post(global_vars.compile_api_url, {"compiled": inputList}, {})
               //.then(response => {
               //console.log(response.data.live_response);
               // }) 
               .catch((err) => console.log("Error", err));
-      
+ 
+      console.log("compileScss ==>", res.data);
       // Changes message box values to update user of progress  
       messageUpdateF(global_vars => {
         global_vars.message.title = 'Compiled';

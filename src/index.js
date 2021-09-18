@@ -33,6 +33,9 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
 if (typeof window.purencool_editor_config.api_url === "undefined") {
   window.purencool_editor_config["api_url"] = 'undefined';
 }
+if (typeof window.purencool_editor_config.api_url === "") {
+  window.purencool_editor_config["api_url"] = 'undefined';
+}
 
 
 /**

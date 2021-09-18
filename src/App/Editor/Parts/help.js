@@ -1,4 +1,5 @@
 import React from "react";
+import {useGlobalState} from 'state-pool';
 
 /**
  * Returns compiled Help information.
@@ -9,10 +10,19 @@ import React from "react";
  *   Response object before rendering.
  */
 const Help = (props) => {
+  
+  /**
+   * Global Vars.
+   * 
+   * @type object global_vars.
+   *   Returns global_vars set at the start of the application.
+   */
+  const [global_vars] = useGlobalState("global_vars");
+
   return (
       <div>
           <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
-              <div className="pnc-pop-up-box">
+              <div className="pnc-">
                 <div>
                   <h2>Help</h2>
                   <p></p>
@@ -22,8 +32,12 @@ const Help = (props) => {
                   <p></p>
                 </div>
                 <div>
+                  <h3>Global Array</h3>
+                  <pre>{JSON.stringify(global_vars, undefined, 2)}</pre>
+                </div>
+                <div>
                   <h3>Live Data</h3>
-                   {JSON.stringify(props.inputList)}
+                  <pre>{JSON.stringify(props.inputList, undefined, 2)}</pre>
                 </div>
               </div>
             </div>

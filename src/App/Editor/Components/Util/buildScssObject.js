@@ -67,7 +67,7 @@ export const buildScssObject = (inputList,globalVars) => {
                 .catch((err) => console.log("Error", err));
 
 
-        console.log("JSON data from API ==>", res.data.live_response);
+        console.log("buildScss compiling ==>", res.data);
         if (res.data.live_response !== undefined) {
           $(document).ready(function () {
             let iFrame = $("iframe#pnc-iframe").contents();
