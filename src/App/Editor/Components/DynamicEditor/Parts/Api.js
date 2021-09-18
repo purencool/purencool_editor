@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import $ from "jquery";
 import {useGlobalState} from 'state-pool';
 
 /**
@@ -31,7 +30,7 @@ const api = (props) => {
 
   /**
    * Response from the api code.
-   * 
+   *
    * @type object useState array.
    *   Returns useState array set for local request.
    */
@@ -39,16 +38,25 @@ const api = (props) => {
 
 
   /**
+   * Sets display mode boolean.
+   *
+   * @type object useState array.
+   *   Returns display mode boolean.
+   */
+  const [showApiDisplayResult, setshowApiDisplayResult] = useState(false);
+
+
+  /**
    * React hook used for when the UI is initalising
    */
   useEffect(() => {
-
     axios.post(global_vars.api_url, {"data": 'editor'}, {})
             .then(response => {
               setInputList([...inputList, response.data]);
             })
             .catch((err) => console.log("Error", err));
-  }, []);
+    
+  }, [showApiDisplayResult]);
 
 
   const handleApiCall = (e) => {
@@ -57,37 +65,38 @@ const api = (props) => {
               setCodeList([...codeList, response.data]);
             })
             .catch((err) => console.log("Error", err));
+    setshowApiDisplayResult(...showApiDisplayResult, true);
   };
 
 
   const handleCopy = (i) => {
+    let id = "code-pre-" + i;
+    document.getElementById(id).innerHTML = "";
     navigator.clipboard.writeText(codeList[codeList.length - 1]);
-    $("#wrapper-code-pre-"+i).slideUp('fast');
-    $("#code-pre-"+i).empty();
+    setshowApiDisplayResult(...showApiDisplayResult, false);
   };
 
 
-
   return (
-          <div className="pnc-api-container"  onChange={e => handleApiCall(e.target.value)}>
-            <select className={props.elementKey}>
+          <div className="pnc-api-container">
+            <select className={props.elementKey} onChange={e => handleApiCall(e.target.value, props.elementKey)}>
               <option value="none" > 
                 Select required SCSS
               </option> 
               {inputList.length === 0 ?
-                ""
-                :
-                inputList[0].map((x, i) => {
+                        ""
+                        :
+                        inputList[0].map((x, i) => {
                   return  <option key={i} value={x.id} className={x.id} > 
-                      {x.label}
-                    </option>;
-                  
+                    {x.label}
+                  </option>;
+
                 })
               }
             </select> 
           
             {(() => {
-                if (codeList[0] !== undefined) {
+                if (showApiDisplayResult === true) {
                   return <div id={"wrapper-code-pre-" + props.elementKey}>
                     <pre id={"code-pre-" + props.elementKey}> {codeList[codeList.length - 1]}</pre>
                     <button onClick={() => handleCopy(props.elementKey)}>Copy to clipboard and clear</button>
@@ -102,5 +111,3 @@ const api = (props) => {
 };
 
 export default api;
-
-
