@@ -69,9 +69,7 @@ const api = (props) => {
   };
 
 
-  const handleCopy = (i) => {
-    let id = "code-pre-" + i;
-    document.getElementById(id).innerHTML = "";
+  const handleCopy = () => {
     navigator.clipboard.writeText(codeList[codeList.length - 1]);
     setshowApiDisplayResult(...showApiDisplayResult, false);
   };
@@ -79,7 +77,7 @@ const api = (props) => {
 
   return (
           <div className="pnc-api-container">
-            <select className={props.elementKey} onChange={e => handleApiCall(e.target.value, props.elementKey)}>
+            <select className={props.elementKey} onChange={e => handleApiCall(e.target.value)}>
               <option value="none" > 
                 Select required SCSS
               </option> 
@@ -87,19 +85,22 @@ const api = (props) => {
                         ""
                         :
                         inputList[0].map((x, i) => {
-                  return  <option key={i} value={x.id} className={x.id} > 
-                    {x.label}
-                  </option>;
-
+                        return  <option key={i} value={x.id} className={x.id} > 
+                          {x.label}
+                        </option>;
                 })
               }
             </select> 
           
             {(() => {
                 if (showApiDisplayResult === true) {
-                  return <div id={"wrapper-code-pre-" + props.elementKey}>
-                    <pre id={"code-pre-" + props.elementKey}> {codeList[codeList.length - 1]}</pre>
-                    <button onClick={() => handleCopy(props.elementKey)}>Copy to clipboard and clear</button>
+                  return <div className="pre-container" id={"wrapper-code-pre-" + props.elementKey}>
+                    <pre id={"code-pre-" + props.elementKey}> 
+                      {codeList[codeList.length - 1]}
+                    </pre>
+                    <button onClick={() => handleCopy()}>
+                       Copy to clipboard
+                    </button>
                     <p></p>
                   </div>;
                 }

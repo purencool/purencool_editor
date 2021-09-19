@@ -4,6 +4,7 @@
   --slider_first_color: #57c5f7;
   --color_light_green: #32cea4;
   --color_green_background: #145242;
+  --color_pre_background:  ivory;
 }
 
 pre {
@@ -13,6 +14,13 @@ pre {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+.pre-container{
+  background-color: var(--color_pre_background);
+  width: 96%;
+  padding: 10px;
+  border-bottom: 1px solid var(--default_second_background);
 }
 
 iframe body *,
