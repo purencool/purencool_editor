@@ -19,6 +19,9 @@
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+#header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+
 
 /**
  * 
@@ -29,6 +32,7 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 /**
  * 
  */
+$header="";
 foreach ($_SERVER as $key => $value) {
   if (strpos($key, 'HTTP_') === 0) {
     $chunks = explode('_', $key);
@@ -141,11 +145,11 @@ if ($body !== '') {
   }
 
   try {
-    if ($bodyArray['data'] == 'service_collection') {
+    if (isset($bodyArray['data']) && $bodyArray['data'] == 'service_collection') {
       $bodyResult = configurationApi();
     }
 
-    if ($bodyArray['data'] == 'editor') {
+    if (isset($bodyArray['data']) && $bodyArray['data'] == 'editor') {
       $bodyResult = configurationApi('editor');
     }
 
@@ -153,8 +157,9 @@ if ($body !== '') {
       $bodyResult = codeApi($bodyArray['code']);
     }
 
+    error_log(print_r($bodyArray, true) . "\n");
     echo json_encode($bodyResult);
-    error_log("\n" . $header . "\n" . $bodyResult . "\n");
+    error_log("\n" . $header . "\n" . print_r($bodyResult, true) . "\n");
   } catch (\Exception $e) {
     echo "";
     error_log('api: Unable to compile content: ' . $e);

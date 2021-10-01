@@ -73,6 +73,11 @@ const api = (props) => {
     navigator.clipboard.writeText(codeList[codeList.length - 1]);
     setshowApiDisplayResult(...showApiDisplayResult, false);
   };
+  
+  
+  const handleClose = () => {
+    setshowApiDisplayResult(...showApiDisplayResult, false);
+  };
 
 
   return (
@@ -99,7 +104,10 @@ const api = (props) => {
                       {codeList[codeList.length - 1]}
                     </pre>
                     <button onClick={() => handleCopy()}>
-                       Copy to clipboard
+                       Copy to Clipboard
+                    </button>
+                    <button onClick={() => handleClose()}>
+                       Close and Clear
                     </button>
                     <p></p>
                   </div>;
