@@ -162,7 +162,7 @@ const DynamicEditor = () => {
   };
 
   return (
-          <div>
+          <div className="pnc-editors">
             {inputList.map((x, i) => {
                         return (
                                 <div key={i} className="pnc-editor-component">

@@ -116,16 +116,17 @@ const Editor = () => {
           <div className="pnc-editor-wrapper">
             <Slider className="slider" onChange={updateSlider} defaultValue={50} />
             <div className="pnc-editor-container" >
-              <div className="pnc-editor-panel pnc-box" 
+              <div className="pnc-left-panel pnc-editor-panel pnc-box" 
                    style={{width: `${ratio}%`}}>
-                <div className="position-relative">  
-                  <MainNavigation />
-                  <ScriptedElements />
-                  <DynamicEditor/>
-                  <SecondIframe />
-                </div> 
+                  <div className="pnc-left-menu position-relative"> 
+                     <MainNavigation />
+                  </div>
+                  <div className="pnc-left-inputs position-relative">
+                     <DynamicEditor/>
+                     <SecondIframe />
+                  </div>
               </div>
-              <div className="pnc-editor-website-frame pnc-box"           
+              <div className="pnc-right-panel pnc-editor-website-frame pnc-box"           
                    style={{width: `${100 - ratio}%`}}>
                 <div className="pnc-editor-iframe-container">
                   <div className="pnc-url-form">

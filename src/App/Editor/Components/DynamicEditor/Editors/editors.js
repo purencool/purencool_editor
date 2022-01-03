@@ -79,7 +79,7 @@ const Editors = (props) => {
 
 
   return (
-          <div>
+          <div className="pnc-editors">
           {props.inputList.map((x, i) => {
                         return (
                                 <div key={i} className="pnc-editor-component">

@@ -15,21 +15,15 @@ import LiveScss from '../Components/DynamicEditor/Buttons/liveScss';
  *   Response object before rendering.
  */
 const MainNavigation = () => {
-  return (
-          <div className="pnc-panel-navigation-wrapper">
-            <div className="pnc-panel-navigation">
-              <div className="pnc-panel-container">
+    return (
+            <div className="pnc-navigation">
                 <CompileScss/>
                 <LiveScss/>
                 <ShowHelp />
                 <EditorsDisplays />
                 <SplitScreen />
-              </div>
             </div>
-            <div className="pnc-panel-spacing"></div>
-          </div>
-
-          );
+            );
 };
 
 export default MainNavigation;

@@ -1,548 +1,547 @@
 :root {
-  --default_background: white;
-  --default_second_background: #f5f7fb;
-  --slider_first_color: #57c5f7;
-  --color_light_green: #32cea4;
-  --color_green_background: #145242;
-  --color_pre_background:  ivory;
+    --default_background: white;
+    --default_second_background: #f5f7fb;
+    --slider_first_color: #57c5f7;
+    --color_light_green: #32cea4;
+    --color_green_background: #145242;
+    --color_pre_background:  ivory;
 }
 
 pre {
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
 .pre-container{
-  background-color: var(--color_pre_background);
-  width: 96%;
-  padding: 10px;
-  border-bottom: 1px solid var(--default_second_background);
+    background-color: var(--color_pre_background);
+    width: 96%;
+    padding: 10px;
+    border-bottom: 1px solid var(--default_second_background);
 }
 
 iframe body *,
 * {
-  scrollbar-width: thin;
-  scrollbar-color: lightgray lightgray;
+    scrollbar-width: thin;
+    scrollbar-color: lightgray lightgray;
 }
 
 iframe body *,
 *::-webkit-scrollbar {
-  width: 2px;
+    width: 2px;
 }
 
 iframe body *,
 *::-webkit-scrollbar-track {
-  background: lightgray;
+    background: lightgray;
 }
 
 iframe body *,
 *::-webkit-scrollbar-thumb {
-  background: lightgray;
-  border-radius: 0;
-  border: 1px solid lightgray;
+    background: lightgray;
+    border-radius: 0;
+    border: 1px solid lightgray;
 }
 
 html {
-  background: var(--default_background);
+    background: var(--default_background);
 }
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 body .ace_gutter-cell.ace_warning,
 body .ace_gutter-cell.ace_error {
-  background-image: none !important;
-  background-repeat: no-repeat !important;
-  background-position: 0;
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    background-position: 0;
 }
 
 .pnc-editor-wrapper {
-  min-height: 100vh;
-  width: 100%;
-  height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 
 .pnc-editor-container {
-  display: flex;
+    display: flex;
 }
 
 .pnc-box {
-  box-sizing: border-box;
-  flex: 1 1 auto;
+    box-sizing: border-box;
+    flex: 1 1 auto;
 }
 
 .pnc-editor-panel,
 .pnc-editor-website-frame {
-  width: 49.5%;
+    width: 49.5%;
 }
 
 .pnc-editor-panel {
-  height: 99.5vh;
-  background: var(--default_second_background);
-  overflow: auto;
-  border-right: 1px solid var(--default_background);
+    height: 99.5vh;
+    overflow: auto;
 }
 
 .pnc-handler {
-  background-color: black;
-  width: 0.5%;
-  cursor: col-resize;
+    background-color: black;
+    width: 0.5%;
+    cursor: col-resize;
 }
 
 .pnc-editor-container input,
 .pnc-editor-container button,
 .pnc-editor-container a {
-  font-size: 13px;
+    font-size: 13px;
 }
 
 .pnc-editor-container a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .pnc-panel-navigation-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .pnc-panel-navigation {
-  position: absolute;
-  width: 100%;
-  padding-bottom: 5px;
+    width: 100%;
+    padding-bottom: 5px;
 }
 
 .pnc-panel-container {
-  padding-left: 5px;
+    padding-left: 5px;
 }
 
 .pnc-panel-spacing {
-  display: block;
-  height: 30px;
+    display: block;
+    height: 30px;
 }
 
 .pnc-editor-component {
-  padding: 25px 0 0 5px;
+    padding: 25px 0 0 5px;
 }
 
 .pnc-title,
 .pnc-editor-panel div.ace_editor {
-  width: 98% !important;
+    width: 98% !important;
 }
 
 .pnc-pop-up-wrapper {
-  position: absolute;
-  background: var(--default_background);
-  top: 0;
-  left: 40%;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  overflow-y: scroll;
-  padding-left: 20px;
+    position: absolute;
+    background: var(--default_background);
+    top: 0;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow-y: scroll;
+    padding-left: 20px;
 }
 
 .pnc-pop-up-box {
-  background: var(--default_second_background);
-  width: 90.5%;
-  margin: 10% 0 0 20px;
-  padding: 10px;
+    background: var(--default_second_background);
+    width: 90.5%;
+    margin: 10% 0 0 20px;
+    padding: 10px;
 }
 
 .pnc-title {
-  border: none;
-  border-bottom: 1px solid darkgray;
-  font-weight: 700;
+    border: none;
+    border-bottom: 1px solid darkgray;
+    font-weight: 700;
 }
 
 /**
  * Iframe editor
  */
 .pnc-url {
-  width: 100%;
-  background: var(--default_background);
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
-  padding: 5px;
+    width: 100%;
+    background: var(--default_background);
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    padding: 5px;
 }
 
 .pnc-url::focus {
-  border: 0;
+    border: 0;
 }
 
 .pnc-editor-website-frame iframe {
-  display: block;
-  width: 100%;
-  height: 95vh;
-  border: none;
+    display: block;
+    width: 100%;
+    height: 95vh;
+    border: none;
 }
 
 /**
  * Api
  */
 .pnc-api-container select {
-  width: 98%;
-  border: none;
-  border-bottom: 1px solid var(--default_second_background);
+    width: 98%;
+    border: none;
+    border-bottom: 1px solid var(--default_second_background);
 }
 
 /**
  * Second Iframe
  */
 .pnc-second-frame {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: lightgray;
-  bottom: 0;
-  right: 0;
-  z-index: 888;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: lightgray;
+    bottom: 0;
+    right: 0;
+    z-index: 888;
 }
 
 .pnc-second-frame iframe {
-  display: block;
-  width: 100%;
-  height: 95vh;
-  border: none;
+    display: block;
+    width: 100%;
+    height: 95vh;
+    border: none;
 }
 
 .pnc-second-url {
-  width: calc(100% - 60px);
-  background: var(--default_background);
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
-  padding: 5px;
+    width: calc(100% - 60px);
+    background: var(--default_background);
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    padding: 5px;
 }
 
 div div .close-second-iframe-btn {
-  float: right;
-  margin: 0;
-  height: 26px;
-  width: 60px;
+    float: right;
+    margin: 0;
+    height: 26px;
+    width: 60px;
 }
 
 .pnc-second-url::focus {
-  border: 0;
+    border: 0;
 }
 
 /**
  * Buttons
  */
 button {
-  background: none;
-  border: none;
-  margin: 5px 5px 0 0;
+    background: none;
+    border: none;
+    margin: 5px 5px 0 0;
 }
 
 .pnc-editor-container .display-editor-btn {
-  float: right;
-  margin-right: 14px;
+    float: right;
+    margin-right: 14px;
 }
 
 /**
  * Feedback box
  */
 #pnc-feedback-id {
-  position: absolute;
-  z-index: 777;
-  left: 5px;
-  bottom: 0;
-  min-width: 100px;
-  padding: 0 20px;
-  color: var(--color_light_green);
-  background: var(--color_green_background);
+    position: absolute;
+    z-index: 777;
+    right: 5px;
+    bottom: 0;
+    min-width: 100px;
+    padding: 0 20px;
+    color: var(--color_light_green);
+    background: var(--color_green_background);
 }
 
 #pnc-feedback-id button {
-  color: var(--color_light_green);
+    color: var(--color_light_green);
 }
 
 #pnc-feedback-id button {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 /**
  * Generic css
  */
 .display-none {
-  display: none;
+    display: none;
 }
 
 .position-relative {
-  position: relative;
+    position: relative;
 }
 
 /**
  * Top slider
  */
 .rc-slider {
-  height: 5px;
-  width: 100%;
-  box-sizing: border-box;
+    position: fixed;
+    height: 7px;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--default_background);
 }
 
 .rc-slider * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider-rail {
-  position: absolute;
-  width: 100%;
-  background-color: var(--default_second_background);
-  height: 4px;
-  border-radius: 6px;
+    position: absolute;
+    width: 100%;
+    background-color: var(--default_second_background);
+    height: 4px;
+    border-radius: 6px;
 }
 
 .rc-slider-track {
-  position: absolute;
-  left: 0;
-  height: 4px;
-  border-radius: 6px;
+    position: absolute;
+    left: 0;
+    height: 4px;
+    border-radius: 6px;
 }
 
 .rc-slider-handle {
-  position: absolute;
-  cursor: pointer;
-  cursor: -webkit-grab;
-  cursor: grab;
-  border: solid 2px #96dbfa;
-  touch-action: pan-x;
+    position: absolute;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    cursor: grab;
+    border: solid 2px #96dbfa;
+    touch-action: pan-x;
 }
 
 .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
-  border-color: var(--slider_first_color);
-  box-shadow: 0 0 0 5px #96dbfa;
+    border-color: var(--slider_first_color);
+    box-shadow: 0 0 0 5px #96dbfa;
 }
 
 .rc-slider-handle:focus {
-  outline: none;
+    outline: none;
 }
 
 .rc-slider-handle-click-focused:focus {
-  border-color: #96dbfa;
-  box-shadow: unset;
+    border-color: #96dbfa;
+    box-shadow: unset;
 }
 
 .rc-slider-handle:hover {
-  border-color: var(--slider_first_color);
+    border-color: var(--slider_first_color);
 }
 
 .rc-slider-handle:active {
-  border-color: var(--slider_first_color);
-  box-shadow: 0 0 5px var(--slider_first_color);
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
+    border-color: var(--slider_first_color);
+    box-shadow: 0 0 5px var(--slider_first_color);
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
 }
 
 .rc-slider-mark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 12px;
 }
 
 .rc-slider-mark-text {
-  position: absolute;
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  cursor: pointer;
-  color: #999;
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    color: #999;
 }
 
 .rc-slider-mark-text-active {
-  color: #666;
+    color: #666;
 }
 
 .rc-slider-step {
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  background: transparent;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: transparent;
 }
 
 .rc-slider-disabled {
-  background-color: #e9e9e9;
+    background-color: #e9e9e9;
 }
 
 .rc-slider-disabled .rc-slider-track {
-  background-color: #ccc;
+    background-color: #ccc;
 }
 
 .rc-slider-disabled .rc-slider-handle,
 .rc-slider-disabled {
-  border-color: #ccc;
-  box-shadow: none;
-  background-color: #fff;
-  cursor: not-allowed;
+    border-color: #ccc;
+    box-shadow: none;
+    background-color: #fff;
+    cursor: not-allowed;
 }
 
 .rc-slider-disabled .rc-slider-mark-text,
 .rc-slider-disabled {
-  cursor: not-allowed !important;
+    cursor: not-allowed !important;
 }
 
 .rc-slider-vertical {
-  width: 14px;
-  height: 100%;
-  padding: 0 5px;
+    width: 14px;
+    height: 100%;
+    padding: 0 5px;
 }
 
 .rc-slider-vertical .rc-slider-rail {
-  height: 100%;
-  width: 4px;
+    height: 100%;
+    width: 4px;
 }
 
 .rc-slider-vertical .rc-slider-track {
-  left: 5px;
-  bottom: 0;
-  width: 4px;
+    left: 5px;
+    bottom: 0;
+    width: 4px;
 }
 
 .rc-slider-vertical .rc-slider-handle {
-  margin-left: -5px;
-  touch-action: pan-y;
+    margin-left: -5px;
+    touch-action: pan-y;
 }
 
 .rc-slider-vertical .rc-slider-mark {
-  top: 0;
-  left: 18px;
-  height: 100%;
+    top: 0;
+    left: 18px;
+    height: 100%;
 }
 
 .rc-slider-vertical .rc-slider-step {
-  height: 100%;
-  width: 4px;
+    height: 100%;
+    width: 4px;
 }
 
 .rc-slider-vertical {
-  left: 2px;
-  margin-bottom: -4px;
+    left: 2px;
+    margin-bottom: -4px;
 }
 
 .rc-slider-vertical .rc-slider-dot:first-child {
-  margin-bottom: -4px;
+    margin-bottom: -4px;
 }
 
 .rc-slider-vertical .rc-slider-dot:last-child {
-  margin-bottom: -4px;
+    margin-bottom: -4px;
 }
 .rc-slider-tooltip-zoom-down-enter,
 .rc-slider-tooltip-zoom-down-appear {
-  animation-duration: 0.3s;
-  animation-fill-mode: both;
-  display: block !important;
-  animation-play-state: paused;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    display: block !important;
+    animation-play-state: paused;
 }
 
 .rc-slider-tooltip-zoom-down-leave {
-  animation-duration: 0.3s;
-  animation-fill-mode: both;
-  display: block !important;
-  animation-play-state: paused;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    display: block !important;
+    animation-play-state: paused;
 }
 
 .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,
 .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {
-  animation-name: rcSliderTooltipZoomDownIn;
-  animation-play-state: running;
+    animation-name: rcSliderTooltipZoomDownIn;
+    animation-play-state: running;
 }
 
 .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {
-  animation-name: rcSliderTooltipZoomDownOut;
-  animation-play-state: running;
+    animation-name: rcSliderTooltipZoomDownOut;
+    animation-play-state: running;
 }
 
 .rc-slider-tooltip-zoom-down-enter,
 .rc-slider-tooltip-zoom-down-appear {
-  transform: scale(0, 0);
-  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    transform: scale(0, 0);
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .rc-slider-tooltip-zoom-down-leave {
-  animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
 
 @keyframes rcSliderTooltipZoomDownIn {
-  0% {
-    opacity: 0;
-    transform-origin: 50% 100%;
-    transform: scale(0, 0);
-  }
-  100% {
-    transform-origin: 50% 100%;
-    transform: scale(1, 1);
-  }
+    0% {
+        opacity: 0;
+        transform-origin: 50% 100%;
+        transform: scale(0, 0);
+    }
+    100% {
+        transform-origin: 50% 100%;
+        transform: scale(1, 1);
+    }
 }
 @keyframes rcSliderTooltipZoomDownOut {
-  0% {
-    transform-origin: 50% 100%;
-    transform: scale(1, 1);
-  }
-  100% {
-    opacity: 0;
-    transform-origin: 50% 100%;
-    transform: scale(0, 0);
-  }
+    0% {
+        transform-origin: 50% 100%;
+        transform: scale(1, 1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 50% 100%;
+        transform: scale(0, 0);
+    }
 }
 
 .rc-slider-tooltip {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  visibility: visible;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    visibility: visible;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider-tooltip * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider-tooltip-hidden {
-  display: none;
+    display: none;
 }
 
 .rc-slider-tooltip-placement-top {
-  padding: 4px 0 8px 0;
+    padding: 4px 0 8px 0;
 }
 
 .rc-slider-tooltip-inner {
-  padding: 6px 2px;
-  min-width: 24px;
-  height: 24px;
-  font-size: 12px;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  background-color: #6c6c6c;
-  border-radius: 6px;
-  box-shadow: 0 0 4px #d9d9d9;
+    padding: 6px 2px;
+    min-width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #6c6c6c;
+    border-radius: 6px;
+    box-shadow: 0 0 4px #d9d9d9;
 }
 
 .rc-slider-tooltip-arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
 }
 
 .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
-  bottom: 4px;
-  left: 50%;
-  margin-left: -4px;
-  border-width: 4px 4px 0;
-  border-top-color: #6c6c6c;
+    bottom: 4px;
+    left: 50%;
+    margin-left: -4px;
+    border-width: 4px 4px 0;
+    border-top-color: #6c6c6c;
 }
