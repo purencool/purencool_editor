@@ -122,7 +122,7 @@ const Editor = () => {
                      <div className="pnc-left-menu position-relative float-left"> 
                        <MainNavigation />
                     </div>
-                    <div className="pnc-left-inputs position-relative float-left">
+                    <div className="pnc-left-inputs position-relative float-right">
                        <DynamicEditor/>
                        <SecondIframe />
                     </div>

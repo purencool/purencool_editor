@@ -68,16 +68,13 @@ const SecondIframe = () => {
           <div id="pnc-second-frame-id" className="pnc-second-frame display-none">
             <div className="pnc-editor-iframe-container">
               <div className="pnc-url-form">
-                
                 <input 
                   type="text" 
                   name="second-url"
                   className="pnc-second-url"
                   placeholder="Add url and press enter"
                   onKeyPress={e => e.key === 'Enter' && handleSecondInputChangeUrl(e)}
-                  />
-                 <button onClick={handleCloseSecondIframe} className="close-second-iframe-btn">Close</button>  
-                       
+                  />  
               </div>
               <div id="pnc-iframe-container">
                 <iframe id="pnc-second-iframe" 
