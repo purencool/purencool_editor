@@ -5,6 +5,7 @@
     --color_light_green: #32cea4;
     --color_green_background: #145242;
     --color_pre_background:  ivory;
+    --color_menu_background: #bfbfbf;
 }
 
 pre {
@@ -49,6 +50,22 @@ iframe body *,
 html {
     background: var(--default_background);
 }
+
+/**
+ * Generic css
+ */
+.display-none {
+    display: none;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.float-left{
+    float:left;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -103,9 +120,6 @@ body .ace_gutter-cell.ace_error {
     color: black;
 }
 
-.pnc-panel-navigation-wrapper {
-    position: relative;
-}
 
 .pnc-panel-navigation {
     width: 100%;
@@ -116,13 +130,28 @@ body .ace_gutter-cell.ace_error {
     padding-left: 5px;
 }
 
-.pnc-panel-spacing {
-    display: block;
-    height: 30px;
+.pnc-left-menu {
+   width: 30px;
+   height: 100%;
+   position: absolute;
+   background-color: var(--color_menu_background);
+}
+
+.pnc-left-inputs {
+    padding-left: 40px;
+    width: calc(100% - 50px);
+}
+
+.pnc-navigation button {
+    background: none;
+    transform-origin: 34px 21px;
+    transform: rotate(90deg);
+    height: 81px;
+    width: 85px;
 }
 
 .pnc-editor-component {
-    padding: 25px 0 0 5px;
+    padding: 25px 0 0 0;
 }
 
 .pnc-title,
@@ -265,16 +294,6 @@ button {
     right: 0px;
 }
 
-/**
- * Generic css
- */
-.display-none {
-    display: none;
-}
-
-.position-relative {
-    position: relative;
-}
 
 /**
  * Top slider

@@ -118,13 +118,15 @@ const Editor = () => {
             <div className="pnc-editor-container" >
               <div className="pnc-left-panel pnc-editor-panel pnc-box" 
                    style={{width: `${ratio}%`}}>
-                  <div className="pnc-left-menu position-relative"> 
-                     <MainNavigation />
-                  </div>
-                  <div className="pnc-left-inputs position-relative">
-                     <DynamicEditor/>
-                     <SecondIframe />
-                  </div>
+                  <div className="pnc-left-systems">                 
+                     <div className="pnc-left-menu position-relative float-left"> 
+                       <MainNavigation />
+                    </div>
+                    <div className="pnc-left-inputs position-relative float-left">
+                       <DynamicEditor/>
+                       <SecondIframe />
+                    </div>
+                 </div>
               </div>
               <div className="pnc-right-panel pnc-editor-website-frame pnc-box"           
                    style={{width: `${100 - ratio}%`}}>

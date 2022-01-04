@@ -20,7 +20,7 @@ const editorsDisplays = () => {
   };
 
   return (
-      <button onClick={handlEditorsDisplays} className="editors-displays-btn">Close/Open Editors</button> 
+      <button onClick={handlEditorsDisplays} className="editors-displays-btn">Editors</button> 
     );
 };
 
