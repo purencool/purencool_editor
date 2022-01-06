@@ -154,7 +154,7 @@ body .ace_gutter-cell.ace_error {
 }
 
 .pnc-editor-component {
-    padding: 25px 0 0 0;
+    padding: 25px 5px 0 5px;
 }
 
 .pnc-title,

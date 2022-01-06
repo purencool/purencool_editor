@@ -7,6 +7,7 @@ import Help from './Parts/help';
 import Feedback from './Parts/feedback';
 import MainNavigation from './Parts/mainNavigation';
 import SecondIframe from "./Parts/secondIframe";
+import Settings from "./Parts/settings";
 import DynamicEditor from "./Components/DynamicEditor/DynamicEditor";
 import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
 
@@ -152,6 +153,7 @@ const Editor = () => {
             </div>
             <Feedback message={global_vars.message} />
             <Help inputList={inputList} />
+            <Settings />        
           </div>
           );
 }
