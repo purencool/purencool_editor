@@ -48,9 +48,16 @@ const api = (props) => {
 
   /**
    * React hook used for when the UI is initalising
+   *  
+   *  window.purencool_editor_config.connect_api_key;
+   *  window.purencool_editor_config.connect_api_domain;
    */
   useEffect(() => {
-    axios.post(global_vars.api_url, {"data": 'editor'}, {})
+    axios.post(global_vars.api_url, {
+              "data": "editor",
+              "key": global_vars.connect_api_key ,
+              "domain": global_vars.connect_api_domain 
+            }, {})
             .then(response => {
               setInputList([...inputList, response.data]);
             })

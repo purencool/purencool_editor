@@ -156,6 +156,6 @@ const Editor = () => {
             <Settings />        
           </div>
           );
-}
+};
 
 export default Editor;

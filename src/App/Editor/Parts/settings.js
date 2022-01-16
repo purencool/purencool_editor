@@ -25,7 +25,10 @@ const Settings = (props) => {
               <div className="pnc-">
                 <div>
                   <h2>Settings</h2>
-                  <p></p>
+                  <form>
+                    <label>Override API URLs to be HTTP or HTTPS</label>
+                    <input type="checkbox" id="https-override" name="https-override" value="https-override"/>            
+                  </form>
               </div>
             </div>
           </div>  
