@@ -4,8 +4,23 @@
     --slider_first_color: #57c5f7;
     --color_light_green: #32cea4;
     --color_green_background: #145242;
-    --color_pre_background:  ivory;
     --color_menu_background: #bfbfbf;
+    --color_api_border:#f5f7fb;
+    --color_api_background:lightgray;
+    --color_ace_editor_background:antiquewhite;
+    --color_ace_editor_gutter_background:antiquewhite;
+}
+
+/**
+ * Block elements
+ */
+html {
+    background: var(--default_background);
+}
+
+body {
+    padding: 0;
+    margin: 0;
 }
 
 pre {
@@ -17,12 +32,6 @@ pre {
     word-wrap: break-word;
 }
 
-.pre-container{
-    background-color: var(--color_pre_background);
-    width: 96%;
-    padding: 10px;
-    border-bottom: 1px solid var(--default_second_background);
-}
 
 iframe body *,
 * {
@@ -47,12 +56,9 @@ iframe body *,
     border: 1px solid lightgray;
 }
 
-html {
-    background: var(--default_background);
-}
 
 /**
- * Generic css
+ * Global CSS classes
  */
 .display-none {
     display: none;
@@ -70,10 +76,7 @@ html {
     float:right;
 }
 
-body {
-    padding: 0;
-    margin: 0;
-}
+
 
 body .ace_gutter-cell.ace_warning,
 body .ace_gutter-cell.ace_error {
@@ -157,9 +160,20 @@ body .ace_gutter-cell.ace_error {
     padding: 25px 5px 0 5px;
 }
 
+/**
+ * Editor
+ */
 .pnc-title,
 .pnc-editor-panel div.ace_editor {
     width: 100% !important;
+}
+
+.pnc-editor-panel div.ace_editor {
+    background: var(--color_ace_editor_background);
+}
+
+.pnc-editor-panel div.ace_gutter-layer{
+    background: var( --color_ace_editor_gutter_background);
 }
 
 .pnc-pop-up-wrapper {
@@ -213,10 +227,19 @@ body .ace_gutter-cell.ace_error {
 /**
  * Api
  */
-.pnc-api-container select {
-    border: none;
-    border-bottom: 1px solid var(--default_second_background);
+.pnc-api-container {
+    background: var(--color_api_background);
 }
+.pnc-api-container select {
+    width:100%;
+    border: none;
+    border-bottom: 1px solid var(--color_api_border);
+}
+
+.pnc-api-container .pre-container{
+    padding:10px;
+}
+
 
 /**
  * Second Iframe
