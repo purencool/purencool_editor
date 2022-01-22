@@ -91,7 +91,7 @@ const api = (props) => {
           <div className="pnc-api-container">
             <select className={props.elementKey} onChange={e => handleApiCall(e.target.value)}>
               <option value="none" > 
-                Select required SCSS
+                Select partial
               </option> 
               {inputList.length === 0 ?
                         ""
@@ -107,16 +107,13 @@ const api = (props) => {
             {(() => {
                 if (showApiDisplayResult === true) {
                   return <div className="pre-container" id={"wrapper-code-pre-" + props.elementKey}>
+                    <div className="pre-container-menu">
+                       <button onClick={() => handleCopy()}>Copy code to clipboard </button>or &nbsp;
+                       <button onClick={() => handleClose()}> close and clear</button>.
+                    </div>
                     <pre id={"code-pre-" + props.elementKey}> 
                       {codeList[codeList.length - 1]}
                     </pre>
-                    <button onClick={() => handleCopy()}>
-                       Copy to Clipboard
-                    </button>
-                    <button onClick={() => handleClose()}>
-                       Close and Clear
-                    </button>
-                    <p></p>
                   </div>;
                 }
 

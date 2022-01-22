@@ -45,16 +45,18 @@ const Feedback = (props) => {
    *   Has no return value.
    */
   useEffect(() => {
-    if(globalVars.message.hash !== props.message.hash) {
-      $(".pnc-feedback-wrapper").slideDown( "slow" );
-    }
+   if(globalVars.message.hash !== props.message.hash) {
+     $(".pnc-feedback-wrapper").slideDown( "slow" );
+   }
   });
   
   return (
-       <div id="pnc-feedback-id"  className="pnc-feedback-wrapper display1-none">
+       <div id="pnc-feedback-id"  className="pnc-feedback-wrapper">
           <div>
-            <button onClick={handleClose} className="close-btn">X</button>
-            <h4>{props.message.title}</h4>
+            <div id="pnc-feedback-title">
+               <button onClick={handleClose} className="close-btn">X</button>
+               <p>{props.message.title}</p>
+            </div> 
             <p>{props.message.message}</p>
           </div>
        </div>

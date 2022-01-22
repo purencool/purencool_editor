@@ -87,7 +87,7 @@ const Editors = (props) => {
                                     type="text" 
                                     name="title"
                                     className="pnc-title"
-                                    placeholder="SCSS Title"
+                                    placeholder="SCSS File Title"
                                     value={x.title}
                                     onChange={e => handleInputChange(e, i)}
                                     />

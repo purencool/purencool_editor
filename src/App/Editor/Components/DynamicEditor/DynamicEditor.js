@@ -170,14 +170,10 @@ const DynamicEditor = () => {
                                     type="text" 
                                     name="title"
                                     className="pnc-title"
-                                    placeholder="SCSS Title"
+                                    placeholder="SCSS File Title"
                                     value={x.title}
                                     onChange={e => handleInputChange(e, i)}
                                     />
-                                  { global_vars.api_url !== 'undefined'
-                                              ? <ApiCall elementKey={i} />
-                                              : ""
-                                  }  
                                   <div className={"editor editor-" + i}>
                                     <AceEditor 
                                       ref={instance => {
@@ -201,9 +197,10 @@ const DynamicEditor = () => {
                                       />
                                   </div>
                                   <div>
-                                    {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
-                                    {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}
-                                    <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
+                                     {global_vars.api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  
+                                     {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
+                                     {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}                                   
+                                     <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
                                   </div>           
                                 </div>
                               );
