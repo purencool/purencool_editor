@@ -57,7 +57,7 @@ window.purencool_editor_config['scripted_elements'] = scriptedElements;
 /**
  * @type object default global message.
  */
-let defaultMessage = {"title": "Welcome","message": "Version 1.0","hash": 1111};
+let defaultMessage = {"title": "Update check","message": "Purencool api editor check...","hash": 1111};
 window.purencool_editor_config['message'] = defaultMessage;
 
 

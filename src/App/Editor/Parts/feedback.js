@@ -29,13 +29,24 @@ const Feedback = (props) => {
   const [globalVars] = useGlobalState("global_vars");
   
   /**
-   * Close feedback box with className="close-btn".
+   *  toggleMessage function.
    * 
    * @returns void
    *   Has no return value.
    */
-  const handleClose = () => {
+  const toggleMessage = () => {      
     $(".pnc-feedback-wrapper").slideToggle( "slow" );
+  };
+  
+  
+  /**
+   * Close feedback box with className="close-btn".
+   *                 <button onClick={handleClose} className="close-btn">X</button>
+   * @returns void
+   *   Has no return value.
+   */
+  const handleClose = () => {
+    toggleMessage();
   };
   
   /**
@@ -46,7 +57,13 @@ const Feedback = (props) => {
    */
   useEffect(() => {
    if(globalVars.message.hash !== props.message.hash) {
-     $(".pnc-feedback-wrapper").slideDown( "slow" );
+    toggleMessage();
+    setTimeout( function ( ) { toggleMessage(); }, 5000 );
+   }
+   if(props.message.title === 'Update check'){ 
+     props.message.title = 'Welcome';
+     props.message.message = "The version number is displayed under help";
+     setTimeout( function ( ) { toggleMessage(); }, 4000 );
    }
   });
   
@@ -54,7 +71,6 @@ const Feedback = (props) => {
        <div id="pnc-feedback-id"  className="pnc-feedback-wrapper">
           <div>
             <div id="pnc-feedback-title">
-               <button onClick={handleClose} className="close-btn">X</button>
                <p>{props.message.title}</p>
             </div> 
             <p>{props.message.message}</p>
