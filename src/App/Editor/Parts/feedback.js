@@ -38,17 +38,6 @@ const Feedback = (props) => {
     $(".pnc-feedback-wrapper").slideToggle( "slow" );
   };
   
-  
-  /**
-   * Close feedback box with className="close-btn".
-   *                 <button onClick={handleClose} className="close-btn">X</button>
-   * @returns void
-   *   Has no return value.
-   */
-  const handleClose = () => {
-    toggleMessage();
-  };
-  
   /**
    * Opens feeback when the prop changes. 
    * 

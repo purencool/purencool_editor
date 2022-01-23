@@ -53,7 +53,7 @@ const api = (props) => {
    *  window.purencool_editor_config.connect_api_domain;
    */
   useEffect(() => {
-    axios.post(global_vars.api_url, {
+    axios.post(global_vars.connect_api_url, {
               "data": "editor",
               "key": global_vars.connect_api_key ,
               "domain": global_vars.connect_api_domain 
@@ -67,7 +67,7 @@ const api = (props) => {
 
 
   const handleApiCall = (e) => {
-    axios.post(global_vars.api_url, {"code": e}, {})
+    axios.post(global_vars.connect_api_url, {"code": e}, {})
             .then(response => {
               setCodeList([...codeList, response.data]);
             })
@@ -91,7 +91,7 @@ const api = (props) => {
           <div className="pnc-api-container">
             <select className={props.elementKey} onChange={e => handleApiCall(e.target.value)}>
               <option value="none" > 
-                Select partial
+                Select SCSS partial
               </option> 
               {inputList.length === 0 ?
                         ""

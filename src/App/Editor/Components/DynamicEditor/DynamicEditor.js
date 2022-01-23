@@ -197,7 +197,7 @@ const DynamicEditor = () => {
                                       />
                                   </div>
                                   <div>
-                                     {global_vars.api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  
+                                     {global_vars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  
                                      {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
                                      {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}                                   
                                      <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>

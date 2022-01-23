@@ -13,6 +13,7 @@ if (typeof window.purencool_editor_config === "undefined") {
     "scss_api_url": "undefined",
     "compile_api_url": "undefined",
     "open_api_url": "undefined",
+    'connect_api_url' : "undefined",
     "connect_api_key": "undefined",
     "connect_api_domain": "undefined"
   };
@@ -26,19 +27,16 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
   window.purencool_editor_config["scss_api_url"] = window.purencool_editor_config.global_api_url;
   window.purencool_editor_config["compile_api_url"] = window.purencool_editor_config.global_api_url;
   window.purencool_editor_config["open_api_url"] = window.purencool_editor_config.global_api_url;
-  window.purencool_editor_config["connect_api_key"] = window.purencool_editor_config.connect_api_key;
-  window.purencool_editor_config["connect_api_domain"] = window.purencool_editor_config.connect_api_domain;
 }
 
 
 /**
  * Sets global state for api.
  */
-if (typeof window.purencool_editor_config.api_url === "undefined") {
-  window.purencool_editor_config["api_url"] = 'undefined';
-}
-if (typeof window.purencool_editor_config.api_url === "") {
-  window.purencool_editor_config["api_url"] = 'undefined';
+if (typeof window.purencool_editor_config.connect_api_url !== "") {
+  window.purencool_editor_config["connect_api_url"] = window.purencool_editor_config.connect_api_url;
+  window.purencool_editor_config["connect_api_key"] = window.purencool_editor_config.connect_api_key;
+  window.purencool_editor_config["connect_api_domain"] = window.purencool_editor_config.connect_api_domain;
 }
 
 
