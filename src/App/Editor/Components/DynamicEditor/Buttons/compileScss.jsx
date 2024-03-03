@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {useGlobalState} from 'state-pool';
+import store from 'state-pool';
 
 /**
  * Compiled Scss action.
@@ -16,7 +16,7 @@ const compileScss = () => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars, setMessage, messageUpdateF] = useGlobalState("global_vars");
+  const [global_vars, setMessage, messageUpdateF] = store.useState("global_vars");
   
   /**
    * InputList saves all the data collected in the Editors.
@@ -27,7 +27,7 @@ const compileScss = () => {
    * @type array 
    *   Returns array of Json objects.
    */
-  const [inputList] = useGlobalState("global_editor_array");
+  const [inputList] = store.useState("global_editor_array");
 
   /**
    * Sends requests to API for SCSS to be compiled and saved.

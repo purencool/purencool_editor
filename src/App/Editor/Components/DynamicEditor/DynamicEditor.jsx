@@ -5,7 +5,7 @@ import 'ace-builds/src-noconflict/ext-language_tools';
 import "ace-builds/src-min-noconflict/mode-html";
 import $ from "jquery";
 import axios from "axios";
-import {useGlobalState} from 'state-pool';
+import store from 'state-pool';
 
 
 import {buildScssObject} from '../Util/buildScssObject';
@@ -26,7 +26,8 @@ const DynamicEditor = () => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars] = useGlobalState("global_vars");
+  const [global_vars] = store.useState("global_vars");
+
 
   /**
    * InputList saves all the data collected in the Editors.
@@ -37,7 +38,7 @@ const DynamicEditor = () => {
    * @type array 
    *   Returns array of Json objects.
    */
-  const [inputList, setInputList] = useGlobalState("global_editor_array");
+  const [inputList, setInputList] = store.useState("global_editor_array");
 
   /**
    * Receives data from the className="pnc-title" text input.

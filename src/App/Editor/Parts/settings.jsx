@@ -1,5 +1,5 @@
 import React from "react";
-import {useGlobalState} from 'state-pool';
+import store from 'state-pool';
 
 /**
  * Returns compiled Help information.
@@ -17,7 +17,7 @@ const Settings = (props) => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars] = useGlobalState("global_vars");
+  const [global_vars] = store.useState("global_vars");
 
   return (
       <div>

@@ -1,5 +1,5 @@
 import React from "react";
-import {useGlobalState} from 'state-pool';
+import store from 'state-pool';
 
 /**
  * Returns compiled Help information.
@@ -17,11 +17,11 @@ const Help = (props) => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars] = useGlobalState("global_vars");
+  const [global_vars] = store.useState("global_vars");
 
   return (
       <div>
-          <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
+          <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper 1display-none">
               <div className="pnc-">
                 <div>
                   <h2>Help</h2>
