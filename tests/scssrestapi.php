@@ -28,6 +28,7 @@ use ScssPhp\ScssPhp\OutputStyle;
  * 
  */
 foreach ($_SERVER as $key => $value) {
+    $header = '';
     if (strpos($key, 'HTTP_') === 0) {
         $chunks = explode('_', $key);
         for ($i = 1; $y = sizeof($chunks) - 1, $i < $y; $i++) {
