@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Slider from "rc-slider";
 import $ from "jquery";
-import {createStore} from 'state-pool';
+import store from "./Components/Util/store.jsx"
 import MainNavigation from "./Parts/mainNavigation.jsx";
 import DynamicEditor from "./Components/DynamicEditor/DynamicEditor.jsx";
 import SecondIframe from "./Parts/secondIframe.jsx";
@@ -12,6 +12,17 @@ import Settings from "./Parts/settings";
 import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
 
 /**
+ * Add Window Variables to Global Variable Store.
+ */
+store.setState("global_vars", window.purencool_editor_config);
+
+/**
+ * GlobalEditorArray saves all the data collected in the Editors.
+ */
+//store.setState("global_editor_array", JSON.stringify([{"title": "", "code": "", "hash":""}]));
+store.setState("global_editor_array", {"title": "", "code": "", "hash":""});
+
+/**
  * Returns compiled Editor and all Objects attached to it.
  *
  * @returns object Editor
@@ -20,24 +31,13 @@ import ScriptedElements from './Components/ScriptedElements/ScriptedElements';
 const Editor = () => {
 
     /**
-     * Add Window Variables to Global Variable Store.
-     */
-    const store = createStore();
-    store.setState("global_vars", window.purencool_editor_config);
-
-    /**
-     * GlobalEditorArray saves all the data collected in the Editors.
-     */
-    store.setState("global_editor_array", [{title: "", code: ""}]);
-
-    /**
      * Global Vars.
      *
      * @type object global_vars.
      *   Returns global_vars set at the start of the application.
      */
-    const [global_vars] = store.useState("global_vars");
-
+    const globalVars = store.useState("global_vars");
+    console.log(globalVars);
     /**
      * InputList saves all the data collected in the Editors.
      *
@@ -47,8 +47,8 @@ const Editor = () => {
      * @type array
      *   Returns array of Json objects.
      */
-    const [inputList] = store.useState("global_editor_array");
-
+    const inputList = store.useState("global_editor_array");
+  console.log(inputList);
     /**
      * Ratio function that updates useState.
      *
@@ -131,7 +131,7 @@ const Editor = () => {
                      style={{width: `${ratio}%`}}>
                     <div className="pnc-left-systems">
                         <div className="pnc-left-menu position-relative float-left">
-                            //MainNavigation //
+                            <MainNavigation />
                         </div>
                         <div className="pnc-left-inputs position-relative float-right">
                             //DynamicEditor//
@@ -161,7 +161,7 @@ const Editor = () => {
                     </div>
                 </div>
             </div>
-            <Feedback message={global_vars.message} />
+            <Feedback message={globalVars.message} />
             <Help inputList={inputList} />
             <Settings />
         </div>
