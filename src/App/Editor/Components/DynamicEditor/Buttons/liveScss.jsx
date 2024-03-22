@@ -1,5 +1,5 @@
 import React from "react";
-import {useGlobalState} from 'state-pool';
+import store from "../../../Components/Util/store"
 
 import {buildScssObject} from '../../Util/buildScssObject';
 
@@ -17,7 +17,7 @@ const liveScss = () => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars] = useGlobalState("global_vars");
+  const [globalVars] = store.useState("global_vars");
 
   /**
    * InputList saves all the data collected in the Editors.
@@ -28,7 +28,7 @@ const liveScss = () => {
    * @type array 
    *   Returns array of Json objects.
    */
-  const [inputList] = useGlobalState("global_editor_array");
+  const [inputList] = store.useState("global_editor_array");
 
   /**
    *  SCSS to button called className="live-btn" to compile CSS.
@@ -38,7 +38,7 @@ const liveScss = () => {
    */
   const handleLive = async () => {
     window.purencool_editor_config["globalKeyPress"] = "1";
-    buildScssObject(inputList, global_vars);
+    buildScssObject(inputList, globalVars);
   };
 
   return (

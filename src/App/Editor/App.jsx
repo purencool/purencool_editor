@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import Slider from "rc-slider";
 import $ from "jquery";
-import store from "./Components/Util/store.jsx"
-import MainNavigation from "./Parts/mainNavigation.jsx";
-import DynamicEditor from "./Components/DynamicEditor/DynamicEditor.jsx";
-import SecondIframe from "./Parts/secondIframe.jsx";
+import store from "./Components/Util/store";
+import MainNavigation from "./Parts/mainNavigation";
+import DynamicEditor from "./Components/DynamicEditor/DynamicEditor";
+import SecondIframe from "./Parts/secondIframe";
 
 import Help from './Parts/help';
 import Feedback from './Parts/feedback';
@@ -20,7 +20,7 @@ store.setState("global_vars", window.purencool_editor_config);
  * GlobalEditorArray saves all the data collected in the Editors.
  */
 //store.setState("global_editor_array", JSON.stringify([{"title": "", "code": "", "hash":""}]));
-store.setState("global_editor_array", {"title": "", "code": "", "hash":""});
+store.setState("global_editor_array", [{title: "", code: ""}]);
 
 /**
  * Returns compiled Editor and all Objects attached to it.
@@ -48,7 +48,7 @@ const Editor = () => {
      *   Returns array of Json objects.
      */
     const inputList = store.useState("global_editor_array");
-  console.log(inputList);
+  
     /**
      * Ratio function that updates useState.
      *
@@ -131,11 +131,11 @@ const Editor = () => {
                      style={{width: `${ratio}%`}}>
                     <div className="pnc-left-systems">
                         <div className="pnc-left-menu position-relative float-left">
-                            <MainNavigation />
+                        <MainNavigation />
                         </div>
                         <div className="pnc-left-inputs position-relative float-right">
-                            //DynamicEditor//
-                            //SecondIframe //
+                            <DynamicEditor/>
+                            <SecondIframe />
                         </div>
                     </div>
                 </div>
@@ -161,9 +161,9 @@ const Editor = () => {
                     </div>
                 </div>
             </div>
-            <Feedback message={globalVars.message} />
+            <Feedback message={globalVars[0].message} />
             <Help inputList={inputList} />
-            <Settings />
+           <Settings />
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
-import store from 'state-pool';
+import store from "../Components/Util/store";
 
 /**
  * Returns compiled Feedback action information.
@@ -26,7 +26,7 @@ const Feedback = (props) => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [globalVars] = store.useState("global_vars");
+  const globalVars = store.useState("global_vars");
   
   /**
    *  toggleMessage function.
@@ -46,7 +46,7 @@ const Feedback = (props) => {
    */
   useEffect(() => {
    console.log(globalVars)
-   if(globalVars.message.hash !== props.message.hash) {
+   if(globalVars[0].message.hash !== props.message.hash) {
     toggleMessage();
     setTimeout( function ( ) { toggleMessage(); }, 5000 );
    }

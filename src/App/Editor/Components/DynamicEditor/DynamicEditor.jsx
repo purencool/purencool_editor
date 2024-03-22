@@ -5,7 +5,7 @@ import 'ace-builds/src-noconflict/ext-language_tools';
 import "ace-builds/src-min-noconflict/mode-html";
 import $ from "jquery";
 import axios from "axios";
-import store from 'state-pool';
+import store from "../../Components/Util/store";
 
 
 import {buildScssObject} from '../Util/buildScssObject';
@@ -26,7 +26,7 @@ const DynamicEditor = () => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars] = store.useState("global_vars");
+  const globalVars = store.useState("global_vars");
 
 
   /**
@@ -39,7 +39,7 @@ const DynamicEditor = () => {
    *   Returns array of Json objects.
    */
   const [inputList, setInputList] = store.useState("global_editor_array");
-
+  console.log(inputList)
   /**
    * Receives data from the className="pnc-title" text input.
    * 
@@ -73,8 +73,8 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const openStorage = (file) => {
-    if (global_vars.open_api_url !== "undefined") {
-      axios.post(global_vars.open_api_url, {"open": file}, {})
+    if (globalVars.open_api_url !== "undefined") {
+      axios.post(globalVars.open_api_url, {"open": file}, {})
               .then(response => {
                 console.log("openStorage ==>", response.data.compiled);
                 if (response.data.compiled === undefined) {
@@ -121,7 +121,7 @@ const DynamicEditor = () => {
     const list = [...inputList];
     list[index]['code'] = code;
     setInputList(list);
-    buildScssObject(inputList, global_vars);
+    buildScssObject(inputList, globalVars);
   };
 
   /**
@@ -177,9 +177,9 @@ const DynamicEditor = () => {
                                     />
                                   <div className={"editor editor-" + i}>
                                     <AceEditor 
-                                      ref={instance => {
-                                    this.aceEditor = instance;
-                                  }}
+                                      //ref={instance => {
+                                      // this.aceEditor = instance;
+                                      //}}
                                       name={"code-editor-" + i}
                                       mode="css" 
                                       placeholder={"CSS or SCSS"}
@@ -187,18 +187,17 @@ const DynamicEditor = () => {
                                       onChange={value => handleCodeInputChange(value, i)}
                                       value={x.code}
                                       setOptions={{
-                                            enableBasicAutocompletion: true,
-                                            enableLiveAutocompletion: true,
-                                            enableSnippets: true,
-                                            minLines: 6,
-                                            maxLines: 30,
-                                            wrap: true,
-                                    autoScrollEditorIntoView: true
-                                  }}
-                                      />
+                                          enableBasicAutocompletion: true,
+                                          enableLiveAutocompletion: true,
+                                          enableSnippets: true,
+                                          inLines: 6,
+                                          maxLines: 30,
+                                          wrap: true,
+                                          autoScrollEditorIntoView: true
+                                      }} />
                                   </div>
                                   <div>
-                                     {global_vars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  
+                                     {globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  
                                      {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
                                      {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}                                   
                                      <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>

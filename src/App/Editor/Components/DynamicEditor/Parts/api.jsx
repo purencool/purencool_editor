@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useGlobalState} from 'state-pool';
+import store from "../../../Components/Util/store";
 
 /**
  * Returns api information.
@@ -16,7 +16,7 @@ const api = (props) => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars] = useGlobalState("global_vars");
+  const globalVars = store.useState("global_vars");
 
 
   /**
@@ -25,7 +25,7 @@ const api = (props) => {
    * @type object useState array.
    *   Returns useState array set for local request.
    */
-  const [inputList, setInputList] = useState([]);
+  const [inputList, setInputList]  = store.useState("global_editor_array");
 
 
   /**
@@ -53,10 +53,10 @@ const api = (props) => {
    *  window.purencool_editor_config.connect_api_domain;
    */
   useEffect(() => {
-    axios.post(global_vars.connect_api_url, {
+    axios.post(globalVars.connect_api_url, {
               "data": "editor",
-              "key": global_vars.connect_api_key ,
-              "domain": global_vars.connect_api_domain 
+              "key": globalVars.connect_api_key ,
+              "domain": globalVars.connect_api_domain 
             }, {})
             .then(response => {
               setInputList([...inputList, response.data]);
@@ -67,7 +67,7 @@ const api = (props) => {
 
 
   const handleApiCall = (e) => {
-    axios.post(global_vars.connect_api_url, {"code": e}, {})
+    axios.post(globalVars.connect_api_url, {"code": e}, {})
             .then(response => {
               setCodeList([...codeList, response.data]);
             })
@@ -96,7 +96,7 @@ const api = (props) => {
               {inputList.length === 0 ?
                         ""
                         :
-                        inputList[0].map((x, i) => {
+                        inputList.map((x, i) => {
                         return  <option key={i} value={x.id} className={x.id} > 
                           {x.label}
                         </option>;

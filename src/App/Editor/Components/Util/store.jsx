@@ -53,7 +53,7 @@ store.persist({
             return JSON.parse(serializedState);
         } catch (err) {
             // Failed to load state
-            return undefined
+            return undefined;
         }
     },
     removeState: function (key) {
@@ -62,7 +62,7 @@ store.persist({
     clear: function () {
         window.localStorage.clear();
     }
-})
+});
 // ===================================================
 
 

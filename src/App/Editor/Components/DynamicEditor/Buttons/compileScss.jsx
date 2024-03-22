@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import store from 'state-pool';
+import store from "../../../Components/Util/store"
 
 /**
  * Compiled Scss action.
@@ -16,7 +16,7 @@ const compileScss = () => {
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [global_vars, setMessage, messageUpdateF] = store.useState("global_vars");
+  const [globalVars, setMessage, messageUpdateF] = store.useState("global_vars");
   
   /**
    * InputList saves all the data collected in the Editors.
@@ -36,9 +36,9 @@ const compileScss = () => {
    *   Has no return value.
    */
   const handleCompile = async () => {
-    if (global_vars.compile_api_url !== "undefined") {
+    if (globalVars.compile_api_url !== "undefined") {
       const res = await axios
-              .post(global_vars.compile_api_url, {"compiled": inputList}, {})
+              .post(globalVars.compile_api_url, {"compiled": inputList}, {})
               //.then(response => {
               //console.log(response.data.live_response);
               // }) 
@@ -46,11 +46,11 @@ const compileScss = () => {
  
       console.log("compileScss ==>", res.data);
       // Changes message box values to update user of progress  
-      messageUpdateF(global_vars => {
-        global_vars.message.title = 'Compiled';
+      messageUpdateF(globalVars => {
+        globalVars.message.title = 'Compiled';
         let message = 'SCSS has been compiled and deployed.';
-        global_vars.message.message = message;
-        global_vars.message.hash = Math.floor(1000 + Math.random() * 9000);
+        globalVars.message.message = message;
+        globalVars.message.hash = Math.floor(1000 + Math.random() * 9000);
       });
     }  
   };
