@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "vbuild": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "BUILD_PATH='./dist' react-scripts build",
-    "test": "BUILD_PATH='./test' react-scripts test",
+    "test": "BUILD_PATH='./test' react-scripts build",
     "eject": "react-scripts eject"  
   },
   "dependencies": {
@@ -20,7 +21,6 @@
     "@testing-library/user-event": "^14.5.2",
     "ace-builds": "^1.32.7",
     "axios": "^1.6.7",
-    "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",
     "jquery": "^3.7.1",
