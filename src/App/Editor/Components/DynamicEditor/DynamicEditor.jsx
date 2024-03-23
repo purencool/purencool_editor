@@ -39,7 +39,7 @@ const DynamicEditor = () => {
    *   Returns array of Json objects.
    */
   const [inputList, setInputList] = store.useState("global_editor_array");
-  console.log(inputList)
+  
   /**
    * Receives data from the className="pnc-title" text input.
    * 
@@ -111,33 +111,19 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const handleCodeInputChange = async (code, index) => {
-    console.log("handle code input change");
     document.addEventListener("keydown", function (e) {
       if (e.keyCode === 186) {
-       // console.log("I have made 186");
-      //  console.log(code);
-      //  console.log(index);
+        console.log("I have made 186");
         window.purencool_editor_config["globalKeyPress"] = "1";
       }
     });
-    console.log("code");
-    console.log(code);
     const list = [...inputList];
-    console.log("list");
-    console.log(list);
     let addtolist = JSON.stringify(list);
-    console.log("addToList");
-   console.log(addtolist);
-   let parselist = JSON.parse(addtolist);
-   console.log("parseList");
-  console.log(parselist);
-
-   parselist[index]['code'] = code;
-  console.log("parseListAddedCode");
- console.log(parselist);
-
+    let parselist = JSON.parse(addtolist);
+    parselist[index]['code'] = code;
     setInputList(parselist);
-    //buildScssObject(parselist, globalVars);
+    buildScssObject(parselist, globalVars);
+    console.log(parselist);
   };
 
   /**
