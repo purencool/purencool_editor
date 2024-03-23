@@ -40,25 +40,6 @@ const DynamicEditor = () => {
    */
   const [inputList, setInputList] = store.useState("global_editor_array");
   
-  /**
-   * Receives data from the className="pnc-title" text input.
-   * 
-   * This function collates the data from the className="pnc-title" text input
-   * and adds it to the inputList to be used later on in different contexts.
-   *  
-   * @param object e
-   *   Data object from text input.
-   * @param int index
-   *   Contains editors text input index number.
-   * @returns void
-   *   Has no return value.
-   */
-  const handleInputChange = (e, index) => {
-    const {name, value} = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
 
   /**
    * Request the system opens storage and gets compiled Json object.
@@ -126,6 +107,30 @@ const DynamicEditor = () => {
     console.log(parselist);
   };
 
+
+  /**
+   * Receives data from the className="pnc-title" text input.
+   * 
+   * This function collates the data from the className="pnc-title" text input
+   * and adds it to the inputList to be used later on in different contexts.
+   *  
+   * @param object e
+   *   Data object from text input.
+   * @param int index
+   *   Contains editors text input index number.
+   * @returns void
+   *   Has no return value.
+   */
+    const handleInputChange = (e, index) => {
+      const list = [...inputList];
+      let addtolist = JSON.stringify(list);
+      let parselist = JSON.parse(addtolist);
+      parselist[index]['title'] = e.target.value;
+      setInputList(parselist);
+      console.log(parselist);
+    };
+  
+
   /**
    * Removes editor with a certian index className="delete-editor".
    * 
@@ -167,18 +172,17 @@ const DynamicEditor = () => {
   return (
           <div className="pnc-editors">
             {inputList.map((x, i) => {
-                        return (
-                                <div key={i} className="pnc-editor-component">
-                                  <input 
-                                    type="text" 
-                                    name={"code-editor-title-" + i}
-                                    className="pnc-title"
-                                    placeholder="SCSS File Title"
-                                    value={x.title}
-                                    onChange={e => handleInputChange(e, i)}
-                                    />
-                                  <div className={"editor editor-" + i}>
-                                    <AceEditor 
+                return (
+                    <div key={i} className="pnc-editor-component">
+                        <input 
+                            type="text" 
+                            name={"code-editor-title-" + i}
+                            className="pnc-title"
+                            placeholder="SCSS File Title"
+                            value={x.title}
+                            onChange={e => handleInputChange(e, i)} />
+                            <div className={"editor editor-" + i}>
+                              <AceEditor 
                                      // ref={
                                      //   this.aceEditor.on("change", (e) => {
                                       //    const code =  this.aceEditor.getValue();
@@ -190,29 +194,33 @@ const DynamicEditor = () => {
                                       //}
                                     //}
 
-                                      name={"code-editor-" + i}
-                                      mode="css" 
-                                      placeholder={"CSS or SCSS"}
-                                      setValue="testing to see"
-                                      onChange={value => handleCodeInputChange(value, i)}
-                                      value={x.code}
-                                      setOptions={{
-                                        enableBasicAutocompletion: true,
-                                        enableLiveAutocompletion: true,
-                                        enableSnippets: true
-                                      }} />
-
-
-                                  </div>
-                                  <div>
-                                     {globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  
-                                     {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
-                                     {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}                                   
-                                     <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
-                                  </div>           
-                                </div>
-                              );
-                    })
+                               name={"code-editor-" + i}
+                               mode="css" 
+                               placeholder={"CSS or SCSS"}
+                               setValue="testing to see"
+                               onChange={value => handleCodeInputChange(value, i)}
+                               value={x.code}
+                               setOptions={{
+                                  enableBasicAutocompletion: true,
+                                  enableLiveAutocompletion: true,
+                                  enableSnippets: true,
+                                  minLines: 9,
+                                  maxLines: 30,
+                                  wrap: true,
+                                  autoScrollEditorIntoView: true }} />
+                            </div>
+                        <div>
+                           {
+                             //globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""
+                           }  
+                           {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
+                           {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}                                   
+                            <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
+                        </div>           
+                    </div>
+                  );
+                }
+              )
             }
           </div>
           );
