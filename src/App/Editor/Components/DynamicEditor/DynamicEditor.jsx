@@ -19,7 +19,7 @@ import ApiCall from './Parts/api';
  *    Response object before rendering.
  */
 const DynamicEditor = () => {
-
+  
   /**
    * Global Vars.
    * 
@@ -111,17 +111,33 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const handleCodeInputChange = async (code, index) => {
-
+    console.log("handle code input change");
     document.addEventListener("keydown", function (e) {
       if (e.keyCode === 186) {
+       // console.log("I have made 186");
+      //  console.log(code);
+      //  console.log(index);
         window.purencool_editor_config["globalKeyPress"] = "1";
       }
     });
-
+    console.log("code");
+    console.log(code);
     const list = [...inputList];
-    list[index]['code'] = code;
-    setInputList(list);
-    buildScssObject(inputList, globalVars);
+    console.log("list");
+    console.log(list);
+    let addtolist = JSON.stringify(list);
+    console.log("addToList");
+   console.log(addtolist);
+   let parselist = JSON.parse(addtolist);
+   console.log("parseList");
+  console.log(parselist);
+
+   parselist[index]['code'] = code;
+  console.log("parseListAddedCode");
+ console.log(parselist);
+
+    setInputList(parselist);
+    //buildScssObject(parselist, globalVars);
   };
 
   /**
@@ -169,7 +185,7 @@ const DynamicEditor = () => {
                                 <div key={i} className="pnc-editor-component">
                                   <input 
                                     type="text" 
-                                    name="title"
+                                    name={"code-editor-title-" + i}
                                     className="pnc-title"
                                     placeholder="SCSS File Title"
                                     value={x.title}
@@ -177,9 +193,17 @@ const DynamicEditor = () => {
                                     />
                                   <div className={"editor editor-" + i}>
                                     <AceEditor 
-                                      //ref={instance => {
+                                     // ref={
+                                     //   this.aceEditor.on("change", (e) => {
+                                      //    const code =  this.aceEditor.getValue();
+                                      //    console.log(code);
+                                      //})
+                                      //;
+                                      //  instance => {
                                       // this.aceEditor = instance;
-                                      //}}
+                                      //}
+                                    //}
+
                                       name={"code-editor-" + i}
                                       mode="css" 
                                       placeholder={"CSS or SCSS"}
@@ -187,14 +211,12 @@ const DynamicEditor = () => {
                                       onChange={value => handleCodeInputChange(value, i)}
                                       value={x.code}
                                       setOptions={{
-                                          enableBasicAutocompletion: true,
-                                          enableLiveAutocompletion: true,
-                                          enableSnippets: true,
-                                          inLines: 6,
-                                          maxLines: 30,
-                                          wrap: true,
-                                          autoScrollEditorIntoView: true
+                                        enableBasicAutocompletion: true,
+                                        enableLiveAutocompletion: true,
+                                        enableSnippets: true
                                       }} />
+
+
                                   </div>
                                   <div>
                                      {globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""}  

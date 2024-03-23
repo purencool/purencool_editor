@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /test
+/test/text.txt
 /src/index.js
 /.pnp
 .pnp.js
