@@ -54,8 +54,9 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const openStorage = (file) => {
-    if (globalVars.open_api_url !== "undefined") {
-      axios.post(globalVars.open_api_url, {"open": file}, {})
+    let url = globalVars[0].open_api_url;
+    if (url !== "undefined") {
+      axios.post(url, {"open": file}, {})
               .then(response => {
                 console.log("openStorage ==>", response.data.compiled);
                 if (response.data.compiled === undefined) {
