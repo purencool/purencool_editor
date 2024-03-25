@@ -56,7 +56,7 @@ const compileScss = () => {
   };
 
   return (
-      <button onClick={handleCompile} className="compile-btn">Compile</button>
+      <button onClick={handleCompile} className="compile-btn">Save</button>
     );
 };
 

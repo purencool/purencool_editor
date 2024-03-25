@@ -42,7 +42,7 @@ const liveScss = () => {
   };
 
   return (
-          <button onClick={handleLive} className="live-btn">Live view</button>
+          <button onClick={handleLive} className="live-btn">Preview</button>
           );
 };
 
