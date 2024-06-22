@@ -1,0 +1,262 @@
+body .ace_gutter-cell.ace_warning,
+body .ace_gutter-cell.ace_error {
+  background-image: none !important;
+  background-repeat: no-repeat !important;
+  background-position: 0;
+}
+
+.pnc-editor-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+}
+
+.pnc-editor-container {
+  display: flex;
+}
+
+.pnc-box {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+}
+
+.pnc-editor-panel,
+.pnc-editor-website-frame {
+  width: 49.5%;
+}
+
+.pnc-editor-panel {
+  height: 99.5vh;
+  overflow: auto;
+}
+
+.pnc-handler {
+  background-color: black;
+  width: 0.5%;
+  cursor: col-resize;
+}
+
+.pnc-editor-container a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.pnc-panel-navigation {
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.pnc-panel-container {
+  padding-left: 5px;
+}
+
+.pnc-left-menu {
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  background-color: var(--color_menu_background);
+}
+
+.pnc-left-inputs {
+  width: calc(100% - 30px);
+}
+
+.pnc-navigation button {
+  background: none;
+  transform-origin: 34px 21px;
+  transform: rotate(90deg);
+  height: 81px;
+  width: 85px;
+}
+
+.pnc-editor-component {
+  padding: 25px 5px 0 5px;
+}
+
+/**
+ * Editor
+ */
+.pnc-title,
+.pnc-editor-panel div.ace_editor {
+  width: 100% !important;
+}
+
+.pnc-editor-panel div.ace_editor {
+  background: var(--color_ace_editor_background);
+}
+
+.pnc-editor-panel div.ace_gutter-layer{
+  background: var( --color_ace_editor_gutter_background);
+}
+
+.pnc-pop-up-wrapper {
+  position: absolute;
+  background: var(--default_background);
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow-y: scroll;
+  padding-left: 20px;
+}
+
+.pnc-pop-up-box {
+  background: var(--default_second_background);
+  width: 90.5%;
+  margin: 10% 0 0 20px;
+  padding: 10px;
+}
+
+.pnc-title {
+  border: none;
+  border-bottom: 1px solid var(--color_light_gray) ;
+}
+
+/**
+ * Iframe editor
+ */
+.pnc-url {
+  width: 100%;
+  background: var(--default_background);
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  padding: 5px;
+}
+
+.pnc-url::focus {
+  border: 0;
+}
+
+.pnc-editor-website-frame iframe {
+  display: block;
+  width: 100%;
+  height: 95vh;
+  border: none;
+}
+
+/**
+ * Api
+ */
+.pnc-api-container {
+  background: var(--color_api_background);
+}
+.pnc-api-container select {
+  width:100%;
+  border: none;
+  border-bottom: 1px solid var(--color_api_border);
+}
+
+.pnc-api-container .pre-container{
+  padding:10px;
+}
+
+.pnc-api-container .pre-container{
+  position: absolute;
+  z-index: 999;
+  background: white;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 200vh;
+}
+
+.pnc-api-container .pre-container-menu{
+  max-width: 100%;
+  background: var(--color_api_background);
+  padding: 10px;
+}
+
+
+.pnc-api-container .pre-container button{
+  border-bottom: 1px solid black;
+}
+
+/**
+ * Second Iframe
+ */
+.pnc-second-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: lightgray;
+  bottom: 0;
+  right: 0;
+  z-index: 888;
+  height: 100vh;
+}
+
+.pnc-second-frame iframe {
+  display: block;
+  width: 100%;
+  height: 95vh;
+  border: none;
+}
+
+.pnc-second-url {
+  width:100%;
+  background: var(--default_background);
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  padding: 5px;
+}
+
+div div .close-second-iframe-btn {
+  float: right;
+  margin: 0;
+  height: 26px;
+  width: 60px;
+}
+
+.pnc-second-url::focus {
+  border: 0;
+}
+
+/**
+ * Buttons
+ */
+button {
+  background: none;
+  border: none;
+  margin: 5px 5px 0 0;
+}
+
+.pnc-editor-container .display-editor-btn {
+  float: right;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.pnc-editor-container .add-editor,
+.pnc-editor-container .delete-editor {
+  padding-left: 0;
+}
+
+/**
+ * Feedback box
+ */
+#pnc-feedback-id {
+  position: absolute;
+  z-index: 777;
+  right: 5px;
+  bottom: 0;
+  min-width: 100px;
+  padding: 0 20px;
+  background: var(--color_messaging_background);
+  border: 2px solid var(--color_messaging_border);
+
+}
+
+#pnc-feedback-id button {
+
+}
+
+#pnc-feedback-id button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}

@@ -1,0 +1,89 @@
+:root {
+  --default_background: white;
+  --default_second_background: #f5f7fb;
+  --slider_first_color: #57c5f7;
+  --color_api_border:#f5f7fb;
+  --color_api_background:lightgray;
+  --color_ace_editor_background:antiquewhite;
+  --color_ace_editor_gutter_background:antiquewhite;
+  --color_light_gray: lightgray;
+  --color_messaging_background: antiquewhite;
+  --color_messaging_border: lightgray;
+  --color_menu_background: lightgray;
+  --font_first: 13px;
+  --font_second: 11px;
+}
+
+/**
+ * Block elements
+ */
+html {
+  background: var(--default_background);
+}
+
+select,
+button,
+input,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: var(--font_first);
+}
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  font-size: var(--font_second);
+
+}
+
+
+iframe body *,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color_light_gray) var(--color_light_gray) ;
+}
+
+iframe body *,
+*::-webkit-scrollbar {
+  width: 2px;
+}
+
+iframe body *,
+*::-webkit-scrollbar-track {
+  background: var(--color_light_gray) ;
+}
+
+iframe body *,
+*::-webkit-scrollbar-thumb {
+  background: var(--color_light_gray) ;
+  border-radius: 0;
+  border: 1px solid var(--color_light_gray) ;
+}
+
+select{
+  background: var(--color_light_gray) ;
+}
+
+/**
+ * Global CSS classes
+ */
+.display-none {
+  display: none;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
+}
