@@ -1,7 +1,7 @@
 :root {
   --default_background: white;
   --default_second_background: #f5f7fb;
-  --slider_first_color: #57c5f7;
+  
   --color_api_border:#f5f7fb;
   --color_api_background:lightgray;
   --color_ace_editor_background:antiquewhite;
@@ -12,6 +12,12 @@
   --color_menu_background: lightgray;
   --font_first: 13px;
   --font_second: 11px;
+
+  /* Slider variables */
+  --slider_background_color:lightgray;
+  --slider_handle_color:#96dbfa;
+  --slider_height:7px;
+  --slider_first_color: #57c5f7;
 }
 
 /**
