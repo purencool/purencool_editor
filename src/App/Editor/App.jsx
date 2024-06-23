@@ -111,6 +111,20 @@ const Editor = () => {
 
 
     /**
+     * Controls default url's for the iframe input box. 
+     *
+     * @returns String
+     *   Returns url string for Iframe if it's set by default.
+     */
+    const updateIframeUrl = () => {
+        if(globalVars[0].default_iframe_url == 'undefined'){
+            return '';
+        }
+        return globalVars[0].default_iframe_url;
+    };
+
+
+    /**
      * React hook used for when the UI is initalising
      */
     useEffect(() => {
@@ -148,6 +162,7 @@ const Editor = () => {
                                 name="url"
                                 className="pnc-url"
                                 placeholder="Add url and press enter"
+                                value={updateIframeUrl()}
                                 onKeyPress={e => e.key === 'Enter' && handleInputChangeUrl(e)}
                             />
                         </div>

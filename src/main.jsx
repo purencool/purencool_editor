@@ -18,7 +18,8 @@ if (typeof window.purencool_editor_config === "undefined") {
         "open_api_url": "undefined",
         'connect_api_url' : "undefined",
         "connect_api_key": "undefined",
-        "connect_api_domain": "undefined"
+        "connect_api_domain": "undefined",
+        "default_iframe_url": "undefined"
     };
 }
 
@@ -30,11 +31,13 @@ if (typeof window.purencool_editor_config.global_api_url !== "undefined") {
     window.purencool_editor_config["scss_api_url"] = window.purencool_editor_config.global_api_url;
     window.purencool_editor_config["compile_api_url"] = window.purencool_editor_config.global_api_url;
     window.purencool_editor_config["open_api_url"] = window.purencool_editor_config.global_api_url;
+    window.purencool_editor_config["default_iframe_url"] = window.purencool_editor_config.default_iframe_url;
+
 }
 
 
 /**
- * Sets global state for api.
+ * Sets global state for external api.
  */
 if (typeof window.purencool_editor_config.connect_api_url !== "undefined") {
     window.purencool_editor_config["connect_api_url"] = window.purencool_editor_config.connect_api_url;
