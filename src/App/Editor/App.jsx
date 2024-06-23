@@ -162,8 +162,8 @@ const Editor = () => {
                                 name="url"
                                 className="pnc-url"
                                 placeholder="Add url and press enter"
-                                value={updateIframeUrl()}
-                                onKeyPress={e => e.key === 'Enter' && handleInputChangeUrl(e)}
+                                defaultValue={updateIframeUrl()}
+                                onKeyUp={e => e.key === 'Enter' && handleInputChangeUrl(e)}
                             />
                         </div>
                         <div id="pnc-iframe-container">
