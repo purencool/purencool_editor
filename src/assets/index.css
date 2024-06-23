@@ -71,7 +71,7 @@ body .ace_gutter-cell.ace_error {
 }
 
 .pnc-editor-component {
-  padding: 25px 5px 0 5px;
+  padding:18px 3px 0 6px; 
 }
 
 /**
@@ -117,6 +117,10 @@ body .ace_gutter-cell.ace_error {
 /**
  * Iframe editor
  */
+.pnc-editor-iframe-container{
+  padding-top: 7px;
+}
+
 .pnc-url {
   width: 100%;
   background: var(--default_background);
