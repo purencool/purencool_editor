@@ -69,6 +69,9 @@ body .ace_gutter-cell.ace_error {
   height: 81px;
   width: 85px;
 }
+.pnc-navigation button:hover {
+  color:var(--color_navigation_button_hover);
+} 
 
 .pnc-editor-component {
   padding:18px 3px 0 6px; 
