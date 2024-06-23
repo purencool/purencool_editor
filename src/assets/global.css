@@ -4,10 +4,10 @@
   
   --color_api_border:#f5f7fb;
   --color_api_background:lightgray;
-  --color_ace_editor_background:antiquewhite;
-  --color_ace_editor_gutter_background:antiquewhite;
+  --color_ace_editor_background:#d8f5d8;
+  --color_ace_editor_gutter_background:#d8f5d8;
   --color_light_gray: lightgray;
-  --color_messaging_background: antiquewhite;
+  --color_messaging_background: #d8f5d8;
   --color_messaging_border: lightgray;
   --color_menu_background: lightgray;
   --color_navigation_button_hover:gray;
