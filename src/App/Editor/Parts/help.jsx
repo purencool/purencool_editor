@@ -27,7 +27,7 @@ const Help = (props) => {
                   <h2>Help</h2>
                   <p></p>
                   <h3>Version</h3>
-                  <p>Purencool editor version is 1.4.0</p>
+                  <p>Purencool editor version is 1.6.0</p>
                   <h3>Compile</h3>
                   <p></p>
                   <h3>Live View</h3>

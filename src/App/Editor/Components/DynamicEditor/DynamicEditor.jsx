@@ -6,7 +6,7 @@ import "ace-builds/src-min-noconflict/mode-html";
 import $ from "jquery";
 import axios from "axios";
 import store from "../../Components/Util/store";
-
+import CssFiles from "./Parts/CssFiles";
 
 import {buildScssObject} from '../Util/buildScssObject';
 
@@ -212,10 +212,17 @@ const DynamicEditor = () => {
                             </div>
                         <div>
                            {
-                             //globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} /> : ""
-                           }  
-                           {inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>}
-                           {inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>}                                   
+                             //globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} />  ""
+                           }
+                           {
+                             globalVars[0].css_files == undefined ? "" : "" //'{<CssFiles />}'
+                           }
+                           {
+                             inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>
+                           }
+                           {
+                             inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>
+                           }                                   
                             <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
                         </div>           
                     </div>
