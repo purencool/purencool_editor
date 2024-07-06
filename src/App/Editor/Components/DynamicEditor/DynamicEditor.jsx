@@ -175,26 +175,12 @@ const DynamicEditor = () => {
             {inputList.map((x, i) => {
                 return (
                     <div key={i} className="pnc-editor-component">
-                        <input 
-                            type="text" 
-                            name={"code-editor-title-" + i}
-                            className="pnc-title"
-                            placeholder="SCSS File Title"
-                            value={x.title}
-                            onChange={e => handleInputChange(e, i)} />
-                            <div className={"editor editor-" + i}>
-                              <AceEditor 
-                                     // ref={
-                                     //   this.aceEditor.on("change", (e) => {
-                                      //    const code =  this.aceEditor.getValue();
-                                      //    console.log(code);
-                                      //})
-                                      //;
-                                      //  instance => {
-                                      // this.aceEditor = instance;
-                                      //}
-                                    //}
+                        <input type="text" name={"code-editor-title-" + i} className="pnc-title"  
+                          placeholder="SCSS File Title"  value={x.title} onChange={e => handleInputChange(e, i)} />
 
+                        <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
+                        <div className={"editor editor-" + i}>
+                              <AceEditor 
                                name={"code-editor-" + i}
                                mode="css" 
                                placeholder={"CSS or SCSS"}
@@ -209,21 +195,13 @@ const DynamicEditor = () => {
                                   maxLines: 30,
                                   wrap: true,
                                   autoScrollEditorIntoView: true }} />
-                            </div>
-                        <div>
-                           {
-                             //globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} />  ""
-                           }
-                           {
-                             globalVars[0].css_files == undefined ? "" : <CssFiles />
-                           }
+                           { globalVars[0].css_files == undefined ? "" : <CssFiles /> }
                            {
                              inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>
                            }
-                           {
-                             inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button>
-                           }                                   
-                            <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
+                           { inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button> }          
+                             <div>   
+                          </div>
                         </div>           
                     </div>
                   );

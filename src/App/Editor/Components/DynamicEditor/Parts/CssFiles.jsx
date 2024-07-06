@@ -31,11 +31,9 @@ const CssFiles = () => {
   }
 
   return (
-      <div>
-        <select id="css-files" name="css-files" >  
+        <select name="code-editor-css-file-" >  
           { options }          
         </select>
-      </div>
     );
 }
 

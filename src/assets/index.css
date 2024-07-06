@@ -80,7 +80,6 @@ body .ace_gutter-cell.ace_error {
 /**
  * Editor
  */
-.pnc-title,
 .pnc-editor-panel div.ace_editor {
   width: 100% !important;
 }
@@ -113,8 +112,10 @@ body .ace_gutter-cell.ace_error {
 }
 
 .pnc-title {
+  width: 80%;
   border: none;
-  border-bottom: 1px solid var(--color_light_gray) ;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--color_light_gray);
 }
 
 /**
@@ -235,7 +236,9 @@ button {
 .pnc-editor-container .display-editor-btn {
   float: right;
   margin-right: 0;
-  padding-right: 0;
+  padding-right: 5px;
+  font-size: 11px;
+  margin-top: 1px;
 }
 
 .pnc-editor-container .add-editor,
