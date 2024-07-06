@@ -19,14 +19,22 @@ const CssFiles = () => {
    */
   const globalVars = store.useState("global_vars");
 
+  /**
+   * Options creation.
+   * 
+   * @type object options.
+   *   Returns options array creation.
+   */ 
+  const options = [];
+  for (const [key, value] of Object.entries(globalVars[0].css_files)) {
+    options.push(<option value={key} key={key}>{value}</option>);
+  }
+
   return (
       <div>
-          <div id="pnc-pop-up-wrapper-id"  className="pnc-pop-up-wrapper display-none">
-                <div>
-                  <h3>Global Array</h3>
-                  <pre>{JSON.stringify(globalVars[0].css_files , undefined, 2)}</pre>
-                </div>
-            </div>
+        <select id="css-files" name="css-files" >  
+          { options }          
+        </select>
       </div>
     );
 }

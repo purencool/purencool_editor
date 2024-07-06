@@ -215,7 +215,7 @@ const DynamicEditor = () => {
                              //globalVars.connect_api_url !== 'undefined' ? <ApiCall elementKey={i} />  ""
                            }
                            {
-                             globalVars[0].css_files == undefined ? "" : "" //'{<CssFiles />}'
+                             globalVars[0].css_files == undefined ? "" : <CssFiles />
                            }
                            {
                              inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>
