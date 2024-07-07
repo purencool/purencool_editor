@@ -33,7 +33,7 @@ const CssFiles = (props) => {
   }
 
   return (
-        <select name={`code-editor-css-file-${ideNumber}`} >  
+        <select name={`code-editor-css-file-${ideNumber}`} onChange={e => handleCssFileChange(e, i)} >  
           { options }          
         </select>
     );

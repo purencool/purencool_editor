@@ -95,17 +95,15 @@ const DynamicEditor = () => {
   const handleCodeInputChange = async (code, index) => {
     document.addEventListener("keydown", function (e) {
       if (e.keyCode === 186) {
-        console.log("I have made 186");
         window.purencool_editor_config["globalKeyPress"] = "1";
       }
     });
     const list = [...inputList];
-    let addtolist = JSON.stringify(list);
-    let parselist = JSON.parse(addtolist);
-    parselist[index]['code'] = code;
-    setInputList(parselist);
-    buildScssObject(parselist, globalVars);
-    console.log(parselist);
+    let addToList = JSON.stringify(list);
+    let parseList = JSON.parse(addToList);
+    parseList[index]['code'] = code;
+    setInputList(parseList);
+    buildScssObject(parseList, globalVars);
   };
 
 
@@ -115,20 +113,19 @@ const DynamicEditor = () => {
    * This function collates the data from the className="pnc-title" text input
    * and adds it to the inputList to be used later on in different contexts.
    *  
-   * @param object e
+   * @param object title
    *   Data object from text input.
    * @param int index
    *   Contains editors text input index number.
    * @returns void
    *   Has no return value.
    */
-    const handleInputChange = (e, index) => {
+    const handleTitleChange = (title, index) => {
       const list = [...inputList];
-      let addtolist = JSON.stringify(list);
-      let parselist = JSON.parse(addtolist);
-      parselist[index]['title'] = e.target.value;
-      setInputList(parselist);
-      console.log(parselist);
+      let addToList = JSON.stringify(list);
+      let parseList = JSON.parse(addToList);
+      parseList[index]['title'] = title.target.value;
+      setInputList(parseList);
     };
   
 
@@ -176,7 +173,7 @@ const DynamicEditor = () => {
                 return (
                     <div key={i} className="pnc-editor-component">
                         <input type="text" name={"code-editor-title-" + i} className="pnc-title"  
-                          placeholder="SCSS File Title"  value={x.title} onChange={e => handleInputChange(e, i)} />
+                          placeholder="SCSS File Title"  value={x.title} onChange={e => handleTitleChange(e, i)} />
 
                         <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">+/-</button>
                         <div className={"editor editor-" + i}>

@@ -19,8 +19,7 @@ store.setState("global_vars", window.purencool_editor_config);
 /**
  * GlobalEditorArray saves all the data collected in the Editors.
  */
-//store.setState("global_editor_array", JSON.stringify([{"title": "", "code": "", "hash":""}]));
-store.setState("global_editor_array", [{title: "", code: ""}]);
+store.setState("global_editor_array", [{title: "", code: "",configuration: {}}]);
 
 /**
  * Returns compiled Editor and all Objects attached to it.
@@ -37,7 +36,6 @@ const Editor = () => {
      *   Returns global_vars set at the start of the application.
      */
     const globalVars = store.useState("global_vars");
-    console.log(globalVars);
     /**
      * InputList saves all the data collected in the Editors.
      *
@@ -104,9 +102,6 @@ const Editor = () => {
      */
     const updateSlider = (val) => {
         setRatio(val);
-        if (val === 20) {
-            console.log(val);
-        }
     };
 
 
