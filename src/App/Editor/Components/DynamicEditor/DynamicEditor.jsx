@@ -178,7 +178,7 @@ const DynamicEditor = () => {
                         <input type="text" name={"code-editor-title-" + i} className="pnc-title"  
                           placeholder="SCSS File Title"  value={x.title} onChange={e => handleInputChange(e, i)} />
 
-                        <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">Close/Open</button>
+                        <button onClick={()=> handleEditorDisplay(i)} className="display-editor-btn">+/-</button>
                         <div className={"editor editor-" + i}>
                               <AceEditor 
                                name={"code-editor-" + i}
@@ -195,14 +195,14 @@ const DynamicEditor = () => {
                                   maxLines: 30,
                                   wrap: true,
                                   autoScrollEditorIntoView: true }} />
-                           { globalVars[0].css_files == undefined ? "" : <CssFiles /> }
-                           {
-                             inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor">Delete</button>
-                           }
-                           { inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor">Add</button> }          
+                              { globalVars[0].css_files == undefined ? "" : <CssFiles ideNumber={i} /> }
+                              {
+                                inputList.length !== 1 && <button onClick={() => handleDeleteClick(i)} className="delete-editor float-right">Del</button>
+                              }
+                              </div> 
                              <div>   
                           </div>
-                        </div>           
+                          { inputList.length - 1 === i && <button onClick={handleAddClick} className="add-editor  clear-both float-right">Add</button> }    
                     </div>
                   );
                 }

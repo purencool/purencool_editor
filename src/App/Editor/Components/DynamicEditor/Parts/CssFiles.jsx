@@ -9,8 +9,10 @@ import store from "../../../Components/Util/store";
  * @returns object Help 
  *   Response object before rendering.
  */
-const CssFiles = () => {
+const CssFiles = (props) => {
   
+  let ideNumber = props.ideNumber;
+
   /**
    * Global Vars.
    * 
@@ -31,7 +33,7 @@ const CssFiles = () => {
   }
 
   return (
-        <select name="code-editor-css-file-" >  
+        <select name={`code-editor-css-file-${ideNumber}`} >  
           { options }          
         </select>
     );
