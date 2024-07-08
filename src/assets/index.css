@@ -261,7 +261,7 @@ button {
 }
 
 .add-editor{
-  margin-top: 3px;
+  margin-top: 15px;
   padding: 5px;
   border: solid var(--color_light_gray) 1px;
 }

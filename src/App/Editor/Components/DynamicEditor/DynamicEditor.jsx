@@ -152,7 +152,7 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const handleAddClick = () => {
-    setInputList([...inputList, {title: "", code: ""}]);
+    setInputList([...inputList, {title: "", code: "",configuration: {}}]);
   };
 
   /**

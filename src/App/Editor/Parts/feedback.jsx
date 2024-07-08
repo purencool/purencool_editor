@@ -45,7 +45,6 @@ const Feedback = (props) => {
    *   Has no return value.
    */
   useEffect(() => {
-   console.log(globalVars)
    if(globalVars[0].message.hash !== props.message.hash) {
     toggleMessage();
     setTimeout( function ( ) { toggleMessage(); }, 5000 );
