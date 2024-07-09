@@ -54,7 +54,14 @@ export const buildScssObject = (inputList,globalVars) => {
 
     let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
-      scssUpdate = scssUpdate + inputList[i].code;
+        let arr = Object.entries(globalVars['css_files']);
+        for (let j = 0; j < arr.length; j++) {
+          if(inputList[i].configuration['css_files']['value'] == arr[j][0]) {
+            if(inputList[i].code != "") {
+              scssUpdate = scssUpdate + arr[j][1]['class_identifier'] + " " + inputList[i].code;
+            }
+          } 
+        }
     }
 
     if (compileLiveAccessFunc(scssUpdate) === true) {

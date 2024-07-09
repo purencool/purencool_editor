@@ -92,7 +92,7 @@ const Editor = () => {
      * Updates slider value so it can set the ratio in the editor.
      *
      * The editor has two main divs that need to be resize from left to right as
-     * this sets setRatio function that then intern changes the inlite styles of
+     * this sets setRatio function that then intern changes the inline styles of
      * className="pnc-editor-panel and className="pnc-editor-website-frame".
      *
      * @param int val
@@ -120,7 +120,7 @@ const Editor = () => {
 
 
     /**
-     * React hook used for when the UI is initalising
+     * React hook used for when the UI is initalizing
      */
     useEffect(() => {
         $('#pnc-iframe').on('load', function () {
@@ -133,7 +133,7 @@ const Editor = () => {
     }, []);
 
     return (
-        <div className="pnc-editor-wrapper">
+        <div className="pnc-editor-wrapper main-content">
             <Slider className="slider" onChange={updateSlider} defaultValue={50}/>
             <div className="pnc-editor-container">
                 <div className="pnc-left-panel pnc-editor-panel pnc-box"
