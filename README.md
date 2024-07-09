@@ -1,7 +1,5 @@
 # SCSS Code Editor
 
-### Features
-
 ### Running Application
 
 ```
