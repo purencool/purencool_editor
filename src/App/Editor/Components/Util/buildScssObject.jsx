@@ -54,6 +54,7 @@ export const buildScssObject = (inputList,globalVars) => {
 
     let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
+      if(globalVars['css_files'] != undefined) {
         let arr = Object.entries(globalVars['css_files']);
         for (let j = 0; j < arr.length; j++) {
           if(inputList[i].configuration['css_files']['value'] == arr[j][0]) {
@@ -62,6 +63,9 @@ export const buildScssObject = (inputList,globalVars) => {
             }
           } 
         }
+      } else {
+        scssUpdate = scssUpdate + inputList[i].code;
+      }
     }
 
     if (compileLiveAccessFunc(scssUpdate) === true) {
