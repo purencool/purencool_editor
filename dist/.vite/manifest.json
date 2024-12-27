@@ -1,0 +1,11 @@
+{
+  "src/main.jsx": {
+    "file": "assets/app-ZCputXoS.js",
+    "name": "app",
+    "src": "src/main.jsx",
+    "isEntry": true,
+    "css": [
+      "assets/app-Dc_uFyTq.css"
+    ]
+  }
+}
