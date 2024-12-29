@@ -11,6 +11,7 @@ import './assets/slider.css'
  * Sets up global variables being used by the application so that editor doesn't
  * throw an error on load if object doesn't exist.
  */
+
 if (typeof window.purencool_editor_config === "undefined") {
     window.purencool_editor_config = {
         "scss_api_url": "undefined",

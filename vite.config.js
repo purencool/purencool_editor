@@ -1,21 +1,27 @@
-import { defineConfig } from 'vite'
+// vite.config.js
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import string from 'vite-plugin-string';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  build:{
-    emptyOutDir: false,
-    sourcemap: process.env.MODE !== 'production',
-    outDir: "dist",
-    manifest: true,
-    cssCodeSplit: true,
+  plugins: [react(), string()],
+  build: {
+    // Disable the chunk size warning
+    chunkSizeWarningLimit: Infinity,
     rollupOptions: {
-      input: {
-        app: path.resolve(__dirname, './src/main.jsx'),
-      },
-    },
-  }
-})
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // Get the name of the directory directly under 'node_modules'
+            // This assumes that the package name is the first part of the path within 'node_modules'
+            const packageName = id.split('node_modules/')[1].split('/')[0];
 
+            // Return a chunk name based on the package name
+            // e.g. 'node_modules/react/index.js' will become 'vendor_react'
+            return `vendor_${packageName}`;
+          }
+        }
+      }
+    }
+  }
+});

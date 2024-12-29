@@ -46,7 +46,7 @@ const Editor = () => {
      *   Returns array of Json objects.
      */
     const inputList = store.useState("global_editor_array");
-  
+
     /**
      * Ratio function that updates useState.
      *
@@ -106,7 +106,7 @@ const Editor = () => {
 
 
     /**
-     * Controls default url's for the iframe input box. 
+     * Controls default url's for the iframe input box.
      *
      * @returns String
      *   Returns url string for Iframe if it's set by default.

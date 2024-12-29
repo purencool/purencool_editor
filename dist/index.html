@@ -1,46 +1,70 @@
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="Purencool editor"/>
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-        <link rel="stylesheet" href="%PUBLIC_URL%/index.css" /> 
-        <title>Code Editor</title>
-    </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-        <script>
-            // Full deployment
-            //*  
-             window.purencool_editor_config={
-             "scss_api_url": "http://localhost:8000/scssrestapi.php",
-             "compile_api_url": "http://localhost:8000/compilerestapi.php",
-             "open_api_url": "http://localhost:8000/openrestapi.php",
-             "connect_api_url" : "https://www.purencool.digital/purencool/api/v1",
-             "connect_api_key" : "temp-key-13",
-             "connect_api_domain" : "www.purencool.digital"
-             }; 
-             //*/
+<!doctype html>
+<html lang="en">
 
-            // Non api version deployment
-            /*  
-             window.purencool_editor_config = {
-             "scss_api_url": "http://localhost:8000/scssrestapi.php",
-             "compile_api_url": "http://localhost:8000/compilerestapi.php",
-             "open_api_url": "http://localhost:8000/openrestapi.php",
-             };
-             //*/
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-            // Set global test
-            /*
-             window.purencool_editor_config={
-             "global_api_url": "http://localhost:8000/openrestapi.php"
-             };
-             //*/
-        </script>    
-    </body>
+  <link rel="icon" href="./favicon.ico" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Purencool editor" />
+  <link rel="apple-touch-icon" href="./logo192.png" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-html.js"></script>
+  <title>Code Editor</title>
+  <script type="module" crossorigin src="/assets/index-Dh0l13Vq.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor_classnames-ELZfJkp_.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_react-B5CIjaDA.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_scheduler-BF-YhwgH.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_react-dom-Cg6Xop6J.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_@babel-Dxhdoqxo.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_rc-util-DiG1V1Yx.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_rc-slider-mP6mgGEM.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_jquery-D7INfxrl.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_state-pool-imnDRRKN.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor_axios-upsvKRUO.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-Dc_uFyTq.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    // Full deployment
+    /*
+    window.purencool_editor_config={
+      "scss_api_url": "http://localhost:8000/scssrestapi.php",
+      "compile_api_url": "http://localhost:8000/compilerestapi.php",
+      "open_api_url": "http://localhost:8000/openrestapi.php",
+      "connect_api_url" : "https://www.purencool.digital/purencool/api/v1",
+      "connect_api_key" : "temp-key-13",
+      "connect_api_domain" : "www.purencool.digital"
+    };
+    //*/
+
+    // Non api version deployment
+    //*
+    window.purencool_editor_config = {
+      "scss_api_url": "http://localhost:8000/compilers/scssrestapi.php",
+      "compile_api_url": "http://localhost:8000/compilers/compilerestapi.php",
+      "open_api_url": "http://localhost:8000/compilers/openrestapi.php",
+      "connect_api_url": "undefined",
+      "default_iframe_url": location.protocol + '//' + location.host,
+      "css_files": {
+        "default": { "name": "Default theme", "class_identifier": ".main-content" },
+        "inline": { "name": "Inline header", "class_identifier": ".main-content" },
+        "admin": { "name": "Admin theme", "class_identifier": ".admin-body" }
+      },
+    };
+    //*/
+
+    // Set global test
+    /*
+     window.purencool_editor_config={
+     "global_api_url": "http://localhost:8000/openrestapi.php"
+     };
+     //*/
+  </script>
+</body>
+
 </html>
