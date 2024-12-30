@@ -1,63 +1,80 @@
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
-import store from "../../../Components/Util/store"
+import store from "../../../Components/Util/store";
 
 /**
- * Compiled Scss action.
- * 
- * @returns object Help 
- *   Response object before rendering.
+ *
+ * @returns {JSX.Element}
+ * @constructor
  */
-const compileScss = () => {
-  
+const CompileScss = () => {
+
   /**
    * Global Vars.
-   * 
+   *
    * @type object global_vars.
    *   Returns global_vars set at the start of the application.
    */
-  const [globalVars, setMessage, messageUpdateF] = store.useState("global_vars");
-  
-  /**
-   * InputList saves all the data collected in the Editors.
-   *  
-   * The inputList function contains an array of objects that is changed by 
-   * setRatio and updates useState. 
-   * 
-   * @type array 
-   *   Returns array of Json objects.
-   */
-  const [inputList] = store.useState("global_editor_array");
+  const globalVars = store.useState("global_vars");
+
 
   /**
-   * Sends requests to API for SCSS to be compiled and saved.
-   * 
-   * @returns void
-   *   Has no return value.
+   * InputList saves all the data collected in the Editors.
+   *
+   * The inputList function contains an array of objects that is changed by
+   * setRatio and updates useState.
+   *
+   * @type array
+   *   Returns array of Json objects.
+   */
+  const [inputList, setInputList] = store.useState("global_editor_array");
+
+  /**
+   *
+   * @returns {Promise<void>}
    */
   const handleCompile = async () => {
+
+    /**
+     *
+     */
+    const updatedInputList = inputList.map((item, index) => {
+      const editorId = `ace-editor-${index}`;
+      const editor = window.ace.edit(editorId);
+      if (editor) {
+        const editorCode = editor.getValue();
+        return { ...item, code: editorCode };
+      } else {
+        console.error(`Editor with ID ${editorId} not found.`);
+        return item;
+      }
+    });
+    setInputList(updatedInputList);
+
+    /**
+     *
+     */
     if (globalVars.compile_api_url !== "undefined") {
-      const res = await axios
-              .post(globalVars.compile_api_url, {"compiled": inputList}, {})
-              //.then(response => {
-              //console.log(response.data.live_response);
-              // }) 
-              .catch((err) => console.log("Error", err));
- 
-      console.log("compileScss ==>", res.data);
-      // Changes message box values to update user of progress  
-      messageUpdateF(globalVars => {
-        globalVars.message.title = 'Compiled';
-        let message = 'SCSS has been compiled and deployed.';
-        globalVars.message.message = message;
-        globalVars.message.hash = Math.floor(1000 + Math.random() * 9000);
-      });
-    }  
+      try {
+        const res = await axios.post(globalVars.compile_api_url, { compiled: updatedInputList });
+        console.log("compileScss ==>", res.data);
+        setGlobalVars((prevGlobalVars) => ({
+          ...prevGlobalVars,
+          message: {
+            title: 'Compiled',
+            message: 'SCSS has been compiled and deployed.',
+            hash: Math.floor(1000 + Math.random() * 9000)
+          }
+        }));
+      } catch (err) {
+        console.error("Error compiling SCSS:", err);
+      }
+    }
   };
 
   return (
-      <button onClick={handleCompile} className="compile-btn">Save</button>
-    );
+    <button onClick={handleCompile} className="compile-btn">Save</button>
+  );
 };
 
-export default compileScss;
+export default CompileScss;

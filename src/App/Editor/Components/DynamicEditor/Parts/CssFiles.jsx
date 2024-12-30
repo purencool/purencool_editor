@@ -1,90 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import store from "../../../Components/Util/store";
 
-/**
- * Returns CssFiles information.
- *
- * @param props
- *   Object props.
- * @returns object Help
- *   Response object before rendering.
- */
 const CssFiles = (props) => {
-
   let ideNumber = props.ideNumber;
-
-
-  /**
-   * InputList saves all the data collected in the Editors.
-   *
-   * The inputList function contains an array of objects that is changed by
-   * setRatio and updates useState.
-   *
-   * @type array
-   *   Returns array of Json objects.
-   */
   const [inputList, setInputList] = store.useState("global_editor_array");
-
-  /**
-   * Global Vars.
-   *
-   * @type object global_vars.
-   *   Returns global_vars set at the start of the application.
-   */
   const globalVars = store.useState("global_vars");
 
-  /**
-   * Receives data from the select input.
-   *
-   * This function collates the data from the select input
-   * and adds it to the inputList to be used later on in different contexts.
-   *
-   * @param object inputValue
-   *   Data object from dropdown input.
-   * @param int index
-   *   Contains editors text input index number.
-   * @returns void
-   *   Has no return value.
-   */
-    const  handleCssFileChange = (inputValue, index) => {
-      const list = [...inputList];
-      let addToList = JSON.stringify(list);
-      let parseList = JSON.parse(addToList);
-      parseList[index]['configuration'] = {
-        'css_files': {
-          'index': index,
-          'value': inputValue
-        }
-      }
-      setInputList(parseList);
-    };
+  useEffect(() => {
+    // Check if the css_files property is undefined and needs to be set to default
+    if (inputList[ideNumber] && inputList[ideNumber].configuration && inputList[ideNumber].configuration['css_files'] === undefined) {
+      handleCssFileChange('default', ideNumber);
+    }
+  }, [ideNumber, inputList]); // Depend on ideNumber and inputList to re-run the effect when they change
 
-
-  /**
-   * Options creation and store results.
-   *
-   * @type object options.
-   *   Returns options array creation.
-   */
-  const options = [];
-    for (const [key, value] of Object.entries(globalVars[0].css_files)) {
-      if(inputList[ideNumber]['configuration']['css_files'] == undefined){
-        handleCssFileChange('default', ideNumber)
-      }
-      if (inputList[ideNumber]['configuration']['css_files']!= undefined) {
-        if (key == inputList[ideNumber]['configuration']['css_files']['value']) {
-          options.push(<option value={key} key={key}>{value.name}</option>);
-        } else {
-          options.push(<option value={key} key={key}>{value.name}</option>);
-        }
-      }
+  const handleCssFileChange = (inputValue, index) => {
+    if (index < 0 || index >= inputList.length) {
+      return;
     }
 
+    const newList = [...inputList];
+    const newConfiguration = {
+      ...newList[index].configuration,
+      css_files: {
+        'index': index,
+        'value': inputValue
+      }
+    };
+
+    newList[index] = { ...newList[index], configuration: newConfiguration };
+    setInputList(newList);
+  };
+
+  const options = globalVars[0] && globalVars[0].css_files
+    ? Object.entries(globalVars[0].css_files).map(([key, value]) => (
+      <option value={key} key={key}>{value.name}</option>
+    ))
+    : [];
+
   return (
-      <select name={`code-editor-css-file-${ideNumber}`} onChange={e => handleCssFileChange(e.target.value, ideNumber)} >
-        { options }
-      </select>
-    );
+    <select
+      name={`code-editor-css-file-${ideNumber}`}
+      onChange={e => handleCssFileChange(e.target.value, ideNumber)}
+      value={inputList[ideNumber]?.configuration?.css_files?.value || ''}
+    >
+      {options}
+    </select>
+  );
 }
 
 export default CssFiles;

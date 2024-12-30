@@ -2,24 +2,24 @@
 
 /**
  * Simple rest API server to save build file
- * 
- * 
+ *
+ *
  * Starting  Build API server
  *    php -S localhost:8000 compilerestapi.php  2>&1 | grep -v '\[200\]'
- * 
- * URL 
+ *
+ * URL
  *    http://localhost:8000/compilerestapi.php
- * 
+ *
  * Post example
  *   {"compiled":[{"title":"Test title","code":"div{\n    a{\n     background: red;\n   }\n}\n\n"},{"title":"akah. aksdhtalll","code":"div{\n    a{\n     background: green;\n   }\n}"}]}
- * 
+ *
  */
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 /**
- * 
+ *
  * @param type $file
  * @param type $content
  * @return boolean
@@ -34,8 +34,9 @@ function writeFileContent($file, $content){
 
 
 /**
- * 
+ *
  */
+$header='';
 foreach ($_SERVER as $key => $value) {
     if (strpos($key, 'HTTP_') === 0) {
         $chunks = explode('_', $key);
@@ -57,4 +58,4 @@ if ($body !== '') {
         echo "";
         error_log('compilephp: Unable to compile content: '.$e);
     }
-} 
+}

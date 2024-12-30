@@ -9,14 +9,15 @@ import $ from "jquery";
  * @param inputList
  *   The inputList function contains an array of objects that is changed
  */
-export const buildScssObject = (inputList,globalVars) => {
-  
+export const buildScssObject = (inputList, globalVars) => {
+
+
   /**
    * Tests to see if the string syntactically correct.
-   * 
-   * Function tests to see if the string syntactically correct and will be 
+   *
+   * Function tests to see if the string syntactically correct and will be
    * effectively able to be compiled.
-   * 
+   *
    * @param String scssUpdate.
    *   String for syntactically correct.
    * @returns Boolean
@@ -25,28 +26,18 @@ export const buildScssObject = (inputList,globalVars) => {
   const compileLiveAccessFunc = (scssUpdate) => {
     let results = false;
 
-    if (globalVars.scss_api_url !== "undefined") {
+    if (globalVars[0].scss_api_url !== "undefined") {
       let braces = (scssUpdate.split("{").length - 1) + (scssUpdate.split("}").length - 1);
       let colons = (scssUpdate.split(":").length - 1) + (scssUpdate.split(";").length - 1);
-
-      if (braces % 2 === 0 & colons % 2 === 0 & (braces + colons) !== 0) {
-        if (window.purencool_editor_config.globalKeyPress === "1") {
-          window.purencool_editor_config["globalKeyPress"] = "0";
-          results = true;
-        }
-      }
     }
-
     return results;
   }
 
 
-
-
   /**
    * Builds SCSS by sending a request to the server.
-   * 
-   * 
+   *
+   *
    * @returns void
    *   Has no return value.
    */
@@ -54,14 +45,14 @@ export const buildScssObject = (inputList,globalVars) => {
 
     let scssUpdate = '';
     for (let i = 0; i < inputList.length; i++) {
-      if(globalVars['css_files'] != undefined) {
+      if (globalVars['css_files'] != undefined) {
         let arr = Object.entries(globalVars['css_files']);
         for (let j = 0; j < arr.length; j++) {
-          if(inputList[i].configuration['css_files']['value'] == arr[j][0]) {
-            if(inputList[i].code != "") {
+          if (inputList[i].configuration['css_files']['value'] == arr[j][0]) {
+            if (inputList[i].code != "") {
               scssUpdate = scssUpdate + arr[j][1]['class_identifier'] + " " + inputList[i].code;
             }
-          } 
+          }
         }
       } else {
         scssUpdate = scssUpdate + inputList[i].code;
@@ -71,11 +62,11 @@ export const buildScssObject = (inputList,globalVars) => {
     if (compileLiveAccessFunc(scssUpdate) === true) {
       try {
         const res = await axios
-                .post(globalVars.scss_api_url, {"live": scssUpdate}, {})
-                //.then(response => {
-                //console.log(response.data.live_response);
-                // }) 
-                .catch((err) => console.log("Error", err));
+          .post(globalVars[0].scss_api_url, {"live": scssUpdate}, {})
+          .then(response => {
+            console.log(response.data.live_response);
+          })
+          .catch((err) => console.log("Error", err));
 
 
         console.log("buildScss compiling ==>", res.data);
@@ -83,8 +74,8 @@ export const buildScssObject = (inputList,globalVars) => {
           $(document).ready(function () {
             let iFrame = $("iframe#pnc-iframe").contents();
             iFrame.find("#live-purencool-editor")
-                    .empty()
-                    .append(res.data.live_response);
+              .empty()
+              .append(res.data.live_response);
           });
         }
       } catch (error) {
@@ -93,11 +84,5 @@ export const buildScssObject = (inputList,globalVars) => {
     }
   };
 
- 
-
-
   buildScssFunc();
-  //console.log(globalVars);
-  //console.log(inputList);
 };
-

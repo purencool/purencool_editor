@@ -43,20 +43,18 @@ const DynamicEditor = () => {
    * compiled object that contains data that can populate the list of text
    * editors in the left hand panel.
    *
-   * @param string file
+   * @param string data
    *   Storages name be opened.
    * @returns void
    *   Has no return value.
    */
-  const openStorage = (file) => {
+  const openStorage = (data) => {
     let url = globalVars[0].open_api_url;
     if (url !== "undefined") {
-      axios.post(url, {"open": file}, {})
+      axios.post(url, {"open": data}, {})
         .then(response => {
           console.log("openStorage ==>", response.data.compiled);
-          if (response.data.compiled === undefined) {
-            setInputList([{title: "", code: ""}]);
-          } else {
+          if (response.data.compiled !== undefined) {
             setInputList(response.data.compiled);
           }
         })
@@ -76,44 +74,49 @@ const DynamicEditor = () => {
    */
   const [aceLoaded, setAceLoaded] = useState(false);
 
+
   /**
-   * React hook used for when the UI is initalising.
+   *
    */
   useEffect(() => {
+    const openDefaultStorage = async () => {
+      try {
+        await openStorage('default');
+      } catch (error) {
+        console.error('An error occurred while opening storage:', error);
+      }
+    };
+    openDefaultStorage();
+  }, []);
 
-    /**
-     * On load open storage.
-     */
-    (async () => {
-      openStorage('default');
-    })();
-
-    /**
-     * Check if Ace cdn is loading editor
-     */
+  /**
+   *
+   */
+  useEffect(() => {
     const checkAceLoaded = () => {
       if (window.ace) {
-        console.log('Ace Editor is loaded.'); // Confirm that Ace is loaded
+        console.log('Ace Editor is loaded.');
         setAceLoaded(true);
       } else {
-        // If not loaded, check again after a delay
         setTimeout(checkAceLoaded, 300);
       }
     };
     checkAceLoaded();
+  }, []); // Empty dependency array makes it only run once on mount
 
-    /**
-     * If it loaded then continue
-     */
+  /**
+   *
+   */
+  useEffect(() => {
     if (aceLoaded) {
-
-      /**
-       * Ace Editor is loaded, initialize the editors
-       */
-      inputList.forEach((_, i) => {
-        const editorId = `ace-editor-${i}`;
+      inputList.forEach((x, index) => {
+        const editorId = `ace-editor-${index}`;
         const editorEl = document.getElementById(editorId);
         if (editorEl && !editorRefs.current[editorId]) {
+          // Initialize the Ace Editor
+          /**
+           *
+           */
           const editor = window.ace.edit(editorId);
           editor.session.setMode('ace/mode/css');
           editor.setOptions({
@@ -124,42 +127,39 @@ const DynamicEditor = () => {
             maxLines: 30,
             wrap: true
           });
-          editor.setAutoScrollEditorIntoView(true);
 
+
+          // Set the editor's value to x.code
           /**
-           * Check if the inputList item is defined before setting the editor value
+           *
            */
-          if (inputList[i] && typeof inputList[i].code === 'string') {
-            editor.setValue(inputList[i].code);
-          } else {
-            console.error(`Code for editor at index ${index} is undefined.`);
-          }
+          editor.setValue(x.code || '', -1); // The second parameter -1 moves the cursor to the start
 
+          // Store the editor instance in the refs object
           /**
-           * Add keypress and if enter is added then save code.
-           * @param event
+           *
            */
-          const handleEnterKeyPress = (event) => {
-            if (event.key === 'Enter') {
-              window.purencool_editor_config["globalKeyPress"] = "0";
-              handleCodeInputChange(editor.getValue(), i);
-            }
-          };
-          window.addEventListener('keydown', handleEnterKeyPress);
-
           editorRefs.current[editorId] = editor;
 
+          /**
+           *
+           */
+          editor.commands.addCommand({
+            name: 'saveOnCtrlEnter',
+            bindKey: { win: 'Ctrl-L', mac: 'Cmd-L' },
+            exec: function(editor) {
+              handleCodeInputChange(editor.getValue(), index);
+            }
+          });
+        } else if (editorEl && editorRefs.current[editorId]) {
+          // If the editor is already initialized, update the form value
+          const editor = editorRefs.current[editorId];
+          editor.setValue(x.code || '', -1);
         }
       });
     }
+  }, [aceLoaded, inputList]);
 
-    /**
-     * Mount editors
-     */
-    return () => {
-      Object.values(editorRefs.current).forEach((editor) => {});
-    };
-  }, [aceLoaded, inputList]); // Re-run when aceLoaded changes or inputList changes
 
   /**
    * Allows developer to use the keypress ";" to compile SCSS.
@@ -175,14 +175,15 @@ const DynamicEditor = () => {
    *   Has no return value.
    */
   const handleCodeInputChange = async (code, index) => {
-    window.purencool_editor_config["globalKeyPress"] = "1";
-    console.log(code)
-    const list = [...inputList];
-    let addToList = JSON.stringify(list);
-    let parseList = JSON.parse(addToList);
-    parseList[index]['code'] = code;
-    setInputList(parseList);
-    buildScssObject(parseList, globalVars);
+    const newList = inputList.map((item, i) => {
+      if (i === index) {
+        return { ...item, code };
+      }
+      return item;
+    });
+    setInputList(newList);
+    console.log('inputList has been updated in handleCodeInputChange:', newList);
+    buildScssObject(newList, globalVars);
   };
 
   /**
@@ -198,12 +199,15 @@ const DynamicEditor = () => {
    * @returns void
    *   Has no return value.
    */
-  const handleTitleChange = (title, index) => {
-    const list = [...inputList];
-    let addToList = JSON.stringify(list);
-    let parseList = JSON.parse(addToList);
-    parseList[index]['title'] = title.target.value;
-    setInputList(parseList);
+  const handleTitleChange = (event, index) => {
+    const newTitle = event.target.value;
+    const updatedInputList = inputList.map((item, i) => {
+      if (i === index) {
+        return { ...item, title: newTitle };
+      }
+      return item;
+    });
+    setInputList(updatedInputList);
   };
 
   /**
@@ -255,7 +259,7 @@ const DynamicEditor = () => {
             <button onClick={() => handleEditorDisplay(i)} className="display-editor-btn">+/-</button>
             <div className={"editor editor-" + i}>
               <div id={editorId}/>
-              {globalVars[0].css_files == undefined ? "" : <CssFiles ideNumber={i}/>}
+              {globalVars[0].css_files == undefined ? "" : <CssFiles ideNumber={i} />}
               {inputList.length !== 1 &&
                 <button onClick={() => handleDeleteClick(i)} className="delete-editor float-right">Del</button>}
             </div>
