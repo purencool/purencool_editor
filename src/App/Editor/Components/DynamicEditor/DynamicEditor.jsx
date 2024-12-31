@@ -3,6 +3,7 @@ import axios from 'axios';
 import $ from 'jquery';
 
 import compileScss from "../../Components/Util/compileScss";
+import liveScss from "../../Components/Util/liveScss";
 import store from "../../Components/Util/store";
 import CssFiles from "./Parts/CssFiles";
 import ApiCall from './Parts/api';
@@ -91,7 +92,6 @@ const DynamicEditor = () => {
 
           /**
            * Allows you use key bindings.
-           *  1. 'Ctrl L' updates live view.
            *  2. 'Ctrl S' saves and compiles
            */
           editor.commands.addCommand({
@@ -102,11 +102,15 @@ const DynamicEditor = () => {
             }
           });
 
+          /**
+           * Allows you use key bindings.
+           *  1. 'Ctrl L' updates live view.
+           */
           editor.commands.addCommand({
             name: 'updateLiveView',
             bindKey: { win: 'Ctrl-L', mac: 'Cmd-L' },
             exec: function (editor) {
-               // Needs function to update.
+              liveScss(inputList, globalVars[0]?.scss_api_url);
             }
           });
         } else if (editorEl && editorRefs.current[editorId]) {
