@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import axios from "axios";
+import React from "react";
+
+import compileScss from "../../../Components/Util/compileScss";
 import store from "../../../Components/Util/store";
 
 /**
@@ -31,49 +32,18 @@ const CompileScss = () => {
 
   /**
    *
-   * @returns {Promise<void>}
    */
-  const handleCompile = async () => {
-
-    /**
-     *
-     */
-    const updatedInputList = inputList.map((item, index) => {
-      const editorId = `ace-editor-${index}`;
-      const editor = window.ace.edit(editorId);
-      if (editor) {
-        const editorCode = editor.getValue();
-        return { ...item, code: editorCode };
-      } else {
-        console.error(`Editor with ID ${editorId} not found.`);
-        return item;
-      }
-    });
-    setInputList(updatedInputList);
-
-    /**
-     *
-     */
-    if (globalVars.compile_api_url !== "undefined") {
-      try {
-        const res = await axios.post(globalVars.compile_api_url, { compiled: updatedInputList });
-        console.log("compileScss ==>", res.data);
-        setGlobalVars((prevGlobalVars) => ({
-          ...prevGlobalVars,
-          message: {
-            title: 'Compiled',
-            message: 'SCSS has been compiled and deployed.',
-            hash: Math.floor(1000 + Math.random() * 9000)
-          }
-        }));
-      } catch (err) {
-        console.error("Error compiling SCSS:", err);
-      }
+  const handleCompileClick = () => {
+    const compileApiUrl = globalVars[0]?.compile_api_url;
+    if (compileApiUrl) {
+      compileScss(inputList, setInputList, compileApiUrl);
+    } else {
+      console.error("Compile API URL is not defined.");
     }
   };
 
   return (
-    <button onClick={handleCompile} className="compile-btn">Save</button>
+    <button onClick={handleCompileClick} className="compile-btn">Save</button>
   );
 };
 

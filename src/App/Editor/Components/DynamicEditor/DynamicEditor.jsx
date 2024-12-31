@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
+import $ from 'jquery';
+
+import compileScss from "../../Components/Util/compileScss";
 import store from "../../Components/Util/store";
 import CssFiles from "./Parts/CssFiles";
-
-import {buildScssObject} from '../Util/buildScssObject';
-
 import ApiCall from './Parts/api';
 
 /**
@@ -37,34 +37,6 @@ const DynamicEditor = () => {
 
 
   /**
-   * Request the system opens storage and gets compiled Json object.
-   *
-   * Asks API to open storage object with a certian name and receives a
-   * compiled object that contains data that can populate the list of text
-   * editors in the left hand panel.
-   *
-   * @param string data
-   *   Storages name be opened.
-   * @returns void
-   *   Has no return value.
-   */
-  const openStorage = (data) => {
-    let url = globalVars[0].open_api_url;
-    if (url !== "undefined") {
-      axios.post(url, {"open": data}, {})
-        .then(response => {
-          console.log("openStorage ==>", response.data.compiled);
-          if (response.data.compiled !== undefined) {
-            setInputList(response.data.compiled);
-          }
-        })
-        .catch((err) => console.log("Error", err));
-    }
-
-  };
-
-
-  /**
    * @type {{current: ({}|null)}}
    */
   const editorRefs = useRef({});
@@ -76,21 +48,7 @@ const DynamicEditor = () => {
 
 
   /**
-   *
-   */
-  useEffect(() => {
-    const openDefaultStorage = async () => {
-      try {
-        await openStorage('default');
-      } catch (error) {
-        console.error('An error occurred while opening storage:', error);
-      }
-    };
-    openDefaultStorage();
-  }, []);
-
-  /**
-   *
+   * Loads editors
    */
   useEffect(() => {
     const checkAceLoaded = () => {
@@ -102,10 +60,10 @@ const DynamicEditor = () => {
       }
     };
     checkAceLoaded();
-  }, []); // Empty dependency array makes it only run once on mount
+  }, []);
 
   /**
-   *
+   * Used when there is a change to an editor or one s altered.
    */
   useEffect(() => {
     if (aceLoaded) {
@@ -128,27 +86,27 @@ const DynamicEditor = () => {
             wrap: true
           });
 
-
-          // Set the editor's value to x.code
-          /**
-           *
-           */
-          editor.setValue(x.code || '', -1); // The second parameter -1 moves the cursor to the start
-
-          // Store the editor instance in the refs object
-          /**
-           *
-           */
+          editor.setValue(x.code || '', -1);
           editorRefs.current[editorId] = editor;
 
           /**
-           *
+           * Allows you use key bindings.
+           *  1. 'Ctrl L' updates live view.
+           *  2. 'Ctrl S' saves and compiles
            */
           editor.commands.addCommand({
             name: 'saveOnCtrlEnter',
+            bindKey: {win: 'Ctrl-S', mac: 'Cmd-S'},
+            exec: function (editor) {
+              compileScss(inputList, setInputList, globalVars[0]?.compile_api_url);
+            }
+          });
+
+          editor.commands.addCommand({
+            name: 'updateLiveView',
             bindKey: { win: 'Ctrl-L', mac: 'Cmd-L' },
-            exec: function(editor) {
-              handleCodeInputChange(editor.getValue(), index);
+            exec: function (editor) {
+               // Needs function to update.
             }
           });
         } else if (editorEl && editorRefs.current[editorId]) {
@@ -159,6 +117,48 @@ const DynamicEditor = () => {
       });
     }
   }, [aceLoaded, inputList]);
+
+  /**
+   * Request the system opens storage and gets compiled Json object.
+   *
+   * Asks API to open storage object with a certian name and receives a
+   * compiled object that contains data that can populate the list of text
+   * editors in the left hand panel.
+   *
+   * @param string data
+   *   Storages name be opened.
+   * @returns void
+   *   Has no return value.
+   */
+  const openStorage = async (data) => {
+    if (!globalVars || !globalVars[0] || typeof globalVars[0].open_api_url === 'undefined') {
+      console.error('The open_api_url is not defined in globalVars.');
+      return;
+    }
+
+    try {
+      const response = await axios.post(globalVars[0].open_api_url, {"open": data});
+      if (response.data.compiled !== undefined && typeof setInputList === 'function') {
+        setInputList(response.data.compiled);
+      }
+    } catch (err) {
+      console.error("Error", err);
+    }
+  };
+
+  /**
+   *
+   */
+  useEffect(() => {
+    const openDefaultStorage = async () => {
+      try {
+        await openStorage('default');
+      } catch (error) {
+        console.error('An error occurred while opening storage:', error);
+      }
+    };
+    openDefaultStorage();
+  }, []);
 
 
   /**
@@ -177,7 +177,7 @@ const DynamicEditor = () => {
   const handleCodeInputChange = async (code, index) => {
     const newList = inputList.map((item, i) => {
       if (i === index) {
-        return { ...item, code };
+        return {...item, code};
       }
       return item;
     });
@@ -203,7 +203,7 @@ const DynamicEditor = () => {
     const newTitle = event.target.value;
     const updatedInputList = inputList.map((item, i) => {
       if (i === index) {
-        return { ...item, title: newTitle };
+        return {...item, title: newTitle};
       }
       return item;
     });
@@ -259,7 +259,7 @@ const DynamicEditor = () => {
             <button onClick={() => handleEditorDisplay(i)} className="display-editor-btn">+/-</button>
             <div className={"editor editor-" + i}>
               <div id={editorId}/>
-              {globalVars[0].css_files == undefined ? "" : <CssFiles ideNumber={i} />}
+              {globalVars[0].css_files == undefined ? "" : <CssFiles ideNumber={i}/>}
               {inputList.length !== 1 &&
                 <button onClick={() => handleDeleteClick(i)} className="delete-editor float-right">Del</button>}
             </div>
